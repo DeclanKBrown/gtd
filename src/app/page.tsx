@@ -31,7 +31,7 @@ export default function Home() {
           className={buttonVariants({
             variant: 'secondary',
             size: 'lg',
-            className: 'my-8',
+            className: 'my-8 dark:bg-white dark:text-gray-700',
           })}
           href={'/dashboard'}
           target="_blank"

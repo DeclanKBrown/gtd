@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from '@/components/ui/use-toast'
 import { Icons } from '@/components/icons'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -27,18 +28,98 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     resolver: zodResolver(userAuthSchema),
   })
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
+  const [isOAuthLoading, setIsOAuthLoading] = React.useState<boolean>(false)
   const searchParams = useSearchParams()
+  const router = useRouter()
+  const supabase = createClientComponentClient<Database>()
 
   async function onSubmit(data: FormData) {
     setIsLoading(true)
 
-    setIsLoading(false)
+    if (searchParams.has('signIn')) {
+      await handleSignIn(data)
+    } else if (searchParams.has('signUp')) {
+      await handleSignUp(data)
+    } else {
+      await handleOAuth()
+    }
 
-    return toast({
-      title: 'Check your email',
-      description: 'We sent you a login link. Be sure to check your spam too.',
-    })
+    setIsLoading(false)
+  }
+
+  // Sign in function
+  const handleSignIn = async (data: FormData) => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      })
+      if (error) {
+        // Handle sign-in error
+        console.error('Sign-in error:', error)
+        return toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        })
+      }
+      router.refresh()
+    } catch (error) {
+      // Handle other errors
+      console.error('Error:', error)
+    }
+  }
+
+  // Sign up function
+  const handleSignUp = async (data: FormData) => {
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+      })
+      if (error) {
+        // Handle sign-up error
+        console.error('Sign-up error:', error)
+        return toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        })
+      }
+      return toast({
+        title: 'Check your email',
+        description:
+          'We sent you a login link. Be sure to check your spam too.',
+      })
+    } catch (error) {
+      // Handle other errors
+      console.error('Error:', error)
+    }
+  }
+
+  // OAuth authentication function
+  const handleOAuth = async () => {
+    setIsOAuthLoading(true)
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google', // Change 'google' to the desired provider
+      })
+      if (error) {
+        // Handle OAuth sign-in error
+        console.error('OAuth sign-in error:', error)
+        return toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        })
+      }
+      router.refresh()
+    } catch (error) {
+      // Handle other errors
+      console.error('Error:', error)
+    } finally {
+      setIsOAuthLoading(false)
+    }
   }
 
   return (
@@ -56,12 +137,31 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading || isGitHubLoading}
+              disabled={isLoading || isOAuthLoading}
               {...register('email')}
             />
             {errors?.email && (
               <p className="px-1 text-xs text-red-600">
                 {errors.email.message}
+              </p>
+            )}
+          </div>
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="password">
+              Password
+            </Label>
+            <Input
+              id="password"
+              placeholder="Password"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="current-password"
+              disabled={isLoading || isOAuthLoading}
+              {...register('password')}
+            />
+            {errors?.password && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.password.message}
               </p>
             )}
           </div>
@@ -87,16 +187,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         type="button"
         className={cn(buttonVariants({ variant: 'outline' }))}
         onClick={() => {
-          setIsGitHubLoading(true)
+          setIsOAuthLoading(true)
         }}
-        disabled={isLoading || isGitHubLoading}
+        disabled={isLoading || isOAuthLoading}
       >
-        {isGitHubLoading ? (
+        {isOAuthLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
+          <Icons.google className="mr-2 h-4 w-4" />
         )}{' '}
-        Github
+        Google
       </button>
     </div>
   )
