@@ -35,7 +35,7 @@ export function LogInForm({ className, ...props }: SignInFormProps) {
   const handleSignIn = async (data: FormData) => {
     setIsLoading(true)
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error, data: user } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       })
@@ -45,6 +45,12 @@ export function LogInForm({ className, ...props }: SignInFormProps) {
           title: 'Error',
           description: error.message,
           variant: 'destructive',
+        })
+      } else if (user) {
+        toast({
+          title: 'Success',
+          description: 'Logged in',
+          variant: 'default',
         })
       }
       router.refresh()
