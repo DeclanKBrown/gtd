@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from '@/components/ui/use-toast'
 import { Icons } from '@/components/icons'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { OAuthButton } from './OAuthButton'
 
 interface SignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -28,34 +27,23 @@ export function RegisterForm({ className, ...props }: SignUpFormProps) {
     resolver: zodResolver(signUpSchema),
   })
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const supabase = createClientComponentClient<Database>()
 
   const handleSignUp = async (data: FormData) => {
     setIsLoading(true)
     try {
-      const { error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-        options: {
-          data: {
-            first_name: data.firstName,
-            last_name: data.lastName,
-          },
-        },
-      })
-      if (error) {
-        console.error('Sign-up error:', error)
-        return toast({
-          title: 'Error',
-          description: error.message,
-          variant: 'destructive',
-        })
-      }
-      return toast({
-        title: 'Check your email',
-        description:
-          'We sent you a login link. Be sure to check your spam too.',
-      })
+      // if (error) {
+      //   console.error('Sign-up error:', error)
+      //   return toast({
+      //     title: 'Error',
+      //     description: error.message,
+      //     variant: 'destructive',
+      //   })
+      // }
+      // return toast({
+      //   title: 'Check your email',
+      //   description:
+      //     'We sent you a login link. Be sure to check your spam too.',
+      // })
     } catch (error) {
       console.error('Error:', error)
     } finally {

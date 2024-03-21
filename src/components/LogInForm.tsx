@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from '@/components/ui/use-toast'
 import { Icons } from '@/components/icons'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { OAuthButton } from './OAuthButton'
 
 interface SignInFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -30,29 +29,24 @@ export function LogInForm({ className, ...props }: SignInFormProps) {
   })
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const router = useRouter()
-  const supabase = createClientComponentClient<Database>()
 
   const handleSignIn = async (data: FormData) => {
     setIsLoading(true)
     try {
-      const { error, data: user } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      })
-      if (error) {
-        console.error('Sign-in error:', error)
-        return toast({
-          title: 'Error',
-          description: error.message,
-          variant: 'destructive',
-        })
-      } else if (user) {
-        toast({
-          title: 'Success',
-          description: 'Logged in',
-          variant: 'default',
-        })
-      }
+      // if (error) {
+      //   console.error('Sign-in error:', error)
+      //   return toast({
+      //     title: 'Error',
+      //     description: error.message,
+      //     variant: 'destructive',
+      //   })
+      // } else if (user) {
+      //   toast({
+      //     title: 'Success',
+      //     description: 'Logged in',
+      //     variant: 'default',
+      //   })
+      // }
       router.refresh()
     } catch (error) {
       console.error('Error:', error)
