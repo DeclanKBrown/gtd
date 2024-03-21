@@ -31,7 +31,7 @@ export default function RegisterPage() {
               Create an account
             </h1>
             <p className="text-sm text-muted-foreground">
-              Enter your email below to create your account
+              Continue with Google to create an account
             </p>
           </div>
           <RegisterForm />

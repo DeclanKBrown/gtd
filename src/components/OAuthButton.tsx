@@ -7,6 +7,8 @@ import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { toast } from '@/components/ui/use-toast'
 
+import { signIn } from 'next-auth/react'
+
 interface OAuthButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
 export function OAuthButton({ className, ...props }: OAuthButtonProps) {
@@ -16,17 +18,16 @@ export function OAuthButton({ className, ...props }: OAuthButtonProps) {
   const handleOAuth = async () => {
     setIsOAuthLoading(true)
     try {
-      // if (error) {
-      //   console.error('OAuth sign-in error:', error)
-      //   return toast({
-      //     title: 'Error',
-      //     description: error.message,
-      //     variant: 'destructive',
-      //   })
-      // }
+      await signIn('google')
+
       router.refresh()
     } catch (error) {
-      console.error('Error:', error)
+      console.error('OAuth sign-in error:', error)
+      return toast({
+        title: 'Error',
+        description: 'Error signing in with Google',
+        variant: 'destructive',
+      })
     } finally {
       setIsOAuthLoading(false)
     }
