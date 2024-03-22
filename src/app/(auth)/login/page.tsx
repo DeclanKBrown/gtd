@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Login to your account',
 }
 
-export default function LoginPage() {
+const LoginPage = () => {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
@@ -42,3 +42,5 @@ export default function LoginPage() {
     </div>
   )
 }
+
+export default LoginPage

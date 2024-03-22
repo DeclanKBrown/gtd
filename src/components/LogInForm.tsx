@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 interface SignInFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function LogInForm({ className, ...props }: SignInFormProps) {
+export const LogInForm = ({ className, ...props }: SignInFormProps) => {
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <div className="grid gap-2">

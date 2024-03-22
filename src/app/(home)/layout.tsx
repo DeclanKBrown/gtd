@@ -4,7 +4,7 @@ interface AuthLayoutProps {
   children: React.ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -12,3 +12,5 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     </div>
   )
 }
+
+export default AuthLayout

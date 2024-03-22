@@ -8,7 +8,7 @@ import { OAuthButton } from './OAuthButton'
 
 interface SignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function RegisterForm({ className, ...props }: SignUpFormProps) {
+export const RegisterForm = ({ className, ...props }: SignUpFormProps) => {
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <div className="grid gap-2">
