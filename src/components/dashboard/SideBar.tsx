@@ -5,8 +5,16 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Icons } from '../icons'
 import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+
+import CaptureModal from './CaptureModal'
 
 export const Sidebar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const showModal = () => setIsModalOpen(true)
+  const hideModal = () => setIsModalOpen(false)
+
   const pathname = usePathname()
 
   const isActive = (href: string) => pathname === href
@@ -42,12 +50,14 @@ export const Sidebar = () => {
             <Button
               variant="ghost"
               className="w-full justify-center lg:justify-start"
+              onClick={showModal}
             >
               <Icons.capture />
               <span className="hidden lg:block">Capture</span>
             </Button>
           </div>
         </div>
+        {isModalOpen && <CaptureModal onClose={hideModal} />}
         {links.map((link) => (
           <div className="px-3 py-2" key={link.name}>
             <div className="space-y-1">
