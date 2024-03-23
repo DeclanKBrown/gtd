@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
-import { RegisterForm } from '@/components/RegisterForm'
+import { RegisterForm } from '@/components/auth/RegisterForm'
 
 export const metadata = {
   title: 'Create an account',

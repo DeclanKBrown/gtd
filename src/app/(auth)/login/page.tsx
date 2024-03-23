@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { LogInForm } from '@/components/LogInForm'
+import { LogInForm } from '@/components/auth/LogInForm'
 
 export const metadata: Metadata = {
   title: 'Login',

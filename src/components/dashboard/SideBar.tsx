@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
-import { Icons } from './icons'
+import { Icons } from '../icons'
 import { Button } from '@/components/ui/button'
 
 export const Sidebar = () => {
