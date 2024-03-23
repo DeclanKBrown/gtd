@@ -45,6 +45,8 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
     console.log(values)
   }
 
+  const type = form.watch('type')
+
   return ReactDOM.createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -55,26 +57,13 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-              <div className="grid grid-cols-1 gap-2">
+              <div className="grid grid-cols-1">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Title</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -143,6 +132,24 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                   )}
                 />
               </div>
+              <div className="grid grid-cols-1">
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {type === 'REFERENCE' ? 'Url' : 'Description'}
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <Button type="submit" className="w-full">
                 Create
               </Button>

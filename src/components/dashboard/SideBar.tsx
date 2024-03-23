@@ -7,7 +7,7 @@ import { Icons } from '../icons'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 
-import CaptureModal from './CaptureModal'
+import CaptureModal from './capture/CaptureModal'
 
 export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
