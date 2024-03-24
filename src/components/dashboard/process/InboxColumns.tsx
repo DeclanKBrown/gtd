@@ -2,8 +2,6 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { Badge } from '@/components/ui/badge'
-
 import { labels, priorities, statuses } from '../table/data/data'
 import { Task } from '../table/data/schema'
 import { InboxColumnHeader } from './InboxColumnHeader'
@@ -11,6 +9,7 @@ import { InboxRowActions } from './InboxRowActions'
 import { InboxRowPriority } from './InboxRowPriority'
 import { InboxRowStatus } from './InboxRowStatus'
 import { InboxRowProject } from './InboxRowProject'
+import InboxRowName from './InboxRowName'
 
 export const InboxColumns: ColumnDef<Task>[] = [
   {
@@ -27,13 +26,17 @@ export const InboxColumns: ColumnDef<Task>[] = [
         console.log('New project:', newProject)
       }
 
+      const handleSave = (newTitle: string) => {
+        console.log('New title:', newTitle)
+      }
+
       return (
         <div className="flex items-center space-x-2">
           <InboxRowProject
             project={project.label}
             onProjectChange={handleProjectChange}
           />
-          <span className="max-w-500px truncate">{row.getValue('title')}</span>
+          <InboxRowName title={row.getValue('title')} onSave={handleSave} />
         </div>
       )
     },
