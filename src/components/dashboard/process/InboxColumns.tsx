@@ -9,6 +9,7 @@ import { Task } from '../table/data/schema'
 import { InboxColumnHeader } from './InboxColumnHeader'
 import { InboxRowActions } from './InboxRowActions'
 import { InboxRowPriority } from './InboxRowPriority'
+import { InboxRowStatus } from './InboxRowStatus'
 
 export const InboxColumns: ColumnDef<Task>[] = [
   {
@@ -41,13 +42,11 @@ export const InboxColumns: ColumnDef<Task>[] = [
         return null
       }
 
+      const handleStatusChange = (newStatus: string) => {
+        console.log('New status:', newStatus)
+      }
       return (
-        <div className="flex w-[100px] items-center">
-          {status.icon && (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{status.label}</span>
-        </div>
+        <InboxRowStatus status={status} onStatusChange={handleStatusChange} />
       )
     },
   },
@@ -61,12 +60,12 @@ export const InboxColumns: ColumnDef<Task>[] = [
         (priority) => priority.value === row.getValue('priority'),
       )
 
-      const handlePriorityChange = (newPriority: string) => {
-        console.log('New priority:', newPriority)
-      }
-
       if (!priority) {
         return null
+      }
+
+      const handlePriorityChange = (newPriority: string) => {
+        console.log('New priority:', newPriority)
       }
 
       return (

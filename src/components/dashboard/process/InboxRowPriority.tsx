@@ -41,7 +41,17 @@ export function InboxRowPriority({
           className="flex h-8 p-0 px-2 data-[state=open]:bg-muted"
         >
           {selectedPriority?.icon && (
-            <selectedPriority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+            <selectedPriority.icon
+              className={`mr-2 h-4 w-4 ${
+                selectedPriority.value === 'critical'
+                  ? 'text-red-800'
+                  : selectedPriority.value === 'high'
+                    ? 'text-red-500'
+                    : selectedPriority.value === 'medium'
+                      ? 'text-yellow-300'
+                      : 'text-blue-500'
+              }`}
+            />
           )}
           {selectedPriority.label}
           <span className="sr-only">Change Priority</span>
