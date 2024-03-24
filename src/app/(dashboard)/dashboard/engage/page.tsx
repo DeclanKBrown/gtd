@@ -20,7 +20,6 @@ const EngagePage = () => {
               <TabsTrigger value="today">Today</TabsTrigger>
               <TabsTrigger value="tomorrow">Tomorrow</TabsTrigger>
               <TabsTrigger value="week">Week</TabsTrigger>
-              <TabsTrigger value="calender">Calender</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>

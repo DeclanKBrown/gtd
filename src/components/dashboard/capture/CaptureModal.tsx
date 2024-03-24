@@ -34,7 +34,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
   const form = useForm<z.infer<typeof captureSchema>>({
     resolver: zodResolver(captureSchema),
     defaultValues: {
-      title: '',
+      name: '',
       description: '',
       type: 'TASK',
       status: 'INBOX',
@@ -45,7 +45,17 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
     console.log(values)
   }
 
-  const type = form.watch('type')
+  const watchType = form.watch('type')
+
+  React.useEffect(() => {
+    if (watchType === 'TASK') {
+      form.setValue('status', 'INBOX')
+    } else if (watchType === 'PROJECT') {
+      form.setValue('status', 'ACTIVE')
+    } else if (watchType === 'REFERENCE') {
+      form.setValue('status', 'ACTIVE')
+    }
+  }, [watchType, form.setValue])
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -60,10 +70,10 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
               <div className="grid grid-cols-1">
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>Name</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -105,26 +115,52 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                     <FormItem>
                       <FormLabel>Status</FormLabel>
                       <Select
+                        {...field}
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        defaultValue={
+                          watchType === 'TASK'
+                            ? 'INBOX'
+                            : watchType === 'PROJECT'
+                              ? 'ACTIVE'
+                              : 'ACTIVE'
+                        }
                       >
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="INBOX">Inbox</SelectItem>
-                            <SelectItem value="SOMEDAY">Someday</SelectItem>
-                            <SelectItem value="WAITING">Waiting</SelectItem>
-                            <SelectItem value="NEXT_ACTION">
-                              Next Action
-                            </SelectItem>
-                            <SelectItem value="DONE">Done</SelectItem>
-                            <SelectItem value="DELEGATED">Delegated</SelectItem>
-                            <SelectItem value="ELIMINATED">
-                              Eliminated
-                            </SelectItem>
-                          </SelectGroup>
+                          {watchType === 'TASK' && (
+                            <SelectGroup>
+                              <SelectItem value="INBOX">Inbox</SelectItem>
+                              <SelectItem value="SOMEDAY">Someday</SelectItem>
+                              <SelectItem value="WAITING">Waiting</SelectItem>
+                              <SelectItem value="NEXT_ACTION">
+                                Next Action
+                              </SelectItem>
+                              <SelectItem value="DONE">Done</SelectItem>
+                              <SelectItem value="DELEGATED">
+                                Delegated
+                              </SelectItem>
+                              <SelectItem value="ELIMINATED">
+                                Eliminated
+                              </SelectItem>
+                            </SelectGroup>
+                          )}
+                          {watchType === 'PROJECT' && (
+                            <SelectGroup>
+                              <SelectItem value="ACTIVE">Active</SelectItem>
+                              <SelectItem value="NOT_STARTED">
+                                Not Started
+                              </SelectItem>
+                              <SelectItem value="ARCHIVED">Archived</SelectItem>
+                            </SelectGroup>
+                          )}
+                          {watchType === 'REFERENCE' && (
+                            <SelectGroup>
+                              <SelectItem value="ACTIVE">Active</SelectItem>
+                              <SelectItem value="ARCHIVED">Archived</SelectItem>
+                            </SelectGroup>
+                          )}
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -139,7 +175,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        {type === 'REFERENCE' ? 'Url' : 'Description'}
+                        {watchType === 'REFERENCE' ? 'Url' : 'Description'}
                       </FormLabel>
                       <FormControl>
                         <Input {...field} />
