@@ -10,20 +10,30 @@ import { InboxColumnHeader } from './InboxColumnHeader'
 import { InboxRowActions } from './InboxRowActions'
 import { InboxRowPriority } from './InboxRowPriority'
 import { InboxRowStatus } from './InboxRowStatus'
+import { InboxRowProject } from './InboxRowProject'
 
 export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => <InboxColumnHeader column={column} title="Title" />,
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const project = labels.find((label) => label.value === row.original.label)
+
+      if (!project) {
+        return null
+      }
+
+      const handleProjectChange = (newProject: string) => {
+        console.log('New project:', newProject)
+      }
 
       return (
-        <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue('title')}
-          </span>
+        <div className="flex items-center space-x-2">
+          <InboxRowProject
+            project={project.label}
+            onProjectChange={handleProjectChange}
+          />
+          <span className="max-w-500px truncate">{row.getValue('title')}</span>
         </div>
       )
     },

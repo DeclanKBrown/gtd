@@ -32,7 +32,7 @@ const ProcessPage = async () => {
           <div className="flex flex-col justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Process</h2>
             <p className="text-muted-foreground">
-              Determine the next action of your inbox tasks
+              Determine the next action of the tasks in your inbox
             </p>
           </div>
         </div>
