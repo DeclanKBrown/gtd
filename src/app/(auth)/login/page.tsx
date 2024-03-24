@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { LogInForm } from '@/components/LogInForm'
+import { LogInForm } from '@/components/auth/LogInForm'
 
 export const metadata: Metadata = {
   title: 'Login',
   description: 'Login to your account',
 }
 
-export default function LoginPage() {
+const LoginPage = () => {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
@@ -42,3 +42,5 @@ export default function LoginPage() {
     </div>
   )
 }
+
+export default LoginPage

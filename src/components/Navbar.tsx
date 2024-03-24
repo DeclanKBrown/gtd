@@ -32,7 +32,7 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/register"
-                className={buttonVariants({ size: 'sm', variant: 'secondary' })}
+                className={buttonVariants({ size: 'sm', variant: 'default' })}
               >
                 Get Started <ArrowRight className="ml-1.5 h-5 w-5" />
               </Link>

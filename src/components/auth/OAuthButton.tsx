@@ -11,7 +11,7 @@ import { signIn } from 'next-auth/react'
 
 interface OAuthButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
-export function OAuthButton({ className, ...props }: OAuthButtonProps) {
+export const OAuthButton = ({ className, ...props }: OAuthButtonProps) => {
   const [isOAuthLoading, setIsOAuthLoading] = React.useState<boolean>(false)
   const router = useRouter()
 

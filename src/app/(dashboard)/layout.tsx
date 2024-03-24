@@ -1,14 +1,18 @@
-import Navbar from '@/components/Navbar'
+import { Sidebar } from '@/components/dashboard/SideBar'
 
-interface AuthLayoutProps {
+interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      {children}
+    <div className="flex min-h-screen">
+      <div className="w-20 flex-shrink-0 lg:w-64">
+        <Sidebar />
+      </div>
+      <div className="flex-grow border-l">{children}</div>
     </div>
   )
 }
+
+export default DashboardLayout

@@ -5,8 +5,6 @@ import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Toaster } from '@/components/ui/toaster'
-import Navbar from '@/components/Navbar'
-import { useRouter } from 'next/router'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,7 +19,7 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <body
@@ -38,3 +36,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   )
 }
+
+export default RootLayout
