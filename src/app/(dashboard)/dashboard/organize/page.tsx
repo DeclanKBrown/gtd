@@ -5,8 +5,8 @@ import { Metadata } from 'next'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Organize } from '@/components/dashboard/organize/tasks/Organize'
 import { taskSchema } from '@/components/dashboard/table/data/schema'
-import { columns } from '@/components/dashboard/table/columns'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import Projects from '@/components/dashboard/organize/projects/Projects'
 
 export const metadata: Metadata = {
   title: 'Organize',
@@ -41,8 +41,14 @@ const OrganizePage = async () => {
                 <TabsTrigger value="references">References</TabsTrigger>
               </TabsList>
               <TabsContent value="tasks">
-                <Organize data={tasks} columns={columns} />
+                <Organize data={tasks} />
               </TabsContent>
+              <TabsContent value="projects">
+                <Projects />
+              </TabsContent>
+              {/* <TabsContent value="tasks">
+                <Organize data={tasks} columns={columns} />
+              </TabsContent> */}
             </Tabs>
           </div>
         </div>

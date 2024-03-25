@@ -26,12 +26,11 @@ import {
 } from '@/components/ui/table'
 
 import { DataTablePagination } from '../../table/data-table-pagination'
-import { DataTableToolbar } from '../../table/data-table-toolbar'
+import { OrganizeToolbar } from './OrganizeToolbar'
 
 import { OrganizeColumns } from './OrganizeColumns'
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
@@ -71,7 +70,7 @@ export function Organize<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <OrganizeToolbar table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
