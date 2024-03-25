@@ -2,19 +2,20 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, priorities, statuses } from '../table/data/data'
-import { Task } from '../table/data/schema'
-import { InboxColumnHeader } from './InboxColumnHeader'
-import { InboxRowActions } from './InboxRowActions'
-import { RowPriority } from '../common/rowPriority'
-import { RowStatus } from '../common/rowStatus'
-import { RowProject } from '../common/rowProject'
-import InboxRowName from '../common/rowName'
+import { labels, priorities, statuses } from '../../table/data/data'
+import { Task } from '../../table/data/schema'
+import { RowPriority } from '../../common/rowPriority'
+import { RowStatus } from '../../common/rowStatus'
+import { RowProject } from '../../common/rowProject'
+import RowName from '../../common/rowName'
+import { OrganizeColumnHeader } from './OrganizeColumnHeader'
 
-export const InboxColumns: ColumnDef<Task>[] = [
+export const OrganizeColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
-    header: ({ column }) => <InboxColumnHeader column={column} title="Title" />,
+    header: ({ column }) => (
+      <OrganizeColumnHeader column={column} title="Title" />
+    ),
     cell: ({ row }) => {
       const project = labels.find((label) => label.value === row.original.label)
 
@@ -36,7 +37,7 @@ export const InboxColumns: ColumnDef<Task>[] = [
             project={project.label}
             onProjectChange={handleProjectChange}
           />
-          <InboxRowName title={row.getValue('title')} onSave={handleSave} />
+          <RowName title={row.getValue('title')} onSave={handleSave} />
         </div>
       )
     },
@@ -44,7 +45,7 @@ export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'status',
     header: ({ column }) => (
-      <InboxColumnHeader column={column} title="Status" />
+      <OrganizeColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
@@ -64,7 +65,7 @@ export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'priority',
     header: ({ column }) => (
-      <InboxColumnHeader column={column} title="Priority" />
+      <OrganizeColumnHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
       const priority = priorities.find(
@@ -86,9 +87,5 @@ export const InboxColumns: ColumnDef<Task>[] = [
         />
       )
     },
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => <InboxRowActions row={row} />,
   },
 ]

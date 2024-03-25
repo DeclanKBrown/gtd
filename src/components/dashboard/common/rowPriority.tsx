@@ -22,7 +22,7 @@ interface InboxRowPriorityProps {
   onPriorityChange: (newPriority: string) => void
 }
 
-export function InboxRowPriority({
+export function RowPriority({
   priority,
   onPriorityChange,
 }: InboxRowPriorityProps) {
