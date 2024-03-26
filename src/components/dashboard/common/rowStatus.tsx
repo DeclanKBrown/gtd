@@ -22,10 +22,7 @@ interface InboxRowStatusProps {
   onStatusChange: (newStatus: string) => void
 }
 
-export function InboxRowStatus({
-  status,
-  onStatusChange,
-}: InboxRowStatusProps) {
+export function RowStatus({ status, onStatusChange }: InboxRowStatusProps) {
   const [selectedStatus, setSelectedStatus] = useState(status)
 
   const handleStatusChange = (status: StatusData) => {

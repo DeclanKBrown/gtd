@@ -6,7 +6,7 @@ interface EditableTitleProps {
   onSave: (newTitle: string) => void
 }
 
-const InboxRowName = ({ title, onSave }: EditableTitleProps) => {
+const RowName = ({ title, onSave }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(title)
 
@@ -41,4 +41,4 @@ const InboxRowName = ({ title, onSave }: EditableTitleProps) => {
   )
 }
 
-export default InboxRowName
+export default RowName

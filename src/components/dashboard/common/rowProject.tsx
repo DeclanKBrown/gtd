@@ -15,10 +15,7 @@ interface InboxRowProjectProps {
   onProjectChange: (newProject: string) => void
 }
 
-export function InboxRowProject({
-  project,
-  onProjectChange,
-}: InboxRowProjectProps) {
+export function RowProject({ project, onProjectChange }: InboxRowProjectProps) {
   const [selectedProject, setSelectedProject] = useState(project)
 
   const handleProjectChange = (project: string) => {
