@@ -9,6 +9,7 @@ import { RowStatus } from '../../common/rowStatus'
 import { RowProject } from '../../common/rowProject'
 import RowName from '../../common/rowName'
 import { OrganizeColumnHeader } from './OrganizeColumnHeader'
+import RowDate from '../../common/rowDate'
 
 export const OrganizeColumns: ColumnDef<Task>[] = [
   {
@@ -60,6 +61,19 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
         console.log('New status:', newStatus)
       }
       return <RowStatus status={status} onStatusChange={handleStatusChange} />
+    },
+  },
+  {
+    accessorKey: 'goal',
+    header: ({ column }) => (
+      <OrganizeColumnHeader column={column} title="Goal Completed" />
+    ),
+    cell: ({ row }) => {
+      const handleSelect = (date: Date) => {
+        console.log('Selected date:', date)
+      }
+
+      return <RowDate goalCompleted={null} onSelect={handleSelect} />
     },
   },
   {

@@ -2,11 +2,9 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, priorities, statuses } from '../table/data/data'
+import { labels, statuses } from '../table/data/data'
 import { Task } from '../table/data/schema'
 import { InboxColumnHeader } from './InboxColumnHeader'
-import { InboxRowActions } from './InboxRowActions'
-import { RowPriority } from '../common/rowPriority'
 import { RowStatus } from '../common/rowStatus'
 import { RowProject } from '../common/rowProject'
 import InboxRowName from '../common/rowName'
@@ -60,35 +58,5 @@ export const InboxColumns: ColumnDef<Task>[] = [
       }
       return <RowStatus status={status} onStatusChange={handleStatusChange} />
     },
-  },
-  {
-    accessorKey: 'priority',
-    header: ({ column }) => (
-      <InboxColumnHeader column={column} title="Priority" />
-    ),
-    cell: ({ row }) => {
-      const priority = priorities.find(
-        (priority) => priority.value === row.getValue('priority'),
-      )
-
-      if (!priority) {
-        return null
-      }
-
-      const handlePriorityChange = (newPriority: string) => {
-        console.log('New priority:', newPriority)
-      }
-
-      return (
-        <RowPriority
-          priority={priority}
-          onPriorityChange={handlePriorityChange}
-        />
-      )
-    },
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => <InboxRowActions row={row} />,
   },
 ]
