@@ -25,7 +25,7 @@ const Project = ({ project }: ProjectProps) => {
   const [status, setStatus] = useState(project.status)
 
   return (
-    <Card>
+    <Card className="hover:bg-accent">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-medium">{project.name}</CardTitle>
         <TooltipProvider>
