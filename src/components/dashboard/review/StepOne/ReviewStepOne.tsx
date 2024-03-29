@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import ReviewTable from '../ReviewTable'
 import { Input } from '@/components/ui/input'
+import TableSimple from '../../table/TableSimple'
 
 type Task = {
   title: string
@@ -39,7 +39,9 @@ const ReviewStepOne = () => {
         onChange={(e) => setTaskInput(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <ReviewTable data={tasks} />
+      <div className="w-full">
+        <TableSimple data={tasks} />
+      </div>
     </div>
   )
 }

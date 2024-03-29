@@ -2,14 +2,14 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, statuses } from '../table/data/data'
-import { Task } from '../table/data/schema'
-import { DataTableColumnHeader } from '../table/data-table-column-header'
-import { RowStatus } from '../table/data-table-row-status'
-import { RowProject } from '../table/data-table-row-project'
-import InboxRowName from '../table/data-table-row-name'
+import { labels, statuses } from './data/data'
+import { Task } from './data/schema'
+import { DataTableColumnHeader } from './data-table-column-header'
+import { RowStatus } from './data-table-row-status'
+import { RowProject } from './data-table-row-project'
+import InboxRowName from './data-table-row-name'
 
-export const InboxColumns: ColumnDef<Task>[] = [
+export const MinimalColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => (

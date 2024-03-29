@@ -2,16 +2,16 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, priorities, statuses } from '../../table/data/data'
-import { Task } from '../../table/data/schema'
-import { RowPriority } from '../../table/data-table-row-priority'
-import { RowStatus } from '../../table/data-table-row-status'
-import { RowProject } from '../../table/data-table-row-project'
-import RowName from '../../table/data-table-row-name'
-import { DataTableColumnHeader } from '../../table/data-table-column-header'
-import RowDate from '../../table/data-table-row-date'
+import { labels, priorities, statuses } from './data/data'
+import { Task } from './data/schema'
+import { RowPriority } from './data-table-row-priority'
+import { RowStatus } from './data-table-row-status'
+import { RowProject } from './data-table-row-project'
+import RowName from './data-table-row-name'
+import { DataTableColumnHeader } from './data-table-column-header'
+import RowDate from './data-table-row-date'
 
-export const OrganizeColumns: ColumnDef<Task>[] = [
+export const Columns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => (

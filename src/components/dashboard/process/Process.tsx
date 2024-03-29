@@ -1,4 +1,4 @@
-import { TableConfigurable } from '../../table/TableConfigurable'
+import TableSimple from '../table/TableSimple'
 import { z } from 'zod'
 import { promises as fs } from 'fs'
 import path from 'path'
@@ -15,10 +15,10 @@ async function getTasks() {
   return z.array(taskSchema).parse(tasks)
 }
 
-const Organize = async () => {
+const Process = async () => {
   const tasks = await getTasks()
 
-  return <TableConfigurable data={tasks} />
+  return <TableSimple data={tasks} />
 }
 
-export default Organize
+export default Process

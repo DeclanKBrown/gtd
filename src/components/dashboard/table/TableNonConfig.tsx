@@ -5,15 +5,9 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { OrganizeColumns } from '../organize/tasks/OrganizeColumns'
-
+import { Columns } from './Columns'
 import {
   Table,
   TableBody,
@@ -26,23 +20,18 @@ import {
 interface InboxProps<TData, TValue> {
   data: TData[]
 }
-const ReviewTable = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
-  const columns = OrganizeColumns as ColumnDef<TData>[]
+const TableNonConfig = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
+  const columns = Columns as ColumnDef<TData>[]
 
   const table = useReactTable({
     data,
     columns,
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
   return (
-    <div className="w-full space-y-4">
+    <div className="space-y-4">
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -97,4 +86,4 @@ const ReviewTable = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
   )
 }
 
-export default ReviewTable
+export default TableNonConfig
