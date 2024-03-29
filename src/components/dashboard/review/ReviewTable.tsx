@@ -12,7 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { OrganizeColumns } from '../../organize/tasks/OrganizeColumns'
+import { OrganizeColumns } from '../organize/tasks/OrganizeColumns'
 
 import {
   Table,
@@ -26,9 +26,7 @@ import {
 interface InboxProps<TData, TValue> {
   data: TData[]
 }
-const ReviewStepOneTable = <TData, TValue>({
-  data,
-}: InboxProps<TData, TValue>) => {
+const ReviewTable = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
   const columns = OrganizeColumns as ColumnDef<TData>[]
 
   const table = useReactTable({
@@ -99,4 +97,4 @@ const ReviewStepOneTable = <TData, TValue>({
   )
 }
 
-export default ReviewStepOneTable
+export default ReviewTable

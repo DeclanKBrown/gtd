@@ -9,7 +9,7 @@ type Task = {
   priority: string
 }
 
-const ReviewStepOne = () => {
+const ReviewStepThree = () => {
   const [tasks, setTasks] = useState<Task[]>([])
   const [taskInput, setTaskInput] = useState('')
 
@@ -34,7 +34,7 @@ const ReviewStepOne = () => {
   return (
     <div className="my-4 flex flex-col items-center gap-6 px-4 text-primary">
       <Input
-        placeholder="Gather and process all loose materials and thoughts to ensure everything is within your GTD system"
+        placeholder="Review your Someday Maybe list, activate relevant projects, delete uninteresting ones, and add bold new ideas"
         value={taskInput}
         onChange={(e) => setTaskInput(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -44,4 +44,4 @@ const ReviewStepOne = () => {
   )
 }
 
-export default ReviewStepOne
+export default ReviewStepThree

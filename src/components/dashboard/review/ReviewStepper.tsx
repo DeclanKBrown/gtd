@@ -4,6 +4,8 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Step, StepItem, Stepper, useStepper } from '@/components/ui/stepper'
 import ReviewStepOne from './StepOne/ReviewStepOne'
+import ReviewStepTwo from './StepTwo/ReviewStepTwo'
+import ReviewStepThree from './StepThree/ReviewStepThree'
 
 const steps = [
   { label: 'Get Clear' },
@@ -19,14 +21,10 @@ const ReviewStepper = () => {
           <ReviewStepOne />
         </Step>
         <Step label="Get Current" checkIcon={Icons.check}>
-          <div className="my-4 flex h-40 items-center justify-center rounded-md border text-primary">
-            <h1 className="text-xl">Get Current</h1>
-          </div>
+          <ReviewStepTwo />
         </Step>
         <Step label="Get Creative" checkIcon={Icons.check}>
-          <div className="my-4 flex h-40 items-center justify-center rounded-md border text-primary">
-            <h1 className="text-xl">Get Creative</h1>
-          </div>
+          <ReviewStepThree />
         </Step>
         <Footer />
       </Stepper>
@@ -49,8 +47,8 @@ const Footer = () => {
   return (
     <>
       {hasCompletedAllSteps && (
-        <div className="my-4 flex h-40 items-center justify-center rounded-md border bg-secondary text-primary">
-          <h1 className="text-xl">Woohoo! All steps completed! 🎉</h1>
+        <div className="my-4 flex h-40 items-center justify-center rounded-md border text-primary">
+          <h1 className="text-xl">Review Complete</h1>
         </div>
       )}
       <div className="flex w-full justify-end gap-2">
