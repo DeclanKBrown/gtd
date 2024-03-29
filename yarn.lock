@@ -781,6 +781,18 @@
     lodash.merge "^4.6.2"
     postcss-selector-parser "6.0.10"
 
+"@tanstack/query-core@5.28.9":
+  version "5.28.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.28.9.tgz#170a7a8794ab73aeffbaf711ac62126479a5d026"
+  integrity sha512-hNlfCiqZevr3GRVPXS3MhaGW5hjcxvCsIQ4q6ff7EPlvFwYZaS+0d9EIIgofnegDaU2BbCDlyURoYfRl5rmzow==
+
+"@tanstack/react-query@^5.28.9":
+  version "5.28.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.28.9.tgz#13c2049daa5db6c3137473e279b209f76d39708e"
+  integrity sha512-vwifBkGXsydsLxFOBMe3+f8kvtDoqDRDwUNjPHVDDt+FoBetCbOWAUHgZn4k+CVeZgLmy7bx6aKeDbe3e8koOQ==
+  dependencies:
+    "@tanstack/query-core" "5.28.9"
+
 "@tanstack/react-table@^8.15.0":
   version "8.15.0"
   resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.15.0.tgz#668ceb9f396d33409165d5b9bee7734b657061c6"
@@ -792,6 +804,26 @@
   version "8.14.0"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.14.0.tgz#4c9fe8b74949bb0ffe4ac8b1937beaff1f3a19de"
   integrity sha512-wDhpKJahGHWhmRt4RxtV3pES63CoeadljGWS/xeS9OJr1HBl2NB+OO44ht3sxDH5j5TRDAbQzC0NvSlsUfn7lQ==
+
+"@trpc/client@^11.0.0-next.327":
+  version "11.0.0-next.327"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-next.327.tgz#22e0f2e40fdad7064ada0a8d1538d51c0c7a6a93"
+  integrity sha512-5Vhem/cavPizA0+CdGDWfJR0XSdljjf927BpKyRt6NfdQP539tP8s0wZsGq/+s9S79hucsDQkh0MoP0Ki3UO4g==
+
+"@trpc/next@^11.0.0-next.327":
+  version "11.0.0-next.327"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-next.327.tgz#32e2f5a7794c5a19dd5cc073ef5e081e8e91e773"
+  integrity sha512-Ks/HRhBiAu46qn2YZxq/t7sllJyO2bktoGZT2g3g28ESK7WuGznbv/hIZYq0TlbPkP/AEQMjP7w9X86E5aG5lA==
+
+"@trpc/react-query@^11.0.0-next.327":
+  version "11.0.0-next.327"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-next.327.tgz#68b54fe5a9cf9cec9a29b9f376cb0328a33c3c4f"
+  integrity sha512-B077KFeI2APLVTsXdIMbArb8j7ZwgIE6vlvEKiM0q2cftckgKV0WclUYboZ9Ldd/AFJ8k8Lz92Ot3CroSUg5vA==
+
+"@trpc/server@^11.0.0-next.327":
+  version "11.0.0-next.327"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-next.327.tgz#eede4d55b120cc69d92394f2fb945a25240f8bbc"
+  integrity sha512-Lw4knzW1z0RpiGjur5gU/d67pl1NEkpIokTefuPqb63FlWCfwfHG3FHfvOaNoQ1lt3xMlw/A+pAMeU/q8YWp4Q==
 
 "@types/json5@^0.0.29":
   version "0.0.29"
