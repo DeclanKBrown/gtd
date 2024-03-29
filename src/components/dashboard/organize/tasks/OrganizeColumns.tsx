@@ -20,10 +20,6 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const project = labels.find((label) => label.value === row.original.label)
 
-      if (!project) {
-        return null
-      }
-
       const handleProjectChange = (newProject: string) => {
         console.log('New project:', newProject)
       }
@@ -35,7 +31,7 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
       return (
         <div className="flex items-center space-x-2">
           <RowProject
-            project={project.label}
+            project={project?.label || 'Choose Project'}
             onProjectChange={handleProjectChange}
           />
           <RowName title={row.getValue('title')} onSave={handleSave} />
