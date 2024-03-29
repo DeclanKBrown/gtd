@@ -4,18 +4,18 @@ import { ColumnDef } from '@tanstack/react-table'
 
 import { labels, priorities, statuses } from '../../table/data/data'
 import { Task } from '../../table/data/schema'
-import { RowPriority } from '../../common/rowPriority'
-import { RowStatus } from '../../common/rowStatus'
-import { RowProject } from '../../common/rowProject'
-import RowName from '../../common/rowName'
-import { OrganizeColumnHeader } from './OrganizeColumnHeader'
-import RowDate from '../../common/rowDate'
+import { RowPriority } from '../../table/data-table-row-priority'
+import { RowStatus } from '../../table/data-table-row-status'
+import { RowProject } from '../../table/data-table-row-project'
+import RowName from '../../table/data-table-row-name'
+import { DataTableColumnHeader } from '../../table/data-table-column-header'
+import RowDate from '../../table/data-table-row-date'
 
 export const OrganizeColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => (
-      <OrganizeColumnHeader column={column} title="Title" />
+      <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => {
       const project = labels.find((label) => label.value === row.original.label)
@@ -42,7 +42,7 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'status',
     header: ({ column }) => (
-      <OrganizeColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
@@ -62,7 +62,7 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'goal',
     header: ({ column }) => (
-      <OrganizeColumnHeader column={column} title="Goal Completed" />
+      <DataTableColumnHeader column={column} title="Goal Completed" />
     ),
     cell: ({ row }) => {
       const handleSelect = (date: Date) => {
@@ -75,7 +75,7 @@ export const OrganizeColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'priority',
     header: ({ column }) => (
-      <OrganizeColumnHeader column={column} title="Priority" />
+      <DataTableColumnHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
       const priority = priorities.find(

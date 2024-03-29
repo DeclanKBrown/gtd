@@ -22,7 +22,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { InboxPagination } from './InboxPagination'
+import { DataTablePagination } from '../table/data-table-pagination'
 
 interface InboxProps<TData, TValue> {
   data: TData[]
@@ -94,7 +94,7 @@ const Inbox = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
           </TableBody>
         </Table>
       </div>
-      <InboxPagination table={table} />
+      <DataTablePagination table={table} />
     </div>
   )
 }

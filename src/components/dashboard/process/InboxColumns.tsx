@@ -4,15 +4,17 @@ import { ColumnDef } from '@tanstack/react-table'
 
 import { labels, statuses } from '../table/data/data'
 import { Task } from '../table/data/schema'
-import { InboxColumnHeader } from './InboxColumnHeader'
-import { RowStatus } from '../common/rowStatus'
-import { RowProject } from '../common/rowProject'
-import InboxRowName from '../common/rowName'
+import { DataTableColumnHeader } from '../table/data-table-column-header'
+import { RowStatus } from '../table/data-table-row-status'
+import { RowProject } from '../table/data-table-row-project'
+import InboxRowName from '../table/data-table-row-name'
 
 export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
-    header: ({ column }) => <InboxColumnHeader column={column} title="Title" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Title" />
+    ),
     cell: ({ row }) => {
       const project = labels.find((label) => label.value === row.original.label)
 
@@ -42,7 +44,7 @@ export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'status',
     header: ({ column }) => (
-      <InboxColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
