@@ -3,6 +3,9 @@
 import * as React from 'react'
 import {
   ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -12,7 +15,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { InboxColumns } from './InboxColumns'
+
 import {
   Table,
   TableBody,
@@ -22,18 +25,41 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { InboxPagination } from './InboxPagination'
+import { DataTablePagination } from './data-table-pagination'
+import { DataTableToolbar } from './data-table-toolbar'
 
-interface InboxProps<TData, TValue> {
+import { Columns } from './Columns'
+
+interface DataTableProps<TData, TValue> {
   data: TData[]
 }
-const Inbox = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
-  const columns = InboxColumns as ColumnDef<TData>[]
+
+export function TableConfigurable<TData, TValue>({
+  data,
+}: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = React.useState({})
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  )
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const columns = Columns as ColumnDef<TData>[]
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters,
+    },
     enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -44,6 +70,7 @@ const Inbox = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
 
   return (
     <div className="space-y-4">
+      <DataTableToolbar table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -94,9 +121,7 @@ const Inbox = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
           </TableBody>
         </Table>
       </div>
-      <InboxPagination table={table} />
+      <DataTablePagination table={table} />
     </div>
   )
 }
-
-export default Inbox

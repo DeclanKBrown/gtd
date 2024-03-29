@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 const ReviewPage = () => {
   return (
     <>
-      {' '}
       <ScrollArea className="h-screen">
         <div className="flex h-screen flex-col">
           <div className="flex-1 space-y-4 p-8 pt-6">

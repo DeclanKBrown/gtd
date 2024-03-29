@@ -2,17 +2,19 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, statuses } from '../table/data/data'
-import { Task } from '../table/data/schema'
-import { InboxColumnHeader } from './InboxColumnHeader'
-import { RowStatus } from '../common/rowStatus'
-import { RowProject } from '../common/rowProject'
-import InboxRowName from '../common/rowName'
+import { labels, statuses } from './data/data'
+import { Task } from './data/schema'
+import { DataTableColumnHeader } from './data-table-column-header'
+import { RowStatus } from './data-table-row-status'
+import { RowProject } from './data-table-row-project'
+import InboxRowName from './data-table-row-name'
 
-export const InboxColumns: ColumnDef<Task>[] = [
+export const MinimalColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'title',
-    header: ({ column }) => <InboxColumnHeader column={column} title="Title" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Title" />
+    ),
     cell: ({ row }) => {
       const project = labels.find((label) => label.value === row.original.label)
 
@@ -42,7 +44,7 @@ export const InboxColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'status',
     header: ({ column }) => (
-      <InboxColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(

@@ -1,10 +1,7 @@
-import { promises as fs } from 'fs'
-import path from 'path'
-import { z } from 'zod'
 import { Metadata } from 'next'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Organize } from '@/components/dashboard/organize/tasks/Organize'
-import { taskSchema } from '@/components/dashboard/table/data/schema'
+import Organize from '@/components/dashboard/organize/tasks/Organize'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Projects from '@/components/dashboard/organize/projects/Projects'
 import References from '@/components/dashboard/organize/references/References'
@@ -14,19 +11,7 @@ export const metadata: Metadata = {
   description: 'Organize your tasks and projects',
 }
 
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), 'src/components/dashboard/table/data/tasks.json'),
-  )
-
-  const tasks = JSON.parse(data.toString())
-
-  return z.array(taskSchema).parse(tasks)
-}
-
 const OrganizePage = async () => {
-  const tasks = await getTasks()
-
   return (
     <>
       <ScrollArea className="h-screen">
@@ -42,7 +27,7 @@ const OrganizePage = async () => {
                 <TabsTrigger value="references">References</TabsTrigger>
               </TabsList>
               <TabsContent value="tasks">
-                <Organize data={tasks} />
+                <Organize />
               </TabsContent>
               <TabsContent value="projects">
                 <Projects />
