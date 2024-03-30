@@ -65,7 +65,7 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum Status {
+enum TaskStatus {
   INBOX
   SOMEDAY
   WAITING
@@ -83,40 +83,52 @@ enum Priority {
 }
 
 model Task {
-  id              String   @id @default(cuid())
+  id              String     @id @default(cuid())
   name            String
   description     String
-  status          String
+  status          TaskStatus
   goalCompletedAt DateTime
-  priority        String
-  Project         Project? @relation(fields: [projectId], references: [id])
+  priority        Priority
+  Project         Project?   @relation(fields: [projectId], references: [id])
   projectId       String?
-  user            User     @relation(fields: [userId], references: [id])
+  user            User       @relation(fields: [userId], references: [id])
   userId          String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
 }
 
 model Project {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
   name        String
   description String
+  status      ProjectStatus
   tasks       Task[]
-  user        User     @relation(fields: [userId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
   userId      String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum ReferenceStatus {
+  ACTIVE
+  ARCHIVED
 }
 
 model Reference {
-  id        String   @id @default(cuid())
+  id        String          @id @default(cuid())
   name      String
   note      String?
   url       String?
-  user      User     @relation(fields: [userId], references: [id])
+  status    ReferenceStatus
+  user      User            @relation(fields: [userId], references: [id])
   userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
 }
 
 model Review {
