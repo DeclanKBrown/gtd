@@ -26,6 +26,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { captureSchema } from '@/lib/validations/captureSchema'
 import { trpc } from '@/app/_trpc/Client'
+import { toast } from '@/components/ui/use-toast'
 
 interface CaptureModalProps {
   onClose: () => void
@@ -45,30 +46,59 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
   const { mutate: createTask } = trpc.createTask.useMutation({
     onSuccess: () => {
       onClose()
+      return toast({
+        title: 'Success',
+        description: 'Task created',
+        variant: 'default',
+      })
     },
     onError: (error) => {
-      console.log(error)
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Error creating task',
+        variant: 'destructive',
+      })
     },
   })
   const { mutate: createProject } = trpc.createProject.useMutation({
     onSuccess: () => {
       onClose()
+      return toast({
+        title: 'Success',
+        description: 'Project created',
+        variant: 'default',
+      })
     },
     onError: (error) => {
-      console.log(error)
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Error creating project',
+        variant: 'destructive',
+      })
     },
   })
   const { mutate: createReference } = trpc.createReference.useMutation({
     onSuccess: () => {
       onClose()
+      return toast({
+        title: 'Success',
+        description: 'Reference created',
+        variant: 'default',
+      })
     },
     onError: (error) => {
-      console.log(error)
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Error creating reference',
+        variant: 'destructive',
+      })
     },
   })
 
   const onSubmit = (values: z.infer<typeof captureSchema>) => {
-    console.log(values)
     if (values.type === 'TASK') {
       createTask({
         data: {
@@ -91,12 +121,11 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
       createReference({
         data: {
           name: values.name,
-          description: values.description,
+          url: values.description,
           status: values.status,
         },
       })
     }
-    console.log('submitted')
   }
 
   const watchType = form.watch('type')

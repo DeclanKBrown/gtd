@@ -86,9 +86,9 @@ model Task {
   id              String     @id @default(cuid())
   name            String
   description     String
-  status          TaskStatus
-  goalCompletedAt DateTime
-  priority        Priority
+  status          TaskStatus @default(INBOX)
+  goalCompletedAt DateTime   @default(now())
+  priority        Priority   @default(LOW)
   Project         Project?   @relation(fields: [projectId], references: [id])
   projectId       String?
   user            User       @relation(fields: [userId], references: [id])

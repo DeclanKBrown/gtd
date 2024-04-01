@@ -30,6 +30,8 @@ export const createTask = async ({
     data: {
       ...data,
       userId,
+      goalCompletedAt: new Date(),
+      priority: 'MEDIUM',
     },
   })
 }
