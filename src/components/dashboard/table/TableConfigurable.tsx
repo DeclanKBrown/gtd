@@ -29,14 +29,15 @@ import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 
 import { Columns } from './Columns'
+import { Task } from '@prisma/client'
 
-interface DataTableProps<TData, TValue> {
-  data: TData[]
+interface TableConfigurableProps {
+  data: Task[]
 }
 
 export function TableConfigurable<TData, TValue>({
   data,
-}: DataTableProps<TData, TValue>) {
+}: TableConfigurableProps) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
@@ -44,7 +45,7 @@ export function TableConfigurable<TData, TValue>({
     [],
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const columns = Columns as ColumnDef<TData>[]
+  const columns = Columns as ColumnDef<Task>[]
 
   const table = useReactTable({
     data,

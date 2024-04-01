@@ -8,6 +8,7 @@ import {
   updateTask,
   deleteTask,
   getInboxTasks,
+  getOrganizeTasks,
 } from '@/services/task'
 
 import {
@@ -41,6 +42,10 @@ export const appRouter = router({
 
   getInboxTasks: privateProcedure.query(async ({ ctx }) => {
     return await getInboxTasks({ userId: ctx.userId })
+  }),
+
+  getOrganizeTasks: privateProcedure.query(async ({ ctx }) => {
+    return await getOrganizeTasks({ userId: ctx.userId })
   }),
 
   getTask: privateProcedure

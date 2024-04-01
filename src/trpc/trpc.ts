@@ -1,7 +1,6 @@
 import { authOptions } from '@/lib/auth'
 import { TRPCError, initTRPC } from '@trpc/server'
 import { getServerSession } from 'next-auth'
-import { getSession } from 'next-auth/react'
 /**
  * Initialization of tRPC backend
  * Should be done only once per backend!

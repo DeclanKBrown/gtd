@@ -14,7 +14,7 @@ import { priorityOptions } from '@/lib/constants'
 interface PriorityData {
   label: string
   value: string
-  icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
+  icon: (props: IconProps) => JSX.Element
 }
 
 interface InboxRowPriorityProps {

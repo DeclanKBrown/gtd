@@ -15,13 +15,14 @@ interface RowDateProps {
   onSelect: (date: Date) => void
 }
 
-const RowDate = ({ goalCompleted }: RowDateProps) => {
+const RowDate = ({ goalCompleted, onSelect }: RowDateProps) => {
   const [date, setDate] = React.useState<Date>(goalCompleted || new Date())
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
 
   const handleSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
       setDate(selectedDate)
+      onSelect(selectedDate)
       setIsPopoverOpen(false)
     }
   }

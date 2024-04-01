@@ -3,13 +3,13 @@
 import { ColumnDef } from '@tanstack/react-table'
 
 import { statusOptions } from '@/lib/constants'
-import { Task } from './data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { RowStatus } from './data-table-row-status'
 import { RowProject } from './data-table-row-project'
 import InboxRowName from './data-table-row-name'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
+import { Task } from '@prisma/client'
 
 export const MinimalColumns: ColumnDef<Task>[] = [
   {
@@ -24,7 +24,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
 
       if (!project) {
         project = {
-          label: 'choose',
+          label: 'Choose Project',
         }
       }
 
@@ -53,11 +53,11 @@ export const MinimalColumns: ColumnDef<Task>[] = [
         },
       })
 
-      const handleSave = (newTitle: string) => {
+      const handleSave = (newName: string) => {
         updateTaskName({
           id: row.original.id,
           data: {
-            name: newTitle,
+            name: newName,
           },
         })
       }
