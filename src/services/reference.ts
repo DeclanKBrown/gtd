@@ -1,31 +1,62 @@
 import { db } from '@/lib/db'
-import { Reference } from '@prisma/client'
+import { Reference, Review } from '@prisma/client'
 
-export const getReferences = async () => {
-  return await db.reference.findMany()
+export const getReferences = async ({ userId }: { userId: string }) => {
+  return await db.reference.findMany({
+    where: { userId },
+  })
 }
 
-export const getReference = async (id: string) => {
+export const getReference = async ({
+  referenceId,
+  userId,
+}: {
+  referenceId: string
+  userId: string
+}) => {
   return await db.reference.findUnique({
-    where: { id },
+    where: { id: referenceId, userId },
   })
 }
 
-export const createReference = async (data: Reference) => {
+export const createReference = async ({
+  data,
+  userId,
+}: {
+  data: Reference
+  userId: string
+}) => {
   return await db.reference.create({
-    data,
+    data: {
+      ...data,
+      userId,
+    },
   })
 }
 
-export const updateReference = async (id: string, data: Reference) => {
+export const updateReference = async ({
+  referenceId,
+  data,
+  userId,
+}: {
+  referenceId: string
+  data: Reference
+  userId: string
+}) => {
   return await db.reference.update({
-    where: { id },
+    where: { id: referenceId, userId },
     data,
   })
 }
 
-export const deleteReference = async (id: string) => {
+export const deleteReference = async ({
+  referenceId,
+  userId,
+}: {
+  referenceId: string
+  userId: string
+}) => {
   return await db.reference.delete({
-    where: { id },
+    where: { id: referenceId, userId },
   })
 }

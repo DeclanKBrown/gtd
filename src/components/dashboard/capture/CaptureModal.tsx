@@ -25,6 +25,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { captureSchema } from '@/lib/validations/captureSchema'
+import { trpc } from '@/app/_trpc/Client'
 
 interface CaptureModalProps {
   onClose: () => void
@@ -41,8 +42,61 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
     },
   })
 
+  const { mutate: createTask } = trpc.createTask.useMutation({
+    onSuccess: () => {
+      onClose()
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+  const { mutate: createProject } = trpc.createProject.useMutation({
+    onSuccess: () => {
+      onClose()
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+  const { mutate: createReference } = trpc.createReference.useMutation({
+    onSuccess: () => {
+      onClose()
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+
   const onSubmit = (values: z.infer<typeof captureSchema>) => {
     console.log(values)
+    if (values.type === 'TASK') {
+      createTask({
+        data: {
+          name: values.name,
+          description: values.description,
+          status: values.status,
+        },
+      })
+    }
+    if (values.type === 'PROJECT') {
+      createProject({
+        data: {
+          name: values.name,
+          description: values.description,
+          status: values.status,
+        },
+      })
+    }
+    if (values.type === 'REFERENCE') {
+      createReference({
+        data: {
+          name: values.name,
+          description: values.description,
+          status: values.status,
+        },
+      })
+    }
+    console.log('submitted')
   }
 
   const watchType = form.watch('type')

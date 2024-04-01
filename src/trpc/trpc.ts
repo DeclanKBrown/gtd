@@ -1,6 +1,7 @@
+import { authOptions } from '@/lib/auth'
 import { TRPCError, initTRPC } from '@trpc/server'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
-
 /**
  * Initialization of tRPC backend
  * Should be done only once per backend!
@@ -9,7 +10,7 @@ const t = initTRPC.create()
 const middleware = t.middleware
 
 const isAuth = middleware(async (opts) => {
-  const session = await getSession()
+  const session = await getServerSession(authOptions)
 
   if (!session || !session.user) {
     throw new TRPCError({ code: 'UNAUTHORIZED' })

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { router, publicProcedure } from './trpc'
+import { router, privateProcedure } from './trpc'
 
 import {
   getTasks,
@@ -34,116 +34,137 @@ import {
 } from '@/services/review'
 
 export const appRouter = router({
-  getTasks: publicProcedure.query(async () => {
-    return await getTasks()
+  getTasks: privateProcedure.query(async ({ ctx }) => {
+    return await getTasks({ userId: ctx.userId })
   }),
 
-  getTask: publicProcedure
+  getTask: privateProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      return await getTask(input.id)
+    .query(async ({ input, ctx }) => {
+      return await getTask({ taskId: input.id, userId: ctx.userId })
     }),
 
-  createTask: publicProcedure
+  createTask: privateProcedure
     .input(z.object({ data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await createTask(input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await createTask({ data: input.data, userId: ctx.userId })
     }),
 
-  updateTask: publicProcedure
+  updateTask: privateProcedure
     .input(z.object({ id: z.string(), data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await updateTask(input.id, input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await updateTask({
+        taskId: input.id,
+        data: input.data,
+        userId: ctx.userId,
+      })
     }),
 
-  deleteTask: publicProcedure
+  deleteTask: privateProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      return await deleteTask(input.id)
+    .mutation(async ({ input, ctx }) => {
+      return await deleteTask({ taskId: input.id, userId: ctx.userId })
     }),
 
-  getProjects: publicProcedure.query(async () => {
-    return await getProjects()
+  getProject: privateProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getProject({ projectId: input.id, userId: ctx.userId })
+    }),
+
+  getProjects: privateProcedure.query(async ({ ctx }) => {
+    return await getProjects({ userId: ctx.userId })
   }),
 
-  getProject: publicProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      return await getProject(input.id)
-    }),
-
-  createProject: publicProcedure
+  createProject: privateProcedure
     .input(z.object({ data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await createProject(input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await createProject({ data: input.data, userId: ctx.userId })
     }),
 
-  updateProject: publicProcedure
+  updateProject: privateProcedure
     .input(z.object({ id: z.string(), data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await updateProject(input.id, input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await updateProject({
+        projectId: input.id,
+        data: input.data,
+        userId: ctx.userId,
+      })
     }),
 
-  deleteProject: publicProcedure
+  deleteProject: privateProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      return await deleteProject(input.id)
+    .mutation(async ({ input, ctx }) => {
+      return await deleteProject({ projectId: input.id, userId: ctx.userId })
     }),
 
-  getReferences: publicProcedure.query(async () => {
-    return await getReferences()
+  getReferences: privateProcedure.query(async ({ ctx }) => {
+    return await getReferences({ userId: ctx.userId })
   }),
 
-  getReference: publicProcedure
+  getReference: privateProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      return await getReference(input.id)
+    .query(async ({ input, ctx }) => {
+      return await getReference({ referenceId: input.id, userId: ctx.userId })
     }),
 
-  createReference: publicProcedure
+  createReference: privateProcedure
     .input(z.object({ data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await createReference(input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await createReference({ data: input.data, userId: ctx.userId })
     }),
 
-  updateReference: publicProcedure
+  updateReference: privateProcedure
     .input(z.object({ id: z.string(), data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await updateReference(input.id, input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await updateReference({
+        referenceId: input.id,
+        data: input.data,
+        userId: ctx.userId,
+      })
     }),
 
-  deleteReference: publicProcedure
+  deleteReference: privateProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      return await deleteReference(input.id)
+    .mutation(async ({ input, ctx }) => {
+      return await deleteReference({
+        referenceId: input.id,
+        userId: ctx.userId,
+      })
     }),
 
-  getReviews: publicProcedure.query(async () => {
-    return await getReviews()
-  }),
-
-  getReview: publicProcedure
+  getReviews: privateProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      return await getReview(input.id)
+    .query(async ({ ctx }) => {
+      return await getReviews({ userId: ctx.userId })
     }),
 
-  createReview: publicProcedure
+  getReview: privateProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getReview({ reviewId: input.id, userId: ctx.userId })
+    }),
+
+  createReview: privateProcedure
     .input(z.object({ data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await createReview(input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await createReview({ data: input.data, userId: ctx.userId })
     }),
 
-  updateReview: publicProcedure
+  updateReview: privateProcedure
     .input(z.object({ id: z.string(), data: z.any() }))
-    .mutation(async ({ input }) => {
-      return await updateReview(input.id, input.data)
+    .mutation(async ({ input, ctx }) => {
+      return await updateReview({
+        reviewId: input.id,
+        data: input.data,
+        userId: ctx.userId,
+      })
     }),
 
-  deleteReview: publicProcedure
+  deleteReview: privateProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      return await deleteReview(input.id)
+    .mutation(async ({ input, ctx }) => {
+      return await deleteReview({ reviewId: input.id, userId: ctx.userId })
     }),
 })
 

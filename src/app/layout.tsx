@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Toaster } from '@/components/ui/toaster'
+import Providers from '@/components/providers/Providers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,17 +23,19 @@ interface RootLayoutProps {
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'grainy min-h-screen font-sans antialiased',
-          inter.className,
-        )}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
+      <Providers>
+        <body
+          className={cn(
+            'grainy min-h-screen font-sans antialiased',
+            inter.className,
+          )}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </Providers>
     </html>
   )
 }

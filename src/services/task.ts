@@ -1,31 +1,62 @@
 import { db } from '@/lib/db'
 import { Task } from '@prisma/client'
 
-export const getTasks = async () => {
-  return await db.task.findMany()
+export const getTasks = async ({ userId }: { userId: string }) => {
+  return await db.task.findMany({
+    where: { userId },
+  })
 }
 
-export const getTask = async (id: string) => {
+export const getTask = async ({
+  taskId,
+  userId,
+}: {
+  taskId: string
+  userId: string
+}) => {
   return await db.task.findUnique({
-    where: { id },
+    where: { id: taskId, userId },
   })
 }
 
-export const createTask = async (data: Task) => {
+export const createTask = async ({
+  data,
+  userId,
+}: {
+  data: Task
+  userId: string
+}) => {
   return await db.task.create({
-    data,
+    data: {
+      ...data,
+      userId,
+    },
   })
 }
 
-export const updateTask = async (id: string, data: Task) => {
+export const updateTask = async ({
+  taskId,
+  data,
+  userId,
+}: {
+  taskId: string
+  data: Task
+  userId: string
+}) => {
   return await db.task.update({
-    where: { id },
+    where: { id: taskId, userId },
     data,
   })
 }
 
-export const deleteTask = async (id: string) => {
+export const deleteTask = async ({
+  taskId,
+  userId,
+}: {
+  taskId: string
+  userId: string
+}) => {
   return await db.task.delete({
-    where: { id },
+    where: { id: taskId, userId },
   })
 }
