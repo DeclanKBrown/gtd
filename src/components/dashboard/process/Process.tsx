@@ -1,22 +1,15 @@
+'use client'
+
 import TableSimple from '../table/TableSimple'
-import { z } from 'zod'
-import { promises as fs } from 'fs'
-import path from 'path'
-import { taskSchema } from '@/components/dashboard/table/data/schema'
+import { trpc } from '@/app/_trpc/Client'
 
-// Simulate a database read for tasks.
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), 'src/components/dashboard/table/data/tasks.json'),
-  )
+const Process = () => {
+  const { data: tasks, isLoading } = trpc.getInboxTasks.useQuery()
+  console.log(tasks)
 
-  const tasks = JSON.parse(data.toString())
-
-  return z.array(taskSchema).parse(tasks)
-}
-
-const Process = async () => {
-  const tasks = await getTasks()
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return <TableSimple data={tasks} />
 }

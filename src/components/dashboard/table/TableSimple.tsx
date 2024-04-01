@@ -23,12 +23,13 @@ import {
 } from '@/components/ui/table'
 
 import { DataTablePagination } from './data-table-pagination'
+import { Task } from '@prisma/client'
 
-interface InboxProps<TData, TValue> {
-  data: TData[]
+interface InboxProps {
+  data: Task[]
 }
-const TableSimple = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
-  const columns = MinimalColumns as ColumnDef<TData>[]
+const TableSimple = <TData, TValue>({ data }: InboxProps) => {
+  const columns = MinimalColumns as ColumnDef<Task>[]
 
   const table = useReactTable({
     data,

@@ -26,8 +26,8 @@ export const labels = [
 
 export const statuses = [
   {
-    value: 'backlog',
-    label: 'Backlog',
+    value: 'Inbox',
+    label: 'Inbox',
     icon: QuestionMarkCircledIcon,
   },
   {

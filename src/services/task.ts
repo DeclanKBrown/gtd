@@ -7,6 +7,13 @@ export const getTasks = async ({ userId }: { userId: string }) => {
   })
 }
 
+export const getInboxTasks = async ({ userId }: { userId: string }) => {
+  return await db.task.findMany({
+    where: { userId, status: 'INBOX' },
+    orderBy: { createdAt: 'asc' },
+  })
+}
+
 export const getTask = async ({
   taskId,
   userId,

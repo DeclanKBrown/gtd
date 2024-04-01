@@ -2,32 +2,64 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { labels, statuses } from './data/data'
+import { statusOptions } from '@/lib/constants'
 import { Task } from './data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { RowStatus } from './data-table-row-status'
 import { RowProject } from './data-table-row-project'
 import InboxRowName from './data-table-row-name'
+import { trpc } from '@/app/_trpc/Client'
+import { toast } from '@/components/ui/use-toast'
 
 export const MinimalColumns: ColumnDef<Task>[] = [
   {
-    accessorKey: 'title',
+    accessorKey: 'name',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
+      <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      const project = labels.find((label) => label.value === row.original.label)
+      let project
+      // TODO: Query all active projects and find
+      // const project = projects.find((proj) => proj.value === row.original.label)
 
       if (!project) {
-        return null
+        project = {
+          label: 'choose',
+        }
       }
 
       const handleProjectChange = (newProject: string) => {
         console.log('New project:', newProject)
       }
 
+      const utils = trpc.useUtils()
+
+      const { mutate: updateTaskName } = trpc.updateTask.useMutation({
+        onSuccess: () => {
+          toast({
+            title: 'Success',
+            description: 'Task updated',
+            variant: 'default',
+          })
+          utils.getInboxTasks.reset()
+        },
+        onError: (error) => {
+          console.error(error)
+          toast({
+            title: 'Error',
+            description: 'Error updating task',
+            variant: 'destructive',
+          })
+        },
+      })
+
       const handleSave = (newTitle: string) => {
-        console.log('New title:', newTitle)
+        updateTaskName({
+          id: row.original.id,
+          data: {
+            name: newTitle,
+          },
+        })
       }
 
       return (
@@ -36,7 +68,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
             project={project.label}
             onProjectChange={handleProjectChange}
           />
-          <InboxRowName title={row.getValue('title')} onSave={handleSave} />
+          <InboxRowName title={row.getValue('name')} onSave={handleSave} />
         </div>
       )
     },
@@ -47,7 +79,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
+      const status = statusOptions.find(
         (status) => status.value === row.getValue('status'),
       )
 
@@ -55,8 +87,34 @@ export const MinimalColumns: ColumnDef<Task>[] = [
         return null
       }
 
+      const utils = trpc.useUtils()
+
+      const { mutate: updateTaskStatus } = trpc.updateTask.useMutation({
+        onSuccess: () => {
+          toast({
+            title: 'Success',
+            description: 'Task updated',
+            variant: 'default',
+          })
+          utils.getInboxTasks.reset()
+        },
+        onError: (error) => {
+          console.error(error)
+          toast({
+            title: 'Error',
+            description: 'Error updating task',
+            variant: 'destructive',
+          })
+        },
+      })
+
       const handleStatusChange = (newStatus: string) => {
-        console.log('New status:', newStatus)
+        updateTaskStatus({
+          id: row.original.id,
+          data: {
+            status: newStatus,
+          },
+        })
       }
       return <RowStatus status={status} onStatusChange={handleStatusChange} />
     },

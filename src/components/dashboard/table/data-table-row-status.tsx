@@ -7,14 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { ForwardRefExoticComponent, RefAttributes, useState } from 'react'
+import { useState } from 'react'
 import { IconProps } from '@radix-ui/react-icons/dist/types'
 import { statusOptions } from '@/lib/constants'
 
 interface StatusData {
   label: string
   value: string
-  icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
+  icon: (props: IconProps) => JSX.Element
 }
 
 interface InboxRowStatusProps {
@@ -27,7 +27,6 @@ export function RowStatus({ status, onStatusChange }: InboxRowStatusProps) {
 
   const handleStatusChange = (status: StatusData) => {
     setSelectedStatus(status)
-    console.log(status.value)
     onStatusChange(status.value)
   }
 
