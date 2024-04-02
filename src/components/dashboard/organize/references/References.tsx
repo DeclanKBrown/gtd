@@ -2,39 +2,21 @@
 
 import { formatDistance } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
+import { trpc } from '@/app/_trpc/Client'
 
 const References = () => {
-  const references = [
-    {
-      name: 'Great YT Vid',
-      url: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
-      note: 'This is a great video',
-      areas: ['finance'],
-      createdAt: '2023-09-01T12:00:00Z',
-    },
-    {
-      name: 'Interesting Article',
-      url: 'https://www.example.com/article',
-      note: 'This is a great video',
-      areas: ['fitness'],
-      createdAt: '2023-09-01T12:00:00Z',
-    },
-    {
-      name: 'Cool Website',
-      url: 'https://www.example.com',
-      note: 'This is a great video',
-      areas: ['science', 'psychology'],
-      createdAt: '2023-09-01T12:00:00Z',
-    },
-  ]
+  const { data: references, isLoading } = trpc.getReferences.useQuery()
 
-  console.log(references)
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="flex flex-col gap-2 pt-0">
-      {references.map((item) => (
-        <>
+      {references &&
+        references.map((item) => (
           <button
-            key={item.name}
+            key={item.id}
             className={
               'flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent'
             }
@@ -53,9 +35,9 @@ const References = () => {
               <div className="text-xs font-medium">{item.url}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item.note.substring(0, 300)}
+              {item?.note?.substring(0, 300)}
             </div>
-            {item.areas.length ? (
+            {/* {item.areas.length ? (
               <div className="flex items-center gap-2">
                 {item.areas.map((label) => (
                   <Badge key={label} variant="outline">
@@ -63,10 +45,9 @@ const References = () => {
                   </Badge>
                 ))}
               </div>
-            ) : null}
+            ) : null} */}
           </button>
-        </>
-      ))}
+        ))}
     </div>
   )
 }
