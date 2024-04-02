@@ -1,5 +1,6 @@
 'use client'
 
+import { trpc } from '@/app/_trpc/Client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -8,21 +9,37 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useState } from 'react'
-
-interface ProjectType {
-  id: number
-  name: string
-  status: string
-  description: string
-}
+import { toast } from '@/components/ui/use-toast'
+import { Project, ProjectStatus } from '@prisma/client'
 
 interface ProjectProps {
-  project: ProjectType
+  project: Project
 }
 
 const Project = ({ project }: ProjectProps) => {
-  const [status, setStatus] = useState(project.status)
+  const utils = trpc.useUtils()
+  const { mutate: updateProjectStatus } = trpc.updateProject.useMutation({
+    onSuccess: () => {
+      toast({
+        title: 'Success',
+        description: 'Project updated',
+        variant: 'default',
+      })
+      utils.getProjects.reset()
+    },
+    onError: (error) => {
+      console.error(error)
+      toast({
+        title: 'Error',
+        description: 'Error updating project',
+        variant: 'destructive',
+      })
+    },
+  })
+
+  const handleUpdateProjectStatus = async (status: ProjectStatus) => {
+    await updateProjectStatus({ id: project.id, data: { status: status } })
+  }
 
   return (
     <Card className="hover:bg-accent">
@@ -41,9 +58,9 @@ const Project = ({ project }: ProjectProps) => {
                 <path
                   d="M9.875 7.5C9.875 8.81168 8.81168 9.875 7.5 9.875C6.18832 9.875 5.125 8.81168 5.125 7.5C5.125 6.18832 6.18832 5.125 7.5 5.125C8.81168 5.125 9.875 6.18832 9.875 7.5Z"
                   fill={
-                    status === 'ACTIVE'
+                    project.status === 'COMPLETED'
                       ? '#16a34a'
-                      : status === 'NOT_STARTED'
+                      : project.status === 'NOT_STARTED'
                         ? '#525252'
                         : '#d97706'
                   }
@@ -52,22 +69,24 @@ const Project = ({ project }: ProjectProps) => {
             </TooltipTrigger>
             <TooltipContent className="flex flex-col gap-1">
               <Button
-                variant={status === 'ACTIVE' ? 'secondary' : 'ghost'}
-                onClick={() => setStatus('ACTIVE')}
+                variant={project.status === 'ACTIVE' ? 'secondary' : 'ghost'}
+                onClick={() => handleUpdateProjectStatus('ACTIVE')}
               >
                 Active
               </Button>
               <Button
-                variant={status === 'NOT_STARTED' ? 'secondary' : 'ghost'}
-                onClick={() => setStatus('NOT_STARTED')}
+                variant={
+                  project.status === 'NOT_STARTED' ? 'secondary' : 'ghost'
+                }
+                onClick={() => handleUpdateProjectStatus('NOT_STARTED')}
               >
                 Not Started
               </Button>
               <Button
-                variant={status === 'ARCHIVED' ? 'secondary' : 'ghost'}
-                onClick={() => setStatus('ARCHIVED')}
+                variant={project.status === 'COMPLETED' ? 'secondary' : 'ghost'}
+                onClick={() => handleUpdateProjectStatus('COMPLETED')}
               >
-                Archived
+                Completed
               </Button>
             </TooltipContent>
           </Tooltip>

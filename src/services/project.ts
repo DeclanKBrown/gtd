@@ -4,6 +4,7 @@ import { Project } from '@prisma/client'
 export const getProjects = async ({ userId }: { userId: string }) => {
   return await db.project.findMany({
     where: { userId },
+    orderBy: { createdAt: 'desc' },
   })
 }
 
