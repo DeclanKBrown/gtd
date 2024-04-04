@@ -1,9 +1,10 @@
 import { db } from '@/lib/db'
-import { Reference, Review } from '@prisma/client'
+import { Reference } from '@prisma/client'
 
 export const getReferences = async ({ userId }: { userId: string }) => {
   return await db.reference.findMany({
     where: { userId },
+    orderBy: { createdAt: 'desc' },
   })
 }
 

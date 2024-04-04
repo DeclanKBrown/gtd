@@ -21,6 +21,33 @@ export const getOrganizeTasks = async ({ userId }: { userId: string }) => {
   })
 }
 
+export const getEngageTasks = async ({
+  userId,
+  startOfPeriod,
+  endOfPeriod,
+}: {
+  userId: string
+  startOfPeriod: string
+  endOfPeriod: string
+}) => {
+  try {
+    const tasks = await db.task.findMany({
+      where: {
+        userId,
+        status: 'NEXT_ACTION',
+        goalCompletedAt: {
+          gte: startOfPeriod,
+          lte: endOfPeriod,
+        },
+      },
+      orderBy: { goalCompletedAt: 'asc' },
+    })
+    return tasks
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getTask = async ({
   taskId,
   userId,

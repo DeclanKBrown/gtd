@@ -1,22 +1,25 @@
-import { z } from 'zod'
-import { promises as fs } from 'fs'
-import path from 'path'
-import { taskSchema } from '@/components/dashboard/table/data/schema'
+'use client'
+
+import { trpc } from '@/app/_trpc/Client'
 import TableNonConfig from '../table/TableNonConfig'
+import { endOfDay, startOfDay } from 'date-fns'
 
 // Simulate a database read for tasks.
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), 'src/components/dashboard/table/data/tasks.json'),
-  )
 
-  const tasks = JSON.parse(data.toString())
+const EngageToday = () => {
+  const start = startOfDay(new Date()).toISOString()
+  const end = endOfDay(new Date()).toISOString()
 
-  return z.array(taskSchema).parse(tasks)
-}
+  const { data: tasks, isLoading } = trpc.getEngageTasks.useQuery({
+    startOfPeriod: start,
+    endOfPeriod: end,
+  })
 
-const EngageToday = async () => {
-  const tasks = await getTasks()
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  console.log(tasks)
 
   return (
     <div className="flex flex-col gap-3">

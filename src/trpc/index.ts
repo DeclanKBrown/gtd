@@ -9,6 +9,7 @@ import {
   deleteTask,
   getInboxTasks,
   getOrganizeTasks,
+  getEngageTasks,
 } from '@/services/task'
 
 import {
@@ -47,6 +48,16 @@ export const appRouter = router({
   getOrganizeTasks: privateProcedure.query(async ({ ctx }) => {
     return await getOrganizeTasks({ userId: ctx.userId })
   }),
+
+  getEngageTasks: privateProcedure
+    .input(z.object({ startOfPeriod: z.string(), endOfPeriod: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getEngageTasks({
+        userId: ctx.userId,
+        startOfPeriod: input.startOfPeriod,
+        endOfPeriod: input.endOfPeriod,
+      })
+    }),
 
   getTask: privateProcedure
     .input(z.object({ id: z.string() }))
