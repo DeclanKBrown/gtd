@@ -7,19 +7,17 @@ import { endOfDay, startOfDay } from 'date-fns'
 // Simulate a database read for tasks.
 
 const EngageToday = () => {
-  const start = startOfDay(new Date()).toISOString()
-  const end = endOfDay(new Date()).toISOString()
+  const startOfToday = startOfDay(new Date()).toISOString()
+  const endOfToday = endOfDay(new Date()).toISOString()
 
   const { data: tasks, isLoading } = trpc.getEngageTasks.useQuery({
-    startOfPeriod: start,
-    endOfPeriod: end,
+    startOfPeriod: startOfToday,
+    endOfPeriod: endOfToday,
   })
 
   if (isLoading) {
     return <div>Loading...</div>
   }
-
-  console.log(tasks)
 
   return (
     <div className="flex flex-col gap-3">

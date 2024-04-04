@@ -1,22 +1,20 @@
-import { z } from 'zod'
-import { promises as fs } from 'fs'
-import path from 'path'
-import { taskSchema } from '@/components/dashboard/table/data/schema'
+'use client'
+import { trpc } from '@/app/_trpc/Client'
 import TableNonConfig from '../table/TableNonConfig'
+import { endOfWeek, startOfWeek } from 'date-fns'
 
-// Simulate a database read for tasks.
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), 'src/components/dashboard/table/data/tasks.json'),
-  )
+const EngageWeek = () => {
+  const startWeek = startOfWeek(new Date()).toISOString()
+  const endWeek = endOfWeek(new Date()).toISOString()
 
-  const tasks = JSON.parse(data.toString())
+  const { data: tasks, isLoading } = trpc.getEngageTasks.useQuery({
+    startOfPeriod: startWeek,
+    endOfPeriod: endWeek,
+  })
 
-  return z.array(taskSchema).parse(tasks)
-}
-
-const EngageWeek = async () => {
-  const tasks = await getTasks()
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="flex flex-col gap-3">
