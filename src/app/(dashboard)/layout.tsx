@@ -7,10 +7,11 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
-  const session = await getServerSession()
-  if (!session || !session.user) {
-    redirect('/login')
-  }
+  // TODO: Add back in
+  // const session = await getServerSession()
+  // if (!session || !session.user) {
+  //   redirect('/login')
+  // }
 
   return (
     <div className="flex min-h-screen">

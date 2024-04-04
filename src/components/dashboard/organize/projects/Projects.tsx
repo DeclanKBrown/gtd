@@ -6,8 +6,27 @@ import Project from './Project'
 const Projects = () => {
   const { data: projects, isLoading } = trpc.getProjects.useQuery()
 
+  /* LOADING */
   if (isLoading) {
     return <div>Loading...</div>
+  }
+
+  /* ERROR */
+  if (!projects) {
+    return (
+      <div className="flex w-full items-center justify-center py-12 text-xl text-red-500">
+        <h1>Error</h1>
+      </div>
+    )
+  }
+
+  /* EMPTY */
+  if (projects.length === 0) {
+    return (
+      <div className="flex w-full items-center justify-center py-12 text-xl">
+        <h1>No Projects Found</h1>
+      </div>
+    )
   }
 
   return (

@@ -258,7 +258,9 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        {watchType === 'REFERENCE' ? 'Url' : 'Description'}
+                        {watchType === 'REFERENCE'
+                          ? 'Url / Note'
+                          : 'Description'}
                       </FormLabel>
                       <FormControl>
                         <Input {...field} />
