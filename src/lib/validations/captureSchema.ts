@@ -16,7 +16,7 @@ const refStatusEnum = z.enum(['ACTIVE', 'ARCHIVED'])
 
 export const captureSchema = z
   .object({
-    name: z.string().min(1).max(30),
+    name: z.string().min(1).max(80),
     description: z.optional(z.string().max(100)),
     type: z.enum(['TASK', 'PROJECT', 'REFERENCE']),
     status: z.string(),

@@ -3,6 +3,7 @@
 import { endOfTomorrow, startOfTomorrow } from 'date-fns'
 import TableNonConfig from '../table/TableNonConfig'
 import { trpc } from '@/app/_trpc/Client'
+import { Loader } from '@/components/Loader'
 
 const EngageTomorrow = () => {
   const startTomorrow = startOfTomorrow().toISOString()
@@ -15,7 +16,7 @@ const EngageTomorrow = () => {
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

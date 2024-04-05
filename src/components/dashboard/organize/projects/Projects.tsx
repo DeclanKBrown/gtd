@@ -2,13 +2,14 @@
 
 import { trpc } from '@/app/_trpc/Client'
 import Project from './Project'
+import { Loader } from '@/components/Loader'
 
 const Projects = () => {
   const { data: projects, isLoading } = trpc.getProjects.useQuery()
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

@@ -1,5 +1,6 @@
 'use client'
 
+import { Loader } from '@/components/Loader'
 import TableSimple from '../table/TableSimple'
 import { trpc } from '@/app/_trpc/Client'
 
@@ -8,7 +9,7 @@ const Process = () => {
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

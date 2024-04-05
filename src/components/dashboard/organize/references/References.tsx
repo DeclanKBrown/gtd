@@ -3,12 +3,13 @@
 import { formatDistance } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { trpc } from '@/app/_trpc/Client'
+import { Loader } from '@/components/Loader'
 
 const References = () => {
   const { data: references, isLoading } = trpc.getReferences.useQuery()
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

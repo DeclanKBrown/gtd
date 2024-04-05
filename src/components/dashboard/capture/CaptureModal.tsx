@@ -158,7 +158,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input {...field} autoComplete="off" />
+                        <Input {...field} autoComplete="off" name="task" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

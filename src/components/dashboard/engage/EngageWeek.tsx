@@ -2,6 +2,7 @@
 import { trpc } from '@/app/_trpc/Client'
 import TableNonConfig from '../table/TableNonConfig'
 import { endOfWeek, startOfWeek } from 'date-fns'
+import { Loader } from '@/components/Loader'
 
 const EngageWeek = () => {
   const startWeek = startOfWeek(new Date()).toISOString()
@@ -15,7 +16,7 @@ const EngageWeek = () => {
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

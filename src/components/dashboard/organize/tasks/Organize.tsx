@@ -2,13 +2,14 @@
 
 import { trpc } from '@/app/_trpc/Client'
 import { TableConfigurable } from '../../table/TableConfigurable'
+import { Loader } from '@/components/Loader'
 
 const Organize = () => {
   const { data: tasks, isLoading } = trpc.getOrganizeTasks.useQuery()
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */

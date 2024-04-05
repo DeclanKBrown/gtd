@@ -3,6 +3,7 @@
 import { trpc } from '@/app/_trpc/Client'
 import TableNonConfig from '../table/TableNonConfig'
 import { endOfDay, startOfDay } from 'date-fns'
+import { Loader } from '@/components/Loader'
 
 // Simulate a database read for tasks.
 
@@ -17,7 +18,7 @@ const EngageToday = () => {
 
   /* LOADING */
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   /* ERROR */
