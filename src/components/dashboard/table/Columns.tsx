@@ -20,21 +20,36 @@ export const Columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      let project
-      // TODO: Query all active projects and find
-      // const project = labels.find((label) => label.value === row.original.project)
-
-      if (!project) {
-        project = {
-          label: 'Choose Project',
-        }
-      }
-
-      const handleProjectChange = (newProject: string) => {
-        console.log('New project:', newProject)
-      }
+      const projectId = row.original.projectId
 
       const utils = trpc.useUtils()
+
+      const { mutate: updateProject } = trpc.updateTask.useMutation({
+        onSuccess: () => {
+          toast({
+            title: 'Success',
+            description: 'Task updated',
+            variant: 'default',
+          })
+          utils.getInboxTasks.reset()
+          utils.getInboxTasks.reset()
+        },
+        onError: (error) => {
+          console.error(error)
+          toast({
+            title: 'Error',
+            description: 'Error updating task',
+            variant: 'destructive',
+          })
+        },
+      })
+
+      const handleProjectChange = (newProjectId: string) => {
+        updateProject({
+          id: row.original.id,
+          data: { projectId: newProjectId },
+        })
+      }
 
       const { mutate: updateTaskName } = trpc.updateTask.useMutation({
         onSuccess: () => {
@@ -68,7 +83,7 @@ export const Columns: ColumnDef<Task>[] = [
       return (
         <div className="flex items-center space-x-2">
           <RowProject
-            project={project?.label}
+            projectId={projectId}
             onProjectChange={handleProjectChange}
           />
           <RowName title={row.original.name} onSave={handleSave} />

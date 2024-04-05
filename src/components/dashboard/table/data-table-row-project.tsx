@@ -1,5 +1,6 @@
 'use client'
 
+import { trpc } from '@/app/_trpc/Client'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,54 +9,49 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useState } from 'react'
 
 interface InboxRowProjectProps {
-  project: string
+  projectId: string
   onProjectChange: (newProject: string) => void
 }
 
-export function RowProject({ project, onProjectChange }: InboxRowProjectProps) {
-  const [selectedProject, setSelectedProject] = useState(project)
+export function RowProject({
+  projectId,
+  onProjectChange,
+}: InboxRowProjectProps) {
+  const { data: projects } = trpc.getProjects.useQuery()
+  console.log(projects)
 
-  const handleProjectChange = (project: string) => {
-    setSelectedProject(project)
-    console.log(project)
-    onProjectChange(project)
+  const project = projects?.find((proj) => proj.id === projectId)
+
+  const handleProjectChange = (projectId: string) => {
+    onProjectChange(projectId)
   }
 
-  const projects = [
-    'Personal',
-    'Work',
-    'Home',
-    'Family',
-    'Health',
-    'Finance',
-    'Social',
-    'Learning',
-    'Spiritual',
-    'Other',
-  ]
+  if (!projects) {
+    return <span>Loading</span>
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="rounded-full p-0">
           <Badge variant="outline">
-            {selectedProject}
+            {project ? project.name : 'Choose Project'}
             <span className="sr-only">Change Project</span>
           </Badge>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        {projects.map((option) => (
-          <DropdownMenuItem
-            key={option}
-            onClick={() => handleProjectChange(option)}
-          >
-            {option}
-          </DropdownMenuItem>
-        ))}
+        {projects &&
+          projects?.map((option) => (
+            <DropdownMenuItem
+              key={option.id}
+              onClick={() => handleProjectChange(option.id)}
+            >
+              {option.name}
+            </DropdownMenuItem>
+          ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )
