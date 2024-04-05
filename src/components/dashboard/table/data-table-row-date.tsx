@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { format, differenceInCalendarDays } from 'date-fns'
+import { format, differenceInCalendarDays, startOfDay } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -16,6 +16,7 @@ interface RowDateProps {
 }
 
 const RowDate = ({ goalCompleted, onSelect }: RowDateProps) => {
+  console.log(goalCompleted)
   const [date, setDate] = React.useState<Date>(goalCompleted || new Date())
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
 

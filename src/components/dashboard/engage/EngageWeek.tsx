@@ -5,7 +5,8 @@ import { endOfWeek, startOfWeek } from 'date-fns'
 
 const EngageWeek = () => {
   const startWeek = startOfWeek(new Date()).toISOString()
-  const endWeek = endOfWeek(new Date()).toISOString()
+  // Week Starts Monday
+  const endWeek = endOfWeek(new Date(), { weekStartsOn: 1 }).toISOString()
 
   const { data: tasks, isLoading } = trpc.getEngageTasks.useQuery({
     startOfPeriod: startWeek,
@@ -30,7 +31,7 @@ const EngageWeek = () => {
   if (tasks.length === 0) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
-        <h1>No tasks Found</h1>
+        <h1>No tasks found</h1>
       </div>
     )
   }

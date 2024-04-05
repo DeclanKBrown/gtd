@@ -24,7 +24,7 @@ const Process = () => {
   if (tasks.length === 0) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
-        <h1>No tasks Found</h1>
+        <h1>No tasks found</h1>
       </div>
     )
   }

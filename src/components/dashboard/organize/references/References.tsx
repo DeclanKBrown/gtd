@@ -24,7 +24,7 @@ const References = () => {
   if (references.length === 0) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
-        <h1>No References Found</h1>
+        <h1>No references found</h1>
       </div>
     )
   }

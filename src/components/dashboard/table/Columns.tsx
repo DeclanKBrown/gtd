@@ -44,6 +44,7 @@ export const Columns: ColumnDef<Task>[] = [
             variant: 'default',
           })
           utils.getInboxTasks.reset()
+          utils.getInboxTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -99,6 +100,7 @@ export const Columns: ColumnDef<Task>[] = [
             variant: 'default',
           })
           utils.getOrganizeTasks.reset()
+          utils.getInboxTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -137,6 +139,7 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
+          utils.getInboxTasks.reset()
           utils.getInboxTasks.reset()
         },
         onError: (error) => {
@@ -190,6 +193,7 @@ export const Columns: ColumnDef<Task>[] = [
             variant: 'default',
           })
           utils.getOrganizeTasks.reset()
+          utils.getInboxTasks.reset()
         },
         onError: (error) => {
           console.error(error)

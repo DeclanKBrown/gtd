@@ -158,7 +158,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -263,7 +263,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                           : 'Description'}
                       </FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
