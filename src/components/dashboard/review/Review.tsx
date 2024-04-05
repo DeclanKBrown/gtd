@@ -3,9 +3,36 @@
 import { Button } from '@/components/ui/button'
 import ReviewStepper from './ReviewStepper'
 import { useState } from 'react'
+import { trpc } from '@/app/_trpc/Client'
+import { toast } from '@/components/ui/use-toast'
 
 const Review = () => {
   const [reviewStarted, setReviewStarted] = useState(false)
+
+  const { mutate: startReview } = trpc.createReview.useMutation({
+    onSuccess: () => {
+      setReviewStarted(true)
+      return toast({
+        title: 'Success',
+        description: 'Review started',
+        variant: 'default',
+      })
+    },
+    onError: (error) => {
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Error starting review',
+        variant: 'destructive',
+      })
+    },
+  })
+
+  const handleStartReview = () => {
+    startReview({
+      date: new Date().toString(),
+    })
+  }
 
   return (
     <>
@@ -14,10 +41,7 @@ const Review = () => {
           <p className="text-lg text-muted-foreground">
             Start your weekly review
           </p>
-          <Button
-            className="px-6 py-4 text-lg"
-            onClick={() => setReviewStarted(true)}
-          >
+          <Button className="px-6 py-4 text-lg" onClick={handleStartReview}>
             Start
           </Button>
         </div>

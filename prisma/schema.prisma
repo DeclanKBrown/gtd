@@ -134,10 +134,10 @@ model Reference {
 
 model Review {
   id        String   @id @default(cuid())
-  started   Boolean?
-  stepOne   Boolean?
-  stepTwo   Boolean?
-  stepThree Boolean?
+  started   Boolean  @default(true)
+  stepOne   Boolean  @default(false)
+  stepTwo   Boolean  @default(false)
+  stepThree Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   createdAt DateTime @default(now())

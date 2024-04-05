@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { Review } from '@prisma/client'
+import { isSunday } from 'date-fns'
 
 export const getReviews = async ({ userId }: { userId: string }) => {
   return await db.review.findMany({
@@ -20,33 +20,71 @@ export const getReview = async ({
 }
 
 export const createReview = async ({
-  data,
+  date,
   userId,
 }: {
-  data: Review
+  date: string
   userId: string
 }) => {
-  return await db.review.create({
-    data: {
-      ...data,
-      userId,
-    },
-  })
+  if (isSunday(date)) {
+    return await db.review.create({
+      data: {
+        userId,
+      },
+    })
+  } else {
+    return new Error('Not Sunday')
+  }
 }
 
 export const updateReview = async ({
-  reviewId,
-  data,
+  stepNumber,
   userId,
 }: {
-  reviewId: string
-  data: Review
+  stepNumber: number
   userId: string
 }) => {
-  return await db.review.update({
-    where: { id: reviewId, userId },
-    data,
+  // Find last review on user and update
+  const currentReview = await db.review.findFirst({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+    select: {
+      id: true,
+    },
   })
+
+  if (!currentReview) {
+    return new Error('Review not found')
+  }
+
+  if (stepNumber === 1) {
+    return await db.review.update({
+      where: { id: currentReview.id, userId },
+      data: {
+        stepOne: true,
+      },
+    })
+  }
+  if (stepNumber === 2) {
+    return await db.review.update({
+      where: { id: currentReview.id, userId },
+      data: {
+        stepTwo: true,
+      },
+    })
+  }
+  if (stepNumber === 3) {
+    return await db.review.update({
+      where: { id: currentReview.id, userId },
+      data: {
+        stepThree: true,
+      },
+    })
+  }
 }
 
 export const deleteReview = async ({

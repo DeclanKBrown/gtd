@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { router, privateProcedure } from './trpc'
+import { router, privateProcedure, publicProcedure } from './trpc'
 
 import {
   getTasks,
@@ -167,17 +167,16 @@ export const appRouter = router({
     }),
 
   createReview: privateProcedure
-    .input(z.object({ data: z.any() }))
+    .input(z.object({ date: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      return await createReview({ data: input.data, userId: ctx.userId })
+      return await createReview({ date: input.date, userId: ctx.userId })
     }),
 
   updateReview: privateProcedure
-    .input(z.object({ id: z.string(), data: z.any() }))
+    .input(z.object({ stepNumber: z.number() }))
     .mutation(async ({ input, ctx }) => {
       return await updateReview({
-        reviewId: input.id,
-        data: input.data,
+        stepNumber: input.stepNumber,
         userId: ctx.userId,
       })
     }),

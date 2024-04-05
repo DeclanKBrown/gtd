@@ -6,6 +6,8 @@ import { Step, StepItem, Stepper, useStepper } from '@/components/ui/stepper'
 import ReviewStepOne from './StepOne/ReviewStepOne'
 import ReviewStepTwo from './StepTwo/ReviewStepTwo'
 import ReviewStepThree from './StepThree/ReviewStepThree'
+import { trpc } from '@/app/_trpc/Client'
+import { toast } from '@/components/ui/use-toast'
 
 const steps = [
   { label: 'Get Clear' },
@@ -43,7 +45,32 @@ const Footer = () => {
     isLastStep,
     isOptionalStep,
     isDisabledStep,
+    activeStep,
   } = useStepper()
+
+  const { mutate: updateReviewStep } = trpc.updateReview.useMutation({
+    onSuccess: () => {
+      nextStep()
+      return toast({
+        title: 'Success',
+        description: `Step ${activeStep} Complete`,
+        variant: 'default',
+      })
+    },
+    onError: (error) => {
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Could not change step',
+        variant: 'destructive',
+      })
+    },
+  })
+
+  const handleNextStep = () => {
+    updateReviewStep({ stepNumber: activeStep + 1 })
+  }
+
   return (
     <>
       {hasCompletedAllSteps && (
@@ -66,7 +93,7 @@ const Footer = () => {
             >
               Prev
             </Button>
-            <Button size="sm" onClick={nextStep}>
+            <Button size="sm" onClick={handleNextStep}>
               {isLastStep ? 'Finish' : isOptionalStep ? 'Skip' : 'Next'}
             </Button>
           </>
