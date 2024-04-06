@@ -1,3 +1,4 @@
+import { format } from 'date-fns' // Import the format function from date-fns library
 import { db } from '@/lib/db'
 import { Task } from '@prisma/client'
 
@@ -10,10 +11,16 @@ export const getTasks = async ({ userId }: { userId: string }) => {
 export const getInboxTasks = async ({ userId }: { userId: string }) => {
   return await db.task.findMany({
     where: { userId, status: 'INBOX' },
-    orderBy: { createdAt: 'asc' },
+    orderBy: [
+      {
+        priority: 'asc',
+      },
+      {
+        id: 'asc',
+      },
+    ],
   })
 }
-
 export const getOrganizeTasks = async ({ userId }: { userId: string }) => {
   return await db.task.findMany({
     where: { userId, status: { not: 'INBOX' } },
@@ -31,18 +38,22 @@ export const getEngageTasks = async ({
   endOfPeriod: string
 }) => {
   try {
-    const tasks = await db.task.findMany({
-      where: {
-        userId,
-        status: 'NEXT_ACTION',
-        goalCompletedAt: {
-          gte: startOfPeriod,
-          lte: endOfPeriod,
-        },
-      },
-      orderBy: { goalCompletedAt: 'asc' },
-    })
-    return tasks
+    return db.$queryRaw`
+      SELECT
+        *
+      FROM "Task" task
+      WHERE
+        task."userId" = ${userId}
+        AND task.status = 'NEXT_ACTION'
+        AND task."goalCompletedAt" BETWEEN ${startOfPeriod}::TIMESTAMP AND ${endOfPeriod}::TIMESTAMP
+      ORDER BY
+        CASE task."priority"
+          WHEN 'LOW' THEN 4
+          WHEN 'MEDIUM' THEN 3
+          WHEN 'HIGH' THEN 2
+          WHEN 'CRITICAL' THEN 1
+        END
+    `
   } catch (error) {
     console.log(error)
   }

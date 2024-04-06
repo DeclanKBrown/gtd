@@ -62,7 +62,7 @@ const Project = ({ project }: ProjectProps) => {
                       ? '#16a34a'
                       : project.status === 'NOT_STARTED'
                         ? '#525252'
-                        : '#d97706'
+                        : '#60a5fa'
                   }
                 />
               </svg>

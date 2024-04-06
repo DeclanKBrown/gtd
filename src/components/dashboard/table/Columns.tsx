@@ -24,6 +24,7 @@ export const Columns: ColumnDef<Task>[] = [
 
       const utils = trpc.useUtils()
 
+      /* Update Project */
       const { mutate: updateProject } = trpc.updateTask.useMutation({
         onSuccess: () => {
           toast({
@@ -31,8 +32,8 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
-          utils.getInboxTasks.reset()
-          utils.getInboxTasks.reset()
+          utils.getInboxTasks.refetch()
+          utils.getOrganizeTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -51,6 +52,7 @@ export const Columns: ColumnDef<Task>[] = [
         })
       }
 
+      /* Update Task */
       const { mutate: updateTaskName } = trpc.updateTask.useMutation({
         onSuccess: () => {
           toast({
@@ -59,7 +61,7 @@ export const Columns: ColumnDef<Task>[] = [
             variant: 'default',
           })
           utils.getInboxTasks.reset()
-          utils.getInboxTasks.reset()
+          utils.getOrganizeTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -96,7 +98,7 @@ export const Columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const status = statusOptions.find(
         (status) => status.value === row.getValue('status'),
       )
@@ -114,8 +116,9 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
-          utils.getOrganizeTasks.reset()
           utils.getInboxTasks.reset()
+          utils.getOrganizeTasks.reset()
+          utils.getEngageTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -154,8 +157,9 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
+          utils.getOrganizeTasks.reset()
           utils.getInboxTasks.reset()
-          utils.getInboxTasks.reset()
+          utils.getEngageTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -209,6 +213,7 @@ export const Columns: ColumnDef<Task>[] = [
           })
           utils.getOrganizeTasks.reset()
           utils.getInboxTasks.reset()
+          utils.getEngageTasks.reset()
         },
         onError: (error) => {
           console.error(error)

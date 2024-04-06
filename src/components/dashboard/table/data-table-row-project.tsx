@@ -1,8 +1,11 @@
 'use client'
 
 import { trpc } from '@/app/_trpc/Client'
+
 import { Badge } from '@/components/ui/badge'
+
 import { Button } from '@/components/ui/button'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,22 +13,27 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
+import { useState } from 'react'
+
 interface InboxRowProjectProps {
   projectId: string
-  onProjectChange: (newProject: string) => void
+  onProjectChange: (newProjectId: string) => void
 }
 
 export function RowProject({
   projectId,
   onProjectChange,
 }: InboxRowProjectProps) {
+  const [selectedProjectId, setSelectedProjectId] = useState(projectId)
   const { data: projects } = trpc.getProjects.useQuery()
-  console.log(projects)
 
-  const project = projects?.find((proj) => proj.id === projectId)
+  const selectedProject = projects?.find(
+    (proj) => proj.id === selectedProjectId,
+  )
 
-  const handleProjectChange = (projectId: string) => {
-    onProjectChange(projectId)
+  const handleProjectChange = (newProjectId: string) => {
+    setSelectedProjectId(newProjectId)
+    onProjectChange(newProjectId)
   }
 
   if (!projects) {
@@ -37,7 +45,7 @@ export function RowProject({
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="rounded-full p-0">
           <Badge variant="outline">
-            {project ? project.name : 'Choose Project'}
+            {selectedProject ? selectedProject.name : 'Choose Project'}
             <span className="sr-only">Change Project</span>
           </Badge>
         </Button>

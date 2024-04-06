@@ -1,10 +1,10 @@
 import { Icons } from '@/components/icons'
 
 export const priorityOptions = [
-  { label: 'Low', value: 'LOW', icon: Icons.lowPriority },
-  { label: 'Medium', value: 'MEDIUM', icon: Icons.mediumPriority },
-  { label: 'High', value: 'HIGH', icon: Icons.highPriority },
   { label: 'Critical', value: 'CRITICAL', icon: Icons.criticalPriority },
+  { label: 'High', value: 'HIGH', icon: Icons.highPriority },
+  { label: 'Medium', value: 'MEDIUM', icon: Icons.mediumPriority },
+  { label: 'Low', value: 'LOW', icon: Icons.lowPriority },
 ]
 
 export const statusOptions = [

@@ -7,9 +7,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { ForwardRefExoticComponent, RefAttributes, useState } from 'react'
-import { IconProps } from '@radix-ui/react-icons/dist/types'
 import { priorityOptions } from '@/lib/constants'
+import { IconProps } from '@radix-ui/react-icons/dist/types'
+import { useState } from 'react'
 
 interface PriorityData {
   label: string
@@ -43,11 +43,11 @@ export function RowPriority({
           {selectedPriority?.icon && (
             <selectedPriority.icon
               className={`mr-2 h-4 w-4 ${
-                selectedPriority.value === 'critical'
+                selectedPriority.value === 'CRITICAL'
                   ? 'text-red-800'
-                  : selectedPriority.value === 'high'
+                  : selectedPriority.value === 'HIGH'
                     ? 'text-red-500'
-                    : selectedPriority.value === 'medium'
+                    : selectedPriority.value === 'MEDIUM'
                       ? 'text-yellow-300'
                       : 'text-blue-500'
               }`}
