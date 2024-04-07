@@ -10,6 +10,7 @@ import {
   getInboxTasks,
   getOrganizeTasks,
   getEngageTasks,
+  getProjectTasks,
 } from '@/services/task'
 
 import {
@@ -56,6 +57,15 @@ export const appRouter = router({
         userId: ctx.userId,
         startOfPeriod: input.startOfPeriod,
         endOfPeriod: input.endOfPeriod,
+      })
+    }),
+
+  getProjectTasks: privateProcedure
+    .input(z.object({ projectId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getProjectTasks({
+        projectId: input.projectId,
+        userId: ctx.userId,
       })
     }),
 

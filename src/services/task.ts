@@ -1,4 +1,3 @@
-import { format } from 'date-fns' // Import the format function from date-fns library
 import { db } from '@/lib/db'
 import { Task } from '@prisma/client'
 
@@ -56,6 +55,35 @@ export const getEngageTasks = async ({
     `
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const getProjectTasks = async ({
+  projectId,
+  userId,
+}: {
+  projectId: string
+  userId: string
+}) => {
+  try {
+    return await db.$queryRaw`
+    SELECT
+      *
+    FROM "Task" task
+    WHERE
+      task."projectId" = ${projectId}
+      AND task."userId" = ${userId}
+    ORDER BY
+      task."goalCompletedAt" ASC,
+      CASE task."priority"
+          WHEN 'LOW' THEN 4
+          WHEN 'MEDIUM' THEN 3
+          WHEN 'HIGH' THEN 2
+          WHEN 'CRITICAL' THEN 1
+        END
+    `
+  } catch (error) {
+    console.error('getProjectTasks', error)
   }
 }
 

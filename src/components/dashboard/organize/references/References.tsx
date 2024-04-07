@@ -4,6 +4,7 @@ import { formatDistance } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { trpc } from '@/app/_trpc/Client'
 import { Loader } from '@/components/Loader'
+import Link from 'next/link'
 
 const References = () => {
   const { data: references, isLoading } = trpc.getReferences.useQuery()
@@ -34,13 +35,14 @@ const References = () => {
     <div className="flex flex-col gap-2 pt-0">
       {references &&
         references.map((item) => (
-          <button
+          <Link
             key={item.id}
+            href={`/dashboard/references/${item.id}`}
             className={
-              'flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent'
+              'flex flex-col items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent'
             }
           >
-            <div className="flex w-full flex-col gap-1">
+            <div className="flex w-full flex-col gap-2">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
                   <div className="font-semibold">{item.name}</div>
@@ -51,7 +53,9 @@ const References = () => {
                   })}
                 </div>
               </div>
-              <div className="text-xs font-medium">{item.url}</div>
+              <div className="text-xs font-medium text-opacity-80">
+                {item.url}
+              </div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
               {item?.note?.substring(0, 300)}
@@ -65,7 +69,7 @@ const References = () => {
                 ))}
               </div>
             ) : null} */}
-          </button>
+          </Link>
         ))}
     </div>
   )

@@ -24,6 +24,8 @@ export const Columns: ColumnDef<Task>[] = [
 
       const projects = table.options.meta.projects
 
+      const utils = trpc.useUtils()
+
       /* Update Project */
       const { mutate: updateProject } = trpc.updateTask.useMutation({
         onSuccess: () => {
@@ -32,6 +34,7 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
+          utils.getProjectTasks.reset()
         },
         onError: (error) => {
           console.error(error)
