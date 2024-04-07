@@ -18,21 +18,35 @@ export const MinimalColumns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      let project
-      // TODO: Query all active projects and find
-      // const project = projects.find((proj) => proj.value === row.original.label)
+      const projectId = row.original.projectId
 
-      if (!project) {
-        project = {
-          label: 'Choose Project',
-        }
+      const projects = table.options.meta.projects
+
+      /* Update Project */
+      const { mutate: updateProject } = trpc.updateTask.useMutation({
+        onSuccess: () => {
+          toast({
+            title: 'Success',
+            description: 'Task updated',
+            variant: 'default',
+          })
+        },
+        onError: (error) => {
+          console.error(error)
+          toast({
+            title: 'Error',
+            description: 'Error updating task',
+            variant: 'destructive',
+          })
+        },
+      })
+
+      const handleProjectChange = (newProjectId: string) => {
+        updateProject({
+          id: row.original.id,
+          data: { projectId: newProjectId },
+        })
       }
-
-      const handleProjectChange = (newProject: string) => {
-        console.log('New project:', newProject)
-      }
-
-      const utils = trpc.useUtils()
 
       const { mutate: updateTaskName } = trpc.updateTask.useMutation({
         onSuccess: () => {
@@ -41,7 +55,6 @@ export const MinimalColumns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
-          utils.getInboxTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -65,7 +78,8 @@ export const MinimalColumns: ColumnDef<Task>[] = [
       return (
         <div className="flex items-center space-x-2">
           <RowProject
-            project={project.label}
+            projects={projects}
+            projectId={projectId}
             onProjectChange={handleProjectChange}
           />
           <InboxRowName title={row.getValue('name')} onSave={handleSave} />
@@ -97,6 +111,8 @@ export const MinimalColumns: ColumnDef<Task>[] = [
             variant: 'default',
           })
           utils.getInboxTasks.reset()
+          utils.getOrganizeTasks.reset()
+          utils.getEngageTasks.reset()
         },
         onError: (error) => {
           console.error(error)

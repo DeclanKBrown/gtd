@@ -1,7 +1,5 @@
 'use client'
 
-import { trpc } from '@/app/_trpc/Client'
-
 import { Badge } from '@/components/ui/badge'
 
 import { Button } from '@/components/ui/button'
@@ -12,20 +10,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Project } from '@prisma/client'
 
 import { useState } from 'react'
 
 interface InboxRowProjectProps {
+  projects: Project[]
   projectId: string
   onProjectChange: (newProjectId: string) => void
 }
 
 export function RowProject({
+  projects,
   projectId,
   onProjectChange,
 }: InboxRowProjectProps) {
   const [selectedProjectId, setSelectedProjectId] = useState(projectId)
-  const { data: projects } = trpc.getProjects.useQuery()
 
   const selectedProject = projects?.find(
     (proj) => proj.id === selectedProjectId,

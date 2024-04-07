@@ -16,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { trpc } from '@/app/_trpc/Client'
 
 interface InboxProps<TData, TValue> {
   data: TData[]
@@ -23,11 +24,16 @@ interface InboxProps<TData, TValue> {
 const TableNonConfig = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
   const columns = Columns as ColumnDef<TData>[]
 
+  const { data: projects } = trpc.getProjects.useQuery()
+
   const table = useReactTable({
     data,
     columns,
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      projects,
+    },
   })
 
   return (

@@ -22,7 +22,7 @@ const RowName = ({ title, onSave }: EditableTitleProps) => {
   }
 
   return (
-    <div className="w-[400px] truncate" onClick={() => setIsEditing(true)}>
+    <div className="w-min truncate" onClick={() => setIsEditing(true)}>
       {isEditing ? (
         <Input
           value={editValue}

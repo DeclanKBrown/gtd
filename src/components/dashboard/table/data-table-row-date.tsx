@@ -16,7 +16,6 @@ interface RowDateProps {
 }
 
 const RowDate = ({ goalCompleted, onSelect }: RowDateProps) => {
-  console.log(goalCompleted)
   const [date, setDate] = React.useState<Date>(goalCompleted || new Date())
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
 

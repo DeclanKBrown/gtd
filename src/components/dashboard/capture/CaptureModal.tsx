@@ -103,7 +103,6 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
       createTask({
         data: {
           name: values.name,
-          description: values.description,
           status: values.status,
         },
       })
@@ -251,27 +250,29 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
                   )}
                 />
               </div>
-              <div className="grid grid-cols-1">
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {watchType === 'REFERENCE'
-                          ? 'Url / Note'
-                          : 'Description'}
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} autoComplete="off" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              {watchType !== 'TASK' && (
+                <div className="grid grid-cols-1">
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          {watchType === 'REFERENCE'
+                            ? 'Url / Note'
+                            : 'Description'}
+                        </FormLabel>
+                        <FormControl>
+                          <Input {...field} autoComplete="off" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )}
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="mt-4 w-full">
                 Create
               </Button>
             </form>

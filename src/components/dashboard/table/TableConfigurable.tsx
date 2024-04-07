@@ -30,6 +30,7 @@ import { DataTableToolbar } from './data-table-toolbar'
 
 import { Columns } from './Columns'
 import { Task } from '@prisma/client'
+import { trpc } from '@/app/_trpc/Client'
 
 interface TableConfigurableProps {
   data: Task[]
@@ -46,6 +47,8 @@ export function TableConfigurable<TData, TValue>({
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
   const columns = Columns as ColumnDef<Task>[]
+
+  const { data: projects } = trpc.getProjects.useQuery()
 
   const table = useReactTable({
     data,
@@ -67,6 +70,9 @@ export function TableConfigurable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      projects,
+    },
   })
 
   return (

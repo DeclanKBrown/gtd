@@ -19,10 +19,10 @@ export const Columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const projectId = row.original.projectId
 
-      const utils = trpc.useUtils()
+      const projects = table.options.meta.projects
 
       /* Update Project */
       const { mutate: updateProject } = trpc.updateTask.useMutation({
@@ -32,8 +32,6 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
-          utils.getInboxTasks.refetch()
-          utils.getOrganizeTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -60,8 +58,6 @@ export const Columns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
-          utils.getInboxTasks.reset()
-          utils.getOrganizeTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -83,8 +79,9 @@ export const Columns: ColumnDef<Task>[] = [
       }
 
       return (
-        <div className="flex items-center space-x-2">
+        <div className="flex w-[425px] items-center space-x-2">
           <RowProject
+            projects={projects}
             projectId={projectId}
             onProjectChange={handleProjectChange}
           />

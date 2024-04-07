@@ -85,7 +85,6 @@ enum Priority {
 model Task {
   id              String     @id @default(cuid())
   name            String
-  description     String
   status          TaskStatus @default(INBOX)
   goalCompletedAt DateTime   @default(now())
   priority        Priority   @default(LOW)

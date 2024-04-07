@@ -24,12 +24,15 @@ import {
 
 import { DataTablePagination } from './data-table-pagination'
 import { Task } from '@prisma/client'
+import { trpc } from '@/app/_trpc/Client'
 
 interface InboxProps {
   data: Task[]
 }
 const TableSimple = <TData, TValue>({ data }: InboxProps) => {
   const columns = MinimalColumns as ColumnDef<Task>[]
+
+  const { data: projects } = trpc.getProjects.useQuery()
 
   const table = useReactTable({
     data,
@@ -41,6 +44,9 @@ const TableSimple = <TData, TValue>({ data }: InboxProps) => {
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      projects,
+    },
   })
 
   return (
