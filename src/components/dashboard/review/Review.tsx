@@ -5,6 +5,7 @@ import ReviewStepper from './ReviewStepper'
 import { useState } from 'react'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
+import { isSunday } from 'date-fns'
 
 const Review = () => {
   const [reviewStarted, setReviewStarted] = useState(false)
@@ -34,14 +35,27 @@ const Review = () => {
     })
   }
 
+  const isNowSunday = isSunday(new Date())
+
   return (
     <>
       {!reviewStarted ? (
-        <div className="flex h-full flex-col items-center justify-center gap-4">
-          <p className="text-lg text-muted-foreground">
-            Start your weekly review
-          </p>
-          <Button className="px-6 py-4 text-lg" onClick={handleStartReview}>
+        <div className="mt-0 flex h-full flex-col items-center justify-center gap-4">
+          {isNowSunday ? (
+            <p className="text-lg text-muted-foreground">
+              Start your weekly review
+            </p>
+          ) : (
+            <p className="text-lg text-muted-foreground">
+              Weekly review will be available on Sunday
+            </p>
+          )}
+          <Button
+            className="px-6 py-4 text-lg"
+            onClick={handleStartReview}
+            // TODO: Add back in
+            // disabled={!isNowSunday}
+          >
             Start
           </Button>
         </div>

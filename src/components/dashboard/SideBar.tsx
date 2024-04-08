@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 
 import CaptureModal from './capture/CaptureModal'
+import { isSunday } from 'date-fns'
 
 export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -39,8 +40,11 @@ export const Sidebar = () => {
       name: 'Review',
       href: '/dashboard/review',
       icon: <Icons.review />,
+      endIcon: <Icons.active />,
     },
   ]
+
+  const isNowSunday = isSunday(new Date())
 
   return (
     <div className="pb-12">
@@ -63,14 +67,17 @@ export const Sidebar = () => {
             <div className="space-y-1">
               <Link
                 href={link.href}
-                className={'lg:justify-start} w-full justify-center'}
+                className={'w-full justify-center lg:justify-start'}
               >
                 <Button
                   variant={isActive(link.href) ? 'secondary' : 'ghost'}
-                  className="w-full justify-center lg:justify-start"
+                  className="w-full justify-center lg:justify-between"
                 >
-                  {link.icon}
-                  <span className="hidden lg:block">{link.name}</span>
+                  <div className="flex items-center">
+                    {link.icon}
+                    <span className="hidden lg:block">{link.name}</span>
+                  </div>
+                  {link.endIcon && isNowSunday && link.endIcon}
                 </Button>
               </Link>
             </div>

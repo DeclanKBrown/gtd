@@ -85,14 +85,14 @@ const Footer = () => {
           </Button>
         ) : (
           <>
-            <Button
+            {/* <Button
               disabled={isDisabledStep}
               onClick={prevStep}
               size="sm"
               variant="secondary"
             >
               Prev
-            </Button>
+            </Button> */}
             <Button size="sm" onClick={handleNextStep}>
               {isLastStep ? 'Finish' : isOptionalStep ? 'Skip' : 'Next'}
             </Button>
