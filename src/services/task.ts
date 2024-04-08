@@ -1,5 +1,6 @@
 import { db } from '@/lib/db'
 import { Task } from '@prisma/client'
+import { addDays } from 'date-fns'
 
 export const getTasks = async ({ userId }: { userId: string }) => {
   return await db.task.findMany({
@@ -37,7 +38,7 @@ export const getEngageTasks = async ({
   endOfPeriod: string
 }) => {
   try {
-    return db.$queryRaw`
+    const tasks: Task[] = await db.$queryRaw`
       SELECT
         *
       FROM "Task" task
@@ -53,6 +54,31 @@ export const getEngageTasks = async ({
           WHEN 'CRITICAL' THEN 1
         END
     `
+
+    // If today has no tasks - already completed show tomorrows next actions
+    if (tasks && tasks.length === 0) {
+      const tomorrowStart = addDays(startOfPeriod, 1).toISOString()
+      const tomorrowEnd = addDays(endOfPeriod, 1).toISOString()
+
+      return await db.$queryRaw`
+      SELECT
+        *
+      FROM "Task" task
+      WHERE
+        task."userId" = ${userId}
+        AND task.status = 'NEXT_ACTION'
+        AND task."goalCompletedAt" BETWEEN ${tomorrowStart}::TIMESTAMP AND ${tomorrowEnd}::TIMESTAMP
+      ORDER BY
+        CASE task."priority"
+          WHEN 'LOW' THEN 4
+          WHEN 'MEDIUM' THEN 3
+          WHEN 'HIGH' THEN 2
+          WHEN 'CRITICAL' THEN 1
+        END
+    `
+    }
+
+    return tasks
   } catch (error) {
     console.error(error)
   }
