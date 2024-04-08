@@ -17,7 +17,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const projectId = row.original.projectId
 
       const projects = table.options.meta.projects

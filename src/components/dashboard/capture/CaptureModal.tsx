@@ -27,6 +27,7 @@ import { z } from 'zod'
 import { captureSchema } from '@/lib/validations/captureSchema'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface CaptureModalProps {
   onClose: () => void
@@ -43,18 +44,28 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
     },
   })
 
+  const utils = trpc.useUtils()
+
   const { mutate: createTask } = trpc.createTask.useMutation({
-    onSuccess: () => {
+    onSuccess: (task) => {
       onClose()
-      return toast({
+      toast({
         title: 'Success',
         description: 'Task created',
         variant: 'default',
       })
+      if (task.status === 'NEXT_ACTION') {
+        utils.getEngageTasks.reset()
+      }
+      if (task.status === 'INBOX') {
+        utils.getInboxTasks.reset()
+      }
+
+      utils.getOrganizeTasks.reset()
     },
     onError: (error) => {
       console.error(error)
-      return toast({
+      toast({
         title: 'Error',
         description: 'Error creating task',
         variant: 'destructive',
@@ -64,11 +75,12 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
   const { mutate: createProject } = trpc.createProject.useMutation({
     onSuccess: () => {
       onClose()
-      return toast({
+      toast({
         title: 'Success',
         description: 'Project created',
         variant: 'default',
       })
+      utils.getProjects.reset()
     },
     onError: (error) => {
       console.error(error)
@@ -87,6 +99,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
         description: 'Reference created',
         variant: 'default',
       })
+      utils.getReferences.reset()
     },
     onError: (error) => {
       console.error(error)
@@ -99,31 +112,35 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
   })
 
   const onSubmit = (values: z.infer<typeof captureSchema>) => {
-    if (values.type === 'TASK') {
-      createTask({
-        data: {
-          name: values.name,
-          status: values.status,
-        },
-      })
-    }
-    if (values.type === 'PROJECT') {
-      createProject({
-        data: {
-          name: values.name,
-          description: values.description,
-          status: values.status,
-        },
-      })
-    }
-    if (values.type === 'REFERENCE') {
-      createReference({
-        data: {
-          name: values.name,
-          url: values.description,
-          status: values.status,
-        },
-      })
+    try {
+      if (values.type === 'TASK') {
+        createTask({
+          data: {
+            name: values.name,
+            status: values.status,
+          },
+        })
+      }
+      if (values.type === 'PROJECT') {
+        createProject({
+          data: {
+            name: values.name,
+            description: values.description,
+            status: values.status,
+          },
+        })
+      }
+      if (values.type === 'REFERENCE') {
+        createReference({
+          data: {
+            name: values.name,
+            url: values.description,
+            status: values.status,
+          },
+        })
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
