@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { toast } from '@/components/ui/use-toast'
-import { Project, ProjectStatus } from '@prisma/client'
+import { ProjectStatus } from '@prisma/client'
 import Link from 'next/link'
 
 interface ProjectProps {

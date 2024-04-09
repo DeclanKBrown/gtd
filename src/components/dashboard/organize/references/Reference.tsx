@@ -1,5 +1,5 @@
 import { Sheet, SheetTrigger } from '@/components/ui/sheet'
-import { Reference, ReferenceStatus } from '@prisma/client'
+import { ReferenceStatus } from '@prisma/client'
 import { formatDistance } from 'date-fns'
 import ReferenceSheet from './ReferenceSheet'
 
