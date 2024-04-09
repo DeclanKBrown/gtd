@@ -160,13 +160,19 @@ export const appRouter = router({
     return await getActiveProjects({ userId: ctx.userId })
   }),
 
-  getProgressOnActiveProjects: privateProcedure.query(async ({ ctx }) => {
-    try {
-      return await getProgressOnActiveProjects({ userId: ctx.userId })
-    } catch (error) {
-      console.log(error)
-    }
-  }),
+  getProgressOnActiveProjects: privateProcedure
+    .input(z.object({ startOfWeek: z.string(), endOfWeek: z.string() }))
+    .query(async ({ input, ctx }) => {
+      try {
+        return await getProgressOnActiveProjects({
+          userId: ctx.userId,
+          startDate: input.startOfWeek,
+          endDate: input.endOfWeek,
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }),
 
   createProject: privateProcedure
     .input(z.object({ data: z.any() }))

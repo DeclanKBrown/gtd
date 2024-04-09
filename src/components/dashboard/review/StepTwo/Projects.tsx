@@ -2,10 +2,24 @@ import { trpc } from '@/app/_trpc/Client'
 import { Loader } from '@/components/Loader'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { endOfWeek, startOfWeek, subWeeks } from 'date-fns'
 
 const ReviewProjects = () => {
+  const dateInPreviousWeek = subWeeks(new Date(), 1)
+
+  // Calculate the start and end of the previous week
+  const startOfPreviousWeek = startOfWeek(dateInPreviousWeek, {
+    weekStartsOn: 1,
+  }).toISOString()
+  const endOfPreviousWeek = endOfWeek(dateInPreviousWeek, {
+    weekStartsOn: 1,
+  }).toISOString()
+
   const { data: projects, isLoading } =
-    trpc.getProgressOnActiveProjects.useQuery()
+    trpc.getProgressOnActiveProjects.useQuery({
+      startOfWeek: startOfPreviousWeek,
+      endOfWeek: endOfPreviousWeek,
+    })
 
   /* LOADING */
   if (isLoading) {
@@ -51,9 +65,10 @@ const ReviewProjects = () => {
                   </h3>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Progress value={30} />
+                  <Progress value={project.percentageOfTotalCompleted} />
                   <h3 className="text-xs text-white/70">
-                    30% of your focus on this project
+                    {project.percentageOfTotalCompleted.toFixed(2)}% of your
+                    focus on this project
                   </h3>
                 </div>
               </CardContent>

@@ -5,7 +5,7 @@ import { endOfWeek, startOfWeek } from 'date-fns'
 import { Loader } from '@/components/Loader'
 
 const EngageWeek = () => {
-  const startWeek = startOfWeek(new Date()).toISOString()
+  const startWeek = startOfWeek(new Date(), { weekStartsOn: 1 }).toISOString()
   // Week Starts Monday
   const endWeek = endOfWeek(new Date(), { weekStartsOn: 1 }).toISOString()
 

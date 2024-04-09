@@ -21,33 +21,62 @@ export const getActiveProjects = async ({ userId }: { userId: string }) => {
 type ProgressOnActiveProjects = {
   name: string
   tasksCompleted: number
+  percentageOfTotalCompleted: number
 }
 
 export const getProgressOnActiveProjects = async ({
   userId,
+  startDate,
+  endDate,
 }: {
   userId: string
+  startDate: string
+  endDate: string
 }): Promise<ProgressOnActiveProjects[]> => {
   try {
     return await db.$queryRaw`
+      WITH CompletedTasks AS (
+        SELECT
+          proj.id AS projectId
+          ,COUNT(task.id) AS tasksCompleted
+        FROM
+          "Project" proj
+        LEFT JOIN
+          "Task" task
+        ON
+          task."projectId" = proj.id
+          AND task."status" = 'DONE'
+          AND task."goalCompletedAt" BETWEEN ${startDate}::TIMESTAMP AND ${endDate}::TIMESTAMP
+        WHERE
+          proj."userId" = ${userId}
+          AND proj."status" = 'ACTIVE'
+        GROUP BY
+          proj.id
+      ), TotalCompleted AS (
+        SELECT
+          SUM(tasksCompleted) AS totalCompleted
+        FROM
+          CompletedTasks
+      )
       SELECT
         proj."name"
-        ,COUNT(task.id)::Int AS "tasksCompleted"
+        ,COALESCE(ct.tasksCompleted, 0)::Int AS "tasksCompleted"
+        ,((COALESCE(ct.tasksCompleted, 0)::FLOAT / NULLIF((SELECT totalCompleted FROM TotalCompleted), 0)) * 100)::Int AS "percentageOfTotalCompleted"
       FROM
         "Project" proj
       LEFT JOIN
-        "Task" task
+        CompletedTasks ct
       ON
-        task."projectId" = proj.id
+        ct.projectId = proj.id
       WHERE
         proj."userId" = ${userId}
         AND proj."status" = 'ACTIVE'
-        AND task."status" = 'DONE'
-      GROUP BY
-        proj.id
+      ORDER BY
+        proj."name"
       `
   } catch (error) {
     console.error(error)
+    return
   }
 }
 
