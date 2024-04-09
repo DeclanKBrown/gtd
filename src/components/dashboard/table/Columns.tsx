@@ -15,7 +15,7 @@ import { priorityOptions, statusOptions } from '@/lib/constants'
 
 export const Columns: ColumnDef<Task>[] = [
   {
-    accessorKey: 'title',
+    accessorKey: 'name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),

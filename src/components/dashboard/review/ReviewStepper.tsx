@@ -8,6 +8,7 @@ import ReviewStepTwo from './StepTwo/ReviewStepTwo'
 import ReviewStepThree from './StepThree/ReviewStepThree'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
+import { useEffect } from 'react'
 
 const steps = [
   { label: 'Get Clear' },
@@ -39,8 +40,6 @@ export default ReviewStepper
 const Footer = () => {
   const {
     nextStep,
-    prevStep,
-    resetSteps,
     hasCompletedAllSteps,
     isLastStep,
     isOptionalStep,
@@ -70,6 +69,13 @@ const Footer = () => {
     updateReviewStep({ stepNumber: activeStep + 1 })
   }
 
+  useEffect(() => {
+    if (hasCompletedAllSteps) {
+      //TODO: Refresh Page
+      setTimeout(() => {}, 500)
+    }
+  }, [hasCompletedAllSteps])
+
   return (
     <>
       {hasCompletedAllSteps && (
@@ -79,9 +85,7 @@ const Footer = () => {
       )}
       <div className="flex w-full justify-end gap-2">
         {hasCompletedAllSteps ? (
-          <Button size="sm" onClick={resetSteps}>
-            Reset
-          </Button>
+          <></>
         ) : (
           <>
             {/* <Button
