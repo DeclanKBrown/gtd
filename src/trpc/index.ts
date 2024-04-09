@@ -23,6 +23,8 @@ import {
   createProject,
   updateProject,
   deleteProject,
+  getActiveProjects,
+  getProgressOnActiveProjects,
 } from '@/services/project'
 
 import {
@@ -145,6 +147,18 @@ export const appRouter = router({
 
   getProjects: privateProcedure.query(async ({ ctx }) => {
     return await getProjects({ userId: ctx.userId })
+  }),
+
+  getActiveProjects: privateProcedure.query(async ({ ctx }) => {
+    return await getActiveProjects({ userId: ctx.userId })
+  }),
+
+  getProgressOnActiveProjects: privateProcedure.query(async ({ ctx }) => {
+    try {
+      return await getProgressOnActiveProjects({ userId: ctx.userId })
+    } catch (error) {
+      console.log(error)
+    }
   }),
 
   createProject: privateProcedure
