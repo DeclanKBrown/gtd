@@ -9,7 +9,7 @@ const Providers = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(() => new QueryClient())
   const apiUrl =
     process.env.NODE_ENV === 'production'
-      ? 'https://your-deployment-url.com/api/trpc'
+      ? 'https://gtd-three.vercel.app/api/trpc'
       : 'http://localhost:3000/api/trpc'
 
   const [trpcClient] = useState(() =>
