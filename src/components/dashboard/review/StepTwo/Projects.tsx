@@ -15,11 +15,14 @@ const ReviewProjects = () => {
     weekStartsOn: 1,
   }).toISOString()
 
-  const { data: projects, isLoading } =
-    trpc.getProgressOnActiveProjects.useQuery({
-      startOfWeek: startOfPreviousWeek,
-      endOfWeek: endOfPreviousWeek,
-    })
+  const {
+    data: projects,
+    isLoading,
+    error,
+  } = trpc.getProgressOnActiveProjects.useQuery({
+    startOfWeek: startOfPreviousWeek,
+    endOfWeek: endOfPreviousWeek,
+  })
 
   /* LOADING */
   if (isLoading) {
@@ -27,16 +30,17 @@ const ReviewProjects = () => {
   }
 
   /* ERROR */
-  if (!projects) {
+  if (error) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl text-red-500">
         <h1>Error</h1>
+        <h1>{error.message}</h1>
       </div>
     )
   }
 
   /* EMPTY */
-  if (projects.length === 0) {
+  if (!projects || (Array.isArray(projects) && projects.length === 0)) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
         <h1>No projects found</h1>
@@ -48,6 +52,7 @@ const ReviewProjects = () => {
     <main className="w-full">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {projects &&
+          Array.isArray(projects) &&
           projects.map((project) => (
             <Card key={project.name} className="hover:bg-accent">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -61,7 +66,7 @@ const ReviewProjects = () => {
                     +{project.tasksCompleted}
                   </h2>
                   <h3 className="text-xs text-white/70">
-                    Tasks completed this week
+                    tasks completed this week
                   </h3>
                 </div>
                 <div className="flex flex-col gap-2">

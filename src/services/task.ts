@@ -36,7 +36,7 @@ export const getEngageTasks = async ({
   userId: string
   startOfPeriod: string
   endOfPeriod: string
-}) => {
+}): Promise<Task[] | null | Error> => {
   try {
     const tasks: Task[] = await db.$queryRaw`
       SELECT
@@ -81,6 +81,12 @@ export const getEngageTasks = async ({
     return tasks
   } catch (error) {
     console.error(error)
+
+    if (error instanceof Error) {
+      return new Error(error.message)
+    }
+
+    return new Error(String(error))
   }
 }
 
@@ -109,7 +115,13 @@ export const getProjectTasks = async ({
         END
     `
   } catch (error) {
-    console.error('getProjectTasks', error)
+    console.error(error)
+
+    if (error instanceof Error) {
+      return new Error(error.message)
+    }
+
+    return new Error(String(error))
   }
 }
 

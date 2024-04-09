@@ -32,7 +32,7 @@ export const getProgressOnActiveProjects = async ({
   userId: string
   startDate: string
   endDate: string
-}): Promise<ProgressOnActiveProjects[]> => {
+}): Promise<ProgressOnActiveProjects[] | Error> => {
   try {
     return await db.$queryRaw`
       WITH CompletedTasks AS (
@@ -76,7 +76,12 @@ export const getProgressOnActiveProjects = async ({
       `
   } catch (error) {
     console.error(error)
-    return
+
+    if (error instanceof Error) {
+      return new Error(error.message)
+    }
+
+    return new Error(String(error))
   }
 }
 

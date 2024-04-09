@@ -9,7 +9,11 @@ const EngageTomorrow = () => {
   const startTomorrow = startOfTomorrow().toISOString()
   const endTomorrow = endOfTomorrow().toISOString()
 
-  const { data: tasks, isLoading } = trpc.getEngageTasks.useQuery({
+  const {
+    data: tasks,
+    isLoading,
+    error,
+  } = trpc.getEngageTasks.useQuery({
     startOfPeriod: startTomorrow,
     endOfPeriod: endTomorrow,
   })
@@ -20,16 +24,17 @@ const EngageTomorrow = () => {
   }
 
   /* ERROR */
-  if (!tasks) {
+  if (error) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl text-red-500">
         <h1>Error</h1>
+        <h1>{error.message}</h1>
       </div>
     )
   }
 
   /* EMPTY */
-  if (tasks.length === 0) {
+  if (!tasks || (Array.isArray(tasks) && tasks.length === 0)) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
         <h1>No tasks found</h1>
