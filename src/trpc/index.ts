@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { router, privateProcedure, publicProcedure } from './trpc'
+import { router, privateProcedure } from './trpc'
 
 import {
   getTasks,
@@ -11,6 +11,10 @@ import {
   getOrganizeTasks,
   getEngageTasks,
   getProjectTasks,
+  getPastWeekEngageTasks,
+  getPastCalendarTasks,
+  getUpcomingWeekTasks,
+  getWaitingForTasks,
 } from '@/services/task'
 
 import {
@@ -68,6 +72,42 @@ export const appRouter = router({
         userId: ctx.userId,
       })
     }),
+
+  getPastWeekEngageTask: privateProcedure
+    .input(z.object({ startOfWeek: z.string(), endOfWeek: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getPastWeekEngageTasks({
+        userId: ctx.userId,
+        startOfWeek: input.startOfWeek,
+        endOfWeek: input.endOfWeek,
+      })
+    }),
+
+  getPastCalenderTasks: privateProcedure
+    .input(z.object({ startOfWeek: z.string(), endOfWeek: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getPastCalendarTasks({
+        userId: ctx.userId,
+        startOfWeek: input.startOfWeek,
+        endOfWeek: input.endOfWeek,
+      })
+    }),
+
+  getUpcomingWeekTasks: privateProcedure
+    .input(z.object({ startOfWeek: z.string(), endOfWeek: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getUpcomingWeekTasks({
+        userId: ctx.userId,
+        startOfWeek: input.startOfWeek,
+        endOfWeek: input.endOfWeek,
+      })
+    }),
+
+  getWaitingForTasks: privateProcedure.query(async ({ ctx }) => {
+    return await getWaitingForTasks({
+      userId: ctx.userId,
+    })
+  }),
 
   getTask: privateProcedure
     .input(z.object({ id: z.string() }))

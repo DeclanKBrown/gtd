@@ -44,7 +44,6 @@ const Footer = () => {
     hasCompletedAllSteps,
     isLastStep,
     isOptionalStep,
-    isDisabledStep,
     activeStep,
   } = useStepper()
 
@@ -53,7 +52,7 @@ const Footer = () => {
       nextStep()
       return toast({
         title: 'Success',
-        description: `Step ${activeStep} Complete`,
+        description: `Step ${activeStep + 1} Complete`,
         variant: 'default',
       })
     },

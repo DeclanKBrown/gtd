@@ -113,6 +113,85 @@ export const getProjectTasks = async ({
   }
 }
 
+export const getPastWeekEngageTasks = async ({
+  userId,
+  startOfWeek,
+  endOfWeek,
+}: {
+  userId: string
+  startOfWeek: string
+  endOfWeek: string
+}) => {
+  return await db.task.findMany({
+    where: {
+      userId,
+      status: 'NEXT_ACTION',
+      goalCompletedAt: {
+        gte: startOfWeek,
+        lte: endOfWeek,
+      },
+    },
+    orderBy: {
+      goalCompletedAt: 'desc',
+    },
+  })
+}
+
+export const getUpcomingWeekTasks = async ({
+  userId,
+  startOfWeek,
+  endOfWeek,
+}: {
+  userId: string
+  startOfWeek: string
+  endOfWeek: string
+}) => {
+  return await db.task.findMany({
+    where: {
+      userId,
+      goalCompletedAt: {
+        gte: startOfWeek,
+        lte: endOfWeek,
+      },
+    },
+    orderBy: {
+      goalCompletedAt: 'asc',
+    },
+  })
+}
+
+export const getPastCalendarTasks = async ({
+  userId,
+  startOfWeek,
+  endOfWeek,
+}: {
+  userId: string
+  startOfWeek: string
+  endOfWeek: string
+}) => {
+  return await db.task.findMany({
+    where: {
+      userId,
+      goalCompletedAt: {
+        gte: startOfWeek,
+        lte: endOfWeek,
+      },
+    },
+  })
+}
+
+export const getWaitingForTasks = async ({ userId }: { userId: string }) => {
+  return await db.task.findMany({
+    where: {
+      userId,
+      status: 'WAITING',
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+}
+
 export const getTask = async ({
   taskId,
   userId,

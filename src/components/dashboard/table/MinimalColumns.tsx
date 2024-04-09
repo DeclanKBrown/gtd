@@ -113,6 +113,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
           utils.getInboxTasks.reset()
           utils.getOrganizeTasks.reset()
           utils.getEngageTasks.reset()
+          utils.getPastWeekEngageTask.reset()
         },
         onError: (error) => {
           console.error(error)
