@@ -14,7 +14,15 @@ import { Project, ProjectStatus } from '@prisma/client'
 import Link from 'next/link'
 
 interface ProjectProps {
-  project: Project
+  project: {
+    id: string
+    name: string
+    description: string
+    status: ProjectStatus
+    userId: string
+    createdAt: string
+    updatedAt: string
+  }
 }
 
 const Project = ({ project }: ProjectProps) => {

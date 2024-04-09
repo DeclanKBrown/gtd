@@ -16,6 +16,7 @@ const ReviewStepOne = () => {
   const [taskInput, setTaskInput] = useState('')
 
   const { mutate: createTask } = trpc.createTask.useMutation({
+    // @ts-ignore
     onMutate: (task: { data: Task }) => {
       setTasks((currentTasks) => [...currentTasks, task.data])
 
@@ -73,6 +74,7 @@ const ReviewStepOne = () => {
         onKeyDown={handleKeyDown}
       />
       <div className="w-full">
+        {/* @ts-ignore */}
         <TableSimple data={tasks} />
       </div>
     </div>

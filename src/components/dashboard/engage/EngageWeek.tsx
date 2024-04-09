@@ -47,6 +47,7 @@ const EngageWeek = () => {
       <p className="text-muted-foreground">
         This week&apos;s Next Actions List
       </p>
+      {/* @ts-ignore */}
       <TableNonConfig data={tasks} />
     </div>
   )

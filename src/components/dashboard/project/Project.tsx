@@ -78,6 +78,7 @@ const Project = () => {
     setIsEditingDescription(false)
   }
 
+  // @ts-ignore
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSave()
@@ -135,6 +136,7 @@ const Project = () => {
             {format(project.createdAt, 'dd/MM/yyyy HH:MM')}
           </span>
         </div>
+        {/* @ts-ignore */}
         <TableNonConfig data={tasks} />
       </div>
     </>

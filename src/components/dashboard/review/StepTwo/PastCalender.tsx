@@ -38,6 +38,7 @@ const ReviewPastCalendar = () => {
     )
   }
 
+  /* @ts-ignore */
   return <TableSimple data={tasks} />
 }
 

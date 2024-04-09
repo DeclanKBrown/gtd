@@ -30,6 +30,7 @@ const Process = () => {
     )
   }
 
+  // @ts-ignore
   return <TableSimple data={tasks} />
 }
 

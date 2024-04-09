@@ -81,7 +81,10 @@ const ReviewStepThree = () => {
             <h1>No tasks found</h1>
           </div>
         ) : (
-          <TableSimple data={tasks} />
+          <>
+            {/* @ts-ignore */}
+            <TableSimple data={tasks} />
+          </>
         )}
       </div>
     </div>

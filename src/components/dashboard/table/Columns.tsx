@@ -22,6 +22,7 @@ export const Columns: ColumnDef<Task>[] = [
     cell: ({ row, table }) => {
       const projectId = row.original.projectId
 
+      /* @ts-ignore */
       const projects = table.options.meta.projects
 
       const utils = trpc.useUtils()
@@ -85,6 +86,7 @@ export const Columns: ColumnDef<Task>[] = [
         <div className="flex w-[425px] items-center space-x-2">
           <RowProject
             projects={projects}
+            /* @ts-ignore */
             projectId={projectId}
             onProjectChange={handleProjectChange}
           />

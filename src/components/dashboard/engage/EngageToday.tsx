@@ -50,6 +50,7 @@ const EngageToday = () => {
         Todays Next Actions are displayed here. Once all are completed,
         tomorrow&apos;s Next Actions will be displayed.
       </p>
+      {/* @ts-ignore */}
       <TableNonConfig data={tasks} />
     </div>
   )

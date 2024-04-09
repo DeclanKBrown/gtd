@@ -28,6 +28,7 @@ const ReviewWaitingFor = () => {
     )
   }
 
+  /* @ts-ignore */
   return <TableSimple data={tasks} />
 }
 

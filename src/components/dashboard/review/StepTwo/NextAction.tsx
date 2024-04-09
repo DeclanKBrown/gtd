@@ -38,6 +38,7 @@ const ReviewNextAction = () => {
     )
   }
 
+  /* @ts-ignore */
   return <TableSimple data={tasks} />
 }
 

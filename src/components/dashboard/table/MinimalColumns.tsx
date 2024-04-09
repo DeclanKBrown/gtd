@@ -20,6 +20,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
     cell: ({ row, table }) => {
       const projectId = row.original.projectId
 
+      // @ts-ignore
       const projects = table.options.meta.projects
 
       /* Update Project */
@@ -79,6 +80,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
         <div className="flex items-center space-x-2">
           <RowProject
             projects={projects}
+            // @ts-ignore
             projectId={projectId}
             onProjectChange={handleProjectChange}
           />

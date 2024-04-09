@@ -1,10 +1,19 @@
 import { Sheet, SheetTrigger } from '@/components/ui/sheet'
-import { Reference } from '@prisma/client'
+import { Reference, ReferenceStatus } from '@prisma/client'
 import { formatDistance } from 'date-fns'
 import ReferenceSheet from './ReferenceSheet'
 
 interface ReferenceProps {
-  reference: Reference
+  reference: {
+    id: string
+    name: string
+    note: string | null
+    url: string | null
+    status: ReferenceStatus
+    userId: string
+    createdAt: string
+    updatedAt: string
+  }
 }
 
 const Reference = ({ reference }: ReferenceProps) => {

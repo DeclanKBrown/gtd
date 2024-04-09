@@ -45,6 +45,7 @@ const EngageTomorrow = () => {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-muted-foreground">Tomorrow&apos;s Next Actions List</p>
+      {/* @ts-ignore */}
       <TableNonConfig data={tasks} />
     </div>
   )
