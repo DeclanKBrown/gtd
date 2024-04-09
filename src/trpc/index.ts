@@ -15,6 +15,7 @@ import {
   getPastCalendarTasks,
   getUpcomingWeekTasks,
   getWaitingForTasks,
+  getSomedayTasks,
 } from '@/services/task'
 
 import {
@@ -107,6 +108,12 @@ export const appRouter = router({
 
   getWaitingForTasks: privateProcedure.query(async ({ ctx }) => {
     return await getWaitingForTasks({
+      userId: ctx.userId,
+    })
+  }),
+
+  getSomedayForTasks: privateProcedure.query(async ({ ctx }) => {
+    return await getSomedayTasks({
       userId: ctx.userId,
     })
   }),

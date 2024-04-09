@@ -192,6 +192,18 @@ export const getWaitingForTasks = async ({ userId }: { userId: string }) => {
   })
 }
 
+export const getSomedayTasks = async ({ userId }: { userId: string }) => {
+  return await db.task.findMany({
+    where: {
+      userId,
+      status: 'SOMEDAY',
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+}
+
 export const getTask = async ({
   taskId,
   userId,

@@ -114,6 +114,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
           utils.getOrganizeTasks.reset()
           utils.getEngageTasks.reset()
           utils.getPastWeekEngageTask.reset()
+          utils.getSomedayForTasks.reset()
         },
         onError: (error) => {
           console.error(error)

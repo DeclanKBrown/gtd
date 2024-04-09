@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import TableSimple from '../../table/TableSimple'
 import { trpc } from '@/app/_trpc/Client'
@@ -14,10 +14,6 @@ type Task = {
 const ReviewStepOne = () => {
   const [tasks, setTasks] = useState<Task[]>([])
   const [taskInput, setTaskInput] = useState('')
-
-  useEffect(() => {
-    console.log(tasks)
-  }, [tasks])
 
   const { mutate: createTask } = trpc.createTask.useMutation({
     onMutate: (task: { data: Task }) => {
