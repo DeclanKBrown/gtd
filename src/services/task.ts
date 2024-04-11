@@ -28,6 +28,65 @@ export const getOrganizeTasks = async ({ userId }: { userId: string }) => {
   })
 }
 
+export const getEngageTodayTasks = async ({
+  userId,
+  endOfPeriod,
+}: {
+  userId: string
+  endOfPeriod: string
+}) => {
+  try {
+    const tasks: Task[] = await db.$queryRaw`
+      SELECT
+        *
+      FROM "Task" task
+      WHERE
+        task."userId" = ${userId}
+        AND task.status = 'NEXT_ACTION'
+        AND task."goalCompletedAt" <= ${endOfPeriod}::TIMESTAMP
+      ORDER BY
+        CASE task."priority"
+          WHEN 'LOW' THEN 4
+          WHEN 'MEDIUM' THEN 3
+          WHEN 'HIGH' THEN 2
+          WHEN 'CRITICAL' THEN 1
+        END
+    `
+
+    // If today has no tasks - already completed show tomorrows next actions
+    if (tasks && tasks.length === 0) {
+      const tomorrowEnd = addDays(endOfPeriod, 1).toISOString()
+
+      return await db.$queryRaw`
+      SELECT
+        *
+      FROM "Task" task
+      WHERE
+        task."userId" = ${userId}
+        AND task.status = 'NEXT_ACTION'
+        AND task."goalCompletedAt" <= ${tomorrowEnd}::TIMESTAMP
+      ORDER BY
+        CASE task."priority"
+          WHEN 'LOW' THEN 4
+          WHEN 'MEDIUM' THEN 3
+          WHEN 'HIGH' THEN 2
+          WHEN 'CRITICAL' THEN 1
+        END
+    `
+    }
+
+    return tasks
+  } catch (error) {
+    console.error(error)
+
+    if (error instanceof Error) {
+      return new Error(error.message)
+    }
+
+    return new Error(String(error))
+  }
+}
+
 export const getEngageTasks = async ({
   userId,
   startOfPeriod,
@@ -54,29 +113,6 @@ export const getEngageTasks = async ({
           WHEN 'CRITICAL' THEN 1
         END
     `
-
-    // If today has no tasks - already completed show tomorrows next actions
-    if (tasks && tasks.length === 0) {
-      const tomorrowStart = addDays(startOfPeriod, 1).toISOString()
-      const tomorrowEnd = addDays(endOfPeriod, 1).toISOString()
-
-      return await db.$queryRaw`
-      SELECT
-        *
-      FROM "Task" task
-      WHERE
-        task."userId" = ${userId}
-        AND task.status = 'NEXT_ACTION'
-        AND task."goalCompletedAt" BETWEEN ${tomorrowStart}::TIMESTAMP AND ${tomorrowEnd}::TIMESTAMP
-      ORDER BY
-        CASE task."priority"
-          WHEN 'LOW' THEN 4
-          WHEN 'MEDIUM' THEN 3
-          WHEN 'HIGH' THEN 2
-          WHEN 'CRITICAL' THEN 1
-        END
-    `
-    }
 
     return tasks
   } catch (error) {

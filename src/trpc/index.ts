@@ -16,6 +16,7 @@ import {
   getUpcomingWeekTasks,
   getWaitingForTasks,
   getSomedayTasks,
+  getEngageTodayTasks,
 } from '@/services/task'
 
 import {
@@ -56,6 +57,15 @@ export const appRouter = router({
   getOrganizeTasks: privateProcedure.query(async ({ ctx }) => {
     return await getOrganizeTasks({ userId: ctx.userId })
   }),
+
+  getEngageTodayTasks: privateProcedure
+    .input(z.object({ endOfPeriod: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await getEngageTodayTasks({
+        userId: ctx.userId,
+        endOfPeriod: input.endOfPeriod,
+      })
+    }),
 
   getEngageTasks: privateProcedure
     .input(z.object({ startOfPeriod: z.string(), endOfPeriod: z.string() }))

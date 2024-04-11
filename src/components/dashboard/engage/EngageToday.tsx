@@ -2,21 +2,17 @@
 
 import { trpc } from '@/app/_trpc/Client'
 import TableNonConfig from '../table/TableNonConfig'
-import { endOfDay, startOfDay } from 'date-fns'
+import { endOfDay } from 'date-fns'
 import { Loader } from '@/components/Loader'
 
-// Simulate a database read for tasks.
-
 const EngageToday = () => {
-  const startOfToday = startOfDay(new Date()).toISOString()
   const endOfToday = endOfDay(new Date()).toISOString()
 
   const {
     data: tasks,
     isLoading,
     error,
-  } = trpc.getEngageTasks.useQuery({
-    startOfPeriod: startOfToday,
+  } = trpc.getEngageTodayTasks.useQuery({
     endOfPeriod: endOfToday,
   })
 
