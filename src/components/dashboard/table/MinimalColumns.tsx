@@ -23,6 +23,8 @@ export const MinimalColumns: ColumnDef<Task>[] = [
       // @ts-ignore
       const projects = table.options.meta.projects
 
+      const utils = trpc.useUtils()
+
       /* Update Project */
       const { mutate: updateProject } = trpc.updateTask.useMutation({
         onSuccess: () => {
@@ -31,6 +33,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
             description: 'Task updated',
             variant: 'default',
           })
+          utils.getProjectTasks.reset()
         },
         onError: (error) => {
           console.error(error)

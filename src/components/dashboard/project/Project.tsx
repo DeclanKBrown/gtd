@@ -17,9 +17,10 @@ const Project = () => {
     id,
   })
 
-  const { data: tasks } = trpc.getProjectTasks.useQuery({
-    projectId: id,
-  })
+  const { data: tasks, isLoading: isLoadingTasks } =
+    trpc.getProjectTasks.useQuery({
+      projectId: id,
+    })
 
   const [isEditingName, setIsEditingName] = useState(false)
   const [editNameValue, setEditNameValue] = useState(project?.name)
@@ -53,7 +54,7 @@ const Project = () => {
   })
 
   /* LOADING */
-  if (isLoading) {
+  if (isLoading || isLoadingTasks) {
     return <Loader />
   }
 

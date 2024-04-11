@@ -121,6 +121,7 @@ export const Columns: ColumnDef<Task>[] = [
           utils.getInboxTasks.reset()
           utils.getOrganizeTasks.reset()
           utils.getEngageTasks.reset()
+          utils.getEngageTodayTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -162,6 +163,7 @@ export const Columns: ColumnDef<Task>[] = [
           utils.getOrganizeTasks.reset()
           utils.getInboxTasks.reset()
           utils.getEngageTasks.reset()
+          utils.getEngageTodayTasks.reset()
         },
         onError: (error) => {
           console.error(error)
