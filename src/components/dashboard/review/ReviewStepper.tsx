@@ -71,8 +71,12 @@ const Footer = () => {
 
   useEffect(() => {
     if (hasCompletedAllSteps) {
-      //TODO: Refresh Page
-      setTimeout(() => {}, 500)
+      const reload = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        window.location.reload()
+      }
+
+      reload()
     }
   }, [hasCompletedAllSteps])
 

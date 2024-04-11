@@ -87,10 +87,8 @@ const ReviewedStepTwo = () => {
         reviewedUpcomingCalendar &&
         reviewedWaitingFor &&
         reviewedProject && (
-          <div className="flex items-center justify-center">
-            <h2 className="text-lg text-muted-foreground">
-              You are now up to date!
-            </h2>
+          <div className="my-4 flex h-40 items-center justify-center rounded-md border text-primary">
+            <h1 className="text-xl">Review Complete</h1>
           </div>
         )}
     </div>

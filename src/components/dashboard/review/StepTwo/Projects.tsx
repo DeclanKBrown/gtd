@@ -72,8 +72,8 @@ const ReviewProjects = () => {
                 <div className="flex flex-col gap-2">
                   <Progress value={project.percentageOfTotalCompleted} />
                   <h3 className="text-xs text-white/70">
-                    {project.percentageOfTotalCompleted.toFixed(2)}% of your
-                    focus on this project
+                    {project.percentageOfTotalCompleted?.toFixed(2) || 0}% of
+                    your focus on this project
                   </h3>
                 </div>
               </CardContent>

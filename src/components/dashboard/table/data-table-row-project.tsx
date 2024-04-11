@@ -37,16 +37,20 @@ export function RowProject({
   }
 
   if (!projects) {
-    return <span>Loading</span>
+    return <span>Loading...</span>
   }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="rounded-full p-0">
+        <Button
+          variant="ghost"
+          className="rounded-full p-0"
+          disabled={projects.length === 0}
+        >
           <Badge variant="outline">
             {selectedProject ? selectedProject.name : 'Choose Project'}
-            <span className="sr-only">Change Project</span>
+            <span className="sr-only">Choose Project</span>
           </Badge>
         </Button>
       </DropdownMenuTrigger>

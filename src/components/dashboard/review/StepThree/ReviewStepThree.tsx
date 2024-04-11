@@ -76,16 +76,16 @@ const ReviewStepThree = () => {
         onKeyDown={handleKeyDown}
       />
       <div className="w-full">
-        {tasks.length === 0 ? (
+        {/* {tasks.length === 0 ? (
           <div className="flex w-full items-center justify-center py-12 text-xl">
             <h1>No tasks found</h1>
           </div>
-        ) : (
-          <>
-            {/* @ts-ignore */}
-            <TableSimple data={tasks} />
-          </>
-        )}
+        ) : ( */}
+        <>
+          {/* @ts-ignore */}
+          <TableSimple data={tasks} />
+        </>
+        {/* )} */}
       </div>
     </div>
   )
