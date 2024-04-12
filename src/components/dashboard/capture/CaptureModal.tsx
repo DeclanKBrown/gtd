@@ -55,6 +55,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
         variant: 'default',
       })
       if (task.status === 'NEXT_ACTION') {
+        utils.getEngageTodayTasks.reset()
         utils.getEngageTasks.reset()
       }
       if (task.status === 'INBOX') {

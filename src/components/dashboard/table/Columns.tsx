@@ -144,6 +144,9 @@ export const Columns: ColumnDef<Task>[] = [
 
       return <RowStatus status={status} onStatusChange={handleStatusChange} />
     },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
   },
   {
     accessorKey: 'goal',
@@ -218,6 +221,7 @@ export const Columns: ColumnDef<Task>[] = [
           utils.getOrganizeTasks.reset()
           utils.getInboxTasks.reset()
           utils.getEngageTasks.reset()
+          utils.getEngageTodayTasks.reset()
         },
         onError: (error) => {
           console.error(error)
@@ -244,6 +248,9 @@ export const Columns: ColumnDef<Task>[] = [
           onPriorityChange={handlePriorityChange}
         />
       )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     },
   },
 ]
