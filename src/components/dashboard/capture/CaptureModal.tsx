@@ -94,7 +94,7 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
   const { mutate: createReference } = trpc.createReference.useMutation({
     onSuccess: () => {
       onClose()
-      return toast({
+      toast({
         title: 'Success',
         description: 'Reference created',
         variant: 'default',

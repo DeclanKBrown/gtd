@@ -24,7 +24,7 @@ export const getInboxTasks = async ({ userId }: { userId: string }) => {
 export const getOrganizeTasks = async ({ userId }: { userId: string }) => {
   return await db.task.findMany({
     where: { userId, status: { not: 'INBOX' } },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { createdAt: 'desc' },
   })
 }
 

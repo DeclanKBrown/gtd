@@ -56,6 +56,7 @@ const Reference = ({ reference }: ReferenceProps) => {
       ) : null} */}
           </div>
         </SheetTrigger>
+        {/* @ts-ignore */}
         <ReferenceSheet reference={reference} />
       </Sheet>
     </>
