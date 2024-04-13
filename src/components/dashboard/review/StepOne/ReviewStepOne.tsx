@@ -3,8 +3,10 @@ import { Input } from '@/components/ui/input'
 import TableSimple from '../../table/TableSimple'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
+import { Task } from '@prisma/client'
 
-type Task = {
+type TaskSimple = {
+  id: string
   name: string
   status: string
   goalCompletedAt: Date | null
@@ -12,17 +14,33 @@ type Task = {
 }
 
 const ReviewStepOne = () => {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<TaskSimple[]>([])
   const [taskInput, setTaskInput] = useState('')
 
   const { mutate: createTask } = trpc.createTask.useMutation({
     // @ts-ignore
-    onMutate: (task: { data: Task }) => {
-      setTasks((currentTasks) => [...currentTasks, task.data])
+    onMutate: (task: { data: TaskSimple }) => {
+      const optimisticTask = { ...task.data, id: 'optimistic-id' }
+      setTasks((currentTasks) => [...currentTasks, optimisticTask])
 
       return { previousTasks: tasks }
     },
-    onSuccess: () => {
+    // @ts-ignore
+    onSuccess: (task: Task) => {
+      setTasks((currentTasks) => {
+        return currentTasks.map((t) =>
+          t.id === 'optimistic-id'
+            ? {
+                ...task,
+                id: task.id,
+                name: task.name,
+                status: task.status,
+                goalCompletedAt: task.goalCompletedAt,
+                priority: task.priority,
+              }
+            : t,
+        )
+      })
       toast({
         title: 'Success',
         description: 'Task created',
