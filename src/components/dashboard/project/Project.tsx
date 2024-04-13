@@ -102,6 +102,22 @@ const Project = () => {
   }
 
   const handleSave = () => {
+    //Don't trigger save if the value is the same as the original or empty
+    if (
+      (isEditingName && editNameValue === project?.name) ||
+      (isEditingName && editNameValue?.trim() === '')
+    ) {
+      setEditNameValue(project?.name)
+      setIsEditingName(false)
+      return
+    }
+
+    if (isEditingDescription && editDescriptionValue === project?.description) {
+      setEditDescriptionValue(project?.description)
+      setIsEditingDescription(false)
+      return
+    }
+
     updateProject({
       id: project.id,
       data: {

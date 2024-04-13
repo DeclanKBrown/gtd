@@ -88,6 +88,15 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
   })
 
   const handleSubmit = () => {
+    //Don't submit if name is empty
+    if (!nameValue) {
+      toast({
+        title: 'Error',
+        description: 'Name is required',
+        variant: 'destructive',
+      })
+      return
+    }
     updateReference({
       id: reference.id,
       data: {
