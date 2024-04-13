@@ -17,6 +17,7 @@ import {
   getWaitingForTasks,
   getSomedayTasks,
   getEngageTodayTasks,
+  dumpTasks,
 } from '@/services/task'
 
 import {
@@ -160,6 +161,10 @@ export const appRouter = router({
     .mutation(async ({ input, ctx }) => {
       return await deleteTask({ taskId: input.id, userId: ctx.userId })
     }),
+
+  dumpTasks: privateProcedure.mutation(async ({ ctx }) => {
+    return await dumpTasks({ userId: ctx.userId })
+  }),
 
   getProject: privateProcedure
     .input(z.object({ id: z.string() }))

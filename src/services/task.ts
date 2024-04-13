@@ -322,3 +322,14 @@ export const deleteTask = async ({
     where: { id: taskId, userId },
   })
 }
+
+export const dumpTasks = async ({ userId }: { userId: string }) => {
+  await db.task.deleteMany({
+    where: {
+      userId,
+      status: {
+        in: ['DONE', 'ELIMINATED'],
+      },
+    },
+  })
+}

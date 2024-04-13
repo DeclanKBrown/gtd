@@ -65,18 +65,40 @@ const Footer = () => {
     },
   })
 
+  const { mutate: dumpTasks } = trpc.dumpTasks.useMutation({
+    onSuccess: () => {
+      return toast({
+        title: 'Success',
+        description: 'Tasks with status Done & Eliminated dumped',
+        variant: 'default',
+      })
+    },
+    onError: (error) => {
+      console.error(error)
+      return toast({
+        title: 'Error',
+        description: 'Could not change step',
+        variant: 'destructive',
+      })
+    },
+  })
+
   const handleNextStep = () => {
     updateReviewStep({ stepNumber: activeStep + 1 })
   }
 
   useEffect(() => {
     if (hasCompletedAllSteps) {
-      const reload = async () => {
+      const dump = async () => {
+        //Delete done & eliminated tasks
+        await dumpTasks()
+
+        //Reload the page after 2 seconds
         await new Promise((resolve) => setTimeout(resolve, 2000))
         window.location.reload()
       }
 
-      reload()
+      dump()
     }
   }, [hasCompletedAllSteps])
 
@@ -92,14 +114,6 @@ const Footer = () => {
           <></>
         ) : (
           <>
-            {/* <Button
-              disabled={isDisabledStep}
-              onClick={prevStep}
-              size="sm"
-              variant="secondary"
-            >
-              Prev
-            </Button> */}
             <Button size="sm" onClick={handleNextStep}>
               {isLastStep ? 'Finish' : isOptionalStep ? 'Skip' : 'Next'}
             </Button>
