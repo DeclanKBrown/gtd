@@ -45,15 +45,6 @@ const Reference = ({ reference }: ReferenceProps) => {
             <div className="line-clamp-2 text-xs text-muted-foreground">
               {reference?.note?.substring(0, 300)}
             </div>
-            {/* {item.areas.length ? (
-        <div className="flex items-center gap-2">
-          {item.areas.map((label) => (
-            <Badge key={label} variant="outline">
-              {label}
-            </Badge>
-          ))}
-        </div>
-      ) : null} */}
           </div>
         </SheetTrigger>
         {/* @ts-ignore */}

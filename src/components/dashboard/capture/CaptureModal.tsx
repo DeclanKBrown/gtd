@@ -27,7 +27,7 @@ import { z } from 'zod'
 import { captureSchema } from '@/lib/validations/captureSchema'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
-import { useQueryClient } from '@tanstack/react-query'
+import { isURL } from '@/lib/utils'
 
 interface CaptureModalProps {
   onClose: () => void
@@ -132,13 +132,23 @@ const CaptureModal = ({ onClose }: CaptureModalProps) => {
         })
       }
       if (values.type === 'REFERENCE') {
-        createReference({
-          data: {
-            name: values.name,
-            url: values.description,
-            status: values.status,
-          },
-        })
+        if (values.description && isURL(values.description)) {
+          createReference({
+            data: {
+              name: values.name,
+              url: values.description,
+              status: values.status,
+            },
+          })
+        } else {
+          createReference({
+            data: {
+              name: values.name,
+              note: values.description,
+              status: values.status,
+            },
+          })
+        }
       }
     } catch (error) {
       console.error(error)

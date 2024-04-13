@@ -16,3 +16,14 @@ export const statusOptions = [
   { label: 'Delegated', value: 'DELEGATED', icon: Icons.delegated },
   { label: 'Eliminated', value: 'ELIMINATED', icon: Icons.eliminated },
 ]
+
+export const referenceStatusOptions = [
+  { label: 'Active', value: 'ACTIVE' },
+  { label: 'Archived', value: 'ARCHIVED' },
+]
+
+export const projectStatusOptions = [
+  { label: 'Not Started', value: 'NOT_STARTED' },
+  { label: 'Active', value: 'ACTIVE' },
+  { label: 'Completed', value: 'COMPLETED' },
+]

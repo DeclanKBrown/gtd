@@ -5,6 +5,15 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectTrigger,
+  SelectValue,
+  SelectLabel,
+  SelectItem,
+} from '@/components/ui/select'
+import {
   SheetClose,
   SheetContent,
   SheetFooter,
@@ -13,6 +22,7 @@ import {
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
+import { referenceStatusOptions } from '@/lib/constants'
 import { Reference } from '@prisma/client'
 import { useState } from 'react'
 
@@ -22,6 +32,7 @@ interface ReferenceSheetProps {
 
 const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
   const [nameValue, setNameValue] = useState(reference.name)
+  const [statusValue, setStatusValue] = useState(reference.status)
   const [urlValue, setURLValue] = useState(reference.url)
   const [noteValue, setNoteValue] = useState(reference.note)
 
@@ -51,6 +62,7 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
       id: reference.id,
       data: {
         name: nameValue,
+        status: statusValue,
         url: urlValue,
         note: noteValue,
       },
@@ -74,6 +86,29 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
               onChange={(e) => setNameValue(e.target.value)}
               className="col-span-3"
             />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="status" className="text-right">
+              Status
+            </Label>
+            <Select
+              value={statusValue}
+              onValueChange={(value) => setStatusValue(value)}
+            >
+              <SelectTrigger className="w-[247.25px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Status</SelectLabel>
+                  {referenceStatusOptions.map((option) => (
+                    <SelectItem value={option.value} key={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="url" className="text-right">
