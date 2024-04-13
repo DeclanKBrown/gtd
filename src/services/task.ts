@@ -290,9 +290,24 @@ export const updateTask = async ({
   data: Task
   userId: string
 }) => {
+  let updateData = data
+  if (data.status !== undefined) {
+    if (data.status === 'DONE') {
+      updateData = {
+        ...data,
+        completedAt: new Date(),
+      }
+    } else {
+      updateData = {
+        ...data,
+        completedAt: null,
+      }
+    }
+  }
+
   return await db.task.update({
     where: { id: taskId, userId },
-    data,
+    data: updateData,
   })
 }
 

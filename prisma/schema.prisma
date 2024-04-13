@@ -92,6 +92,7 @@ model Task {
   projectId       String?
   user            User       @relation(fields: [userId], references: [id])
   userId          String
+  completedAt     DateTime?
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 }

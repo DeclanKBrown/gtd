@@ -46,7 +46,7 @@ export const getProgressOnActiveProjects = async ({
         ON
           task."projectId" = proj.id
           AND task."status" = 'DONE'
-          AND task."goalCompletedAt" BETWEEN ${startDate}::TIMESTAMP AND ${endDate}::TIMESTAMP
+          AND task."completedAt" BETWEEN ${startDate}::TIMESTAMP AND ${endDate}::TIMESTAMP
         WHERE
           proj."userId" = ${userId}
           AND proj."status" = 'ACTIVE'
