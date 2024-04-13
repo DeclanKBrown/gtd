@@ -12,8 +12,7 @@ const Navbar = () => {
             GTD
           </Link>
 
-          {/* TODO: Add mobile navbar */}
-          <div className="hidden items-center space-x-4 sm:flex">
+          <div className="flex items-center space-x-4">
             <>
               <Link
                 href="/pricing"

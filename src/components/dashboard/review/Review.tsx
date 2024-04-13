@@ -53,8 +53,7 @@ const Review = () => {
           <Button
             className="px-6 py-4 text-lg"
             onClick={handleStartReview}
-            // TODO: Add back in
-            // disabled={!isNowSunday}
+            disabled={!isNowSunday}
           >
             Start
           </Button>

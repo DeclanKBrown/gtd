@@ -42,7 +42,7 @@ const Pricing = () => {
 
   return (
     <>
-      <div className="mb-8 mt-12 w-full text-center">
+      <div className="mb-8 w-full pt-12 text-center">
         <div className="mx-auto mb-10 sm:max-w-lg">
           <h1 className="text-6xl font-bold sm:text-7xl">Pricing</h1>
           <p className="mt-5 text-gray-600 sm:text-lg">
@@ -92,7 +92,7 @@ const Pricing = () => {
               })}
               onClick={() => createStripeSession()}
             >
-              {session?.data?.user ? 'Buy Now' : 'Get Started'}
+              Get Started
               <ArrowRight className="ml-1.5 h-5 w-5" />
             </Button>
           ) : (

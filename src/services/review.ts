@@ -19,6 +19,37 @@ export const getReview = async ({
   })
 }
 
+export const reviewComplete = async ({
+  startDate,
+  endDate,
+  userId,
+}: {
+  startDate: string
+  endDate: string
+  userId: string
+}) => {
+  const review = await db.review.findFirst({
+    where: {
+      userId,
+      createdAt: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+  })
+
+  if (
+    !review ||
+    (review && !review.stepOne) ||
+    (review && !review.stepTwo) ||
+    (review && !review.stepThree)
+  ) {
+    return false
+  }
+
+  return true
+}
+
 export const createReview = async ({
   date,
   userId,

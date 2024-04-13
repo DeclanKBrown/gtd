@@ -44,6 +44,7 @@ import {
   createReview,
   updateReview,
   deleteReview,
+  reviewComplete,
 } from '@/services/review'
 import { absoluteUrl } from '@/lib/utils'
 import { TRPCError } from '@trpc/server'
@@ -261,6 +262,16 @@ export const appRouter = router({
     .input(z.object({ id: z.string() }))
     .query(async ({ input, ctx }) => {
       return await getReview({ reviewId: input.id, userId: ctx.userId })
+    }),
+
+  reviewComplete: privateProcedure
+    .input(z.object({ startDate: z.string(), endDate: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await reviewComplete({
+        startDate: input.startDate,
+        endDate: input.endDate,
+        userId: ctx.userId,
+      })
     }),
 
   createReview: privateProcedure

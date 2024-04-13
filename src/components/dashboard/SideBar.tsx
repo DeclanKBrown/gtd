@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { toast } from '../ui/use-toast'
+import { useReviewComplete } from '@/hooks/useReviewComplete'
 
 export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -71,6 +72,8 @@ export const Sidebar = () => {
 
   const router = useRouter()
 
+  const { isReviewComplete } = useReviewComplete()
+
   return (
     <div className="flex h-full flex-col justify-between">
       <div className="py-4">
@@ -102,7 +105,10 @@ export const Sidebar = () => {
                     {link.icon}
                     <span className="hidden lg:block">{link.name}</span>
                   </div>
-                  {link.endIcon && isNowSunday && link.endIcon}
+                  {link.endIcon &&
+                    isNowSunday &&
+                    !isReviewComplete &&
+                    link.endIcon}
                 </Button>
               </Link>
             </div>

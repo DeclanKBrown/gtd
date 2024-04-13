@@ -37,7 +37,12 @@ export function RowProject({
   }
 
   if (!projects) {
-    return <span>Loading...</span>
+    return (
+      <Badge variant="outline">
+        <span className="sr-only">Loading</span>
+        Loading...
+      </Badge>
+    )
   }
 
   return (
