@@ -185,7 +185,7 @@ export const appRouter = router({
           endDate: input.endOfWeek,
         })
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     }),
 
@@ -324,7 +324,7 @@ export const appRouter = router({
 
       return { url: stripeSession.url }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }),
 })

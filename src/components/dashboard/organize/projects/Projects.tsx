@@ -25,7 +25,7 @@ const Projects = () => {
   if (projects.length === 0) {
     return (
       <div className="flex w-full items-center justify-center py-12 text-xl">
-        <h1>No projects found</h1>
+        <h1>No projects yet</h1>
       </div>
     )
   }
