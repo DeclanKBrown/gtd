@@ -5,13 +5,11 @@ import { Progress } from '@/components/ui/progress'
 import { endOfWeek, startOfWeek, subWeeks } from 'date-fns'
 
 const ReviewProjects = () => {
-  const dateInPreviousWeek = subWeeks(new Date(), 1)
-
   // Calculate the start and end of the previous week
-  const startOfPreviousWeek = startOfWeek(dateInPreviousWeek, {
+  const startOfPreviousWeek = startOfWeek(new Date(), {
     weekStartsOn: 1,
   }).toISOString()
-  const endOfPreviousWeek = endOfWeek(dateInPreviousWeek, {
+  const endOfPreviousWeek = endOfWeek(new Date(), {
     weekStartsOn: 1,
   }).toISOString()
 

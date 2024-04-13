@@ -118,6 +118,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
           utils.getInboxTasks.reset()
           utils.getOrganizeTasks.reset()
           utils.getEngageTasks.reset()
+          utils.getEngageTodayTasks.reset()
           utils.getPastWeekEngageTask.reset()
           utils.getSomedayForTasks.reset()
         },
