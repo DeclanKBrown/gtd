@@ -8,7 +8,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -22,7 +21,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { DataTablePagination } from './data-table-pagination'
 import { Task } from '@prisma/client'
 import { trpc } from '@/app/_trpc/Client'
 
