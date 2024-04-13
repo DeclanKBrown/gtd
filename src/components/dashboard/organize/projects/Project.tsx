@@ -52,7 +52,7 @@ const Project = ({ project }: ProjectProps) => {
 
   return (
     <Link href={`/dashboard/projects/${project.id}`}>
-      <Card className="hover:bg-accent">
+      <Card className="h-[110px] max-h-[110px] overflow-hidden hover:bg-accent">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-medium">{project.name}</CardTitle>
           <TooltipProvider>
@@ -116,7 +116,7 @@ const Project = ({ project }: ProjectProps) => {
         <CardContent className="w-full overflow-hidden">
           <p className="text-xs text-muted-foreground">
             {project.description.length > 100
-              ? project.description.substring(0, 100) + '...'
+              ? project.description.substring(0, 60) + '...'
               : project.description}
           </p>
         </CardContent>

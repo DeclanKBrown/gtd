@@ -88,7 +88,7 @@ const ReviewedStepTwo = () => {
         reviewedWaitingFor &&
         reviewedProject && (
           <div className="my-4 flex h-40 items-center justify-center rounded-md border text-primary">
-            <h1 className="text-xl">Review Complete</h1>
+            <h1 className="text-xl">Get Current Complete</h1>
           </div>
         )}
     </div>

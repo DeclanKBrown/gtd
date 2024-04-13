@@ -24,7 +24,7 @@ const Reference = ({ reference }: ReferenceProps) => {
           <div
             key={reference.id}
             className={
-              'flex cursor-pointer flex-col items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent'
+              'flex h-[80px] max-h-[80px] cursor-pointer flex-col items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent'
             }
           >
             <div className="flex w-full flex-col gap-2">

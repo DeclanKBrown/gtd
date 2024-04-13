@@ -11,6 +11,13 @@ const RowName = ({ title, onSave }: EditableTitleProps) => {
   const [editValue, setEditValue] = useState(title)
 
   const handleSave = () => {
+    //Don't trigger save if the value is the same as the original or empty
+    if (editValue === title || editValue.trim() === '') {
+      setEditValue(title)
+      setIsEditing(false)
+      return
+    }
+
     onSave(editValue)
     setIsEditing(false)
   }

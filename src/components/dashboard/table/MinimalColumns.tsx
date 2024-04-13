@@ -80,7 +80,7 @@ export const MinimalColumns: ColumnDef<Task>[] = [
       }
 
       return (
-        <div className="flex items-center space-x-2">
+        <div className="flex w-[425px] items-center space-x-2">
           <RowProject
             projects={projects}
             // @ts-ignore

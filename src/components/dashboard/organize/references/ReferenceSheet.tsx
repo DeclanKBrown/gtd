@@ -92,9 +92,10 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
             </Label>
             <Textarea
               id="note"
+              rows={4}
               value={noteValue || ''}
               onChange={(e) => setNoteValue(e.target.value)}
-              className="col-span-3"
+              className="col-span-3 max-h-[400px]"
             />
           </div>
         </div>
