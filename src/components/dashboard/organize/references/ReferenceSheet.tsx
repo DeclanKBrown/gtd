@@ -20,6 +20,17 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
 import { referenceStatusOptions } from '@/lib/constants'
@@ -57,6 +68,25 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
     },
   })
 
+  const { mutate: deleteReference } = trpc.deleteReference.useMutation({
+    onSuccess: () => {
+      toast({
+        title: 'Success',
+        description: 'Reference deleted',
+        variant: 'default',
+      })
+      utils.getReferences.reset()
+    },
+    onError: (error) => {
+      console.error(error)
+      toast({
+        title: 'Error',
+        description: 'Error deleting reference',
+        variant: 'destructive',
+      })
+    },
+  })
+
   const handleSubmit = () => {
     updateReference({
       id: reference.id,
@@ -67,6 +97,10 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
         note: noteValue,
       },
     })
+  }
+
+  const handleDelete = () => {
+    deleteReference({ id: reference.id })
   }
 
   return (
@@ -82,6 +116,7 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
             </Label>
             <Input
               id="name"
+              autoComplete="off"
               value={nameValue}
               onChange={(e) => setNameValue(e.target.value)}
               className="col-span-3"
@@ -116,6 +151,7 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
             </Label>
             <Input
               id="url"
+              autoComplete="off"
               value={urlValue || ''}
               onChange={(e) => setURLValue(e.target.value)}
               className="col-span-3"
@@ -127,6 +163,7 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
             </Label>
             <Textarea
               id="note"
+              autoComplete="off"
               rows={4}
               value={noteValue || ''}
               onChange={(e) => setNoteValue(e.target.value)}
@@ -136,7 +173,34 @@ const ReferenceSheet = ({ reference }: ReferenceSheetProps) => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button onClick={handleSubmit}>Save changes</Button>
+            <>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button className="text-red-500">Delete</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      this reference
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      className="text-red-500"
+                      onClick={handleDelete}
+                    >
+                      Confirm
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              <Button onClick={handleSubmit}>Save changes</Button>
+            </>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
