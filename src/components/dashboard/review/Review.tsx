@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
 import { isSunday } from 'date-fns'
+import { useReviewComplete } from '@/hooks/useReviewComplete'
 
 const Review = () => {
   const [reviewStarted, setReviewStarted] = useState(false)
@@ -37,6 +38,8 @@ const Review = () => {
 
   const isNowSunday = isSunday(new Date())
 
+  const { isReviewComplete } = useReviewComplete()
+
   return (
     <>
       {!reviewStarted ? (
@@ -53,7 +56,7 @@ const Review = () => {
           <Button
             className="px-6 py-4 text-lg"
             onClick={handleStartReview}
-            disabled={!isNowSunday}
+            disabled={!isNowSunday || isReviewComplete}
           >
             Start
           </Button>
