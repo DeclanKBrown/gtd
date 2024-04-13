@@ -18,6 +18,7 @@ import {
   getSomedayTasks,
   getEngageTodayTasks,
   dumpTasks,
+  getNextActionTasks,
 } from '@/services/task'
 
 import {
@@ -131,6 +132,12 @@ export const appRouter = router({
 
   getSomedayForTasks: privateProcedure.query(async ({ ctx }) => {
     return await getSomedayTasks({
+      userId: ctx.userId,
+    })
+  }),
+
+  getNextActionTasks: privateProcedure.query(async ({ ctx }) => {
+    return await getNextActionTasks({
       userId: ctx.userId,
     })
   }),
