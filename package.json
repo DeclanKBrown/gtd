@@ -35,6 +35,7 @@
     "@trpc/next": "^11.0.0-next.327",
     "@trpc/react-query": "^11.0.0-next.327",
     "@trpc/server": "^11.0.0-next.327",
+    "@vercel/analytics": "^1.2.2",
     "@vercel/postgres": "^0.7.2",
     "@vercel/speed-insights": "^1.0.10",
     "class-variance-authority": "^0.7.0",
