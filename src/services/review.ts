@@ -51,21 +51,39 @@ export const reviewComplete = async ({
 }
 
 export const createReview = async ({
+  startOfDay,
+  endOfDay,
   date,
   userId,
 }: {
+  startOfDay: string
+  endOfDay: string
   date: string
   userId: string
 }) => {
-  if (isSunday(date)) {
-    return await db.review.create({
-      data: {
-        userId,
-      },
-    })
-  } else {
+  if (!isSunday(date)) {
     return new Error('Not Sunday')
   }
+
+  const review = await db.review.findFirst({
+    where: {
+      userId,
+      createdAt: {
+        gte: startOfDay,
+        lte: endOfDay,
+      },
+    },
+  })
+
+  if (review) {
+    return
+  }
+
+  return await db.review.create({
+    data: {
+      userId,
+    },
+  })
 }
 
 export const updateReview = async ({

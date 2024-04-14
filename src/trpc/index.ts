@@ -282,9 +282,20 @@ export const appRouter = router({
     }),
 
   createReview: privateProcedure
-    .input(z.object({ date: z.string() }))
+    .input(
+      z.object({
+        startOfDay: z.string(),
+        endOfDay: z.string(),
+        date: z.string(),
+      }),
+    )
     .mutation(async ({ input, ctx }) => {
-      return await createReview({ date: input.date, userId: ctx.userId })
+      return await createReview({
+        startOfDay: input.startOfDay,
+        endOfDay: input.endOfDay,
+        date: input.date,
+        userId: ctx.userId,
+      })
     }),
 
   updateReview: privateProcedure

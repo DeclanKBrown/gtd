@@ -5,7 +5,7 @@ import ReviewStepper from './ReviewStepper'
 import { useState } from 'react'
 import { trpc } from '@/app/_trpc/Client'
 import { toast } from '@/components/ui/use-toast'
-import { isSunday } from 'date-fns'
+import { isSunday, startOfDay, endOfDay } from 'date-fns'
 import { useReviewComplete } from '@/hooks/useReviewComplete'
 
 const Review = () => {
@@ -30,8 +30,13 @@ const Review = () => {
     },
   })
 
+  const startOfToday = startOfDay(new Date()).toISOString()
+  const endOfToday = endOfDay(new Date()).toISOString()
+
   const handleStartReview = () => {
     startReview({
+      startOfDay: startOfToday,
+      endOfDay: endOfToday,
       date: new Date().toString(),
     })
   }
