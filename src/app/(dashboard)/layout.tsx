@@ -21,10 +21,8 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="w-20 flex-shrink-0 lg:w-64">
-        <Sidebar />
-      </div>
-      <div className="flex-grow border-l">{children}</div>
+      <Sidebar />
+      <div className="flex-grow">{children}</div>
     </div>
   )
 }

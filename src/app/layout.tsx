@@ -30,7 +30,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <Providers>
         <body
           className={cn(
-            'grainy min-h-screen font-sans antialiased',
+            'grainy max-h-screen min-h-screen font-sans antialiased',
             inter.className,
           )}
         >

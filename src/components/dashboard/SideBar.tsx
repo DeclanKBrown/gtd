@@ -75,93 +75,153 @@ export const Sidebar = () => {
   const { isReviewComplete } = useReviewComplete()
 
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="py-4">
-        <div className="px-3 py-2">
-          <div className="space-y-1">
-            <Button
-              variant="ghost"
-              className="w-full justify-center lg:justify-start"
-              onClick={showModal}
-            >
-              <Icons.capture />
-              <span className="hidden lg:block">Capture</span>
-            </Button>
-          </div>
-        </div>
-        {isModalOpen && <CaptureModal onClose={hideModal} />}
-        {links.map((link) => (
-          <div className="px-3 py-2" key={link.name}>
+    <>
+      {/* Desktop Sidebar */}
+      <div className="hidden w-20 flex-col justify-between border-r md:flex lg:w-64">
+        <div className="py-4">
+          <div className="px-3 py-2">
             <div className="space-y-1">
-              <Link
-                href={link.href}
-                className={'w-full justify-center lg:justify-start'}
+              <Button
+                variant="ghost"
+                className="w-full justify-center lg:justify-start"
+                onClick={showModal}
               >
-                <Button
-                  variant={isActive(link.href) ? 'secondary' : 'ghost'}
-                  className="w-full justify-center lg:justify-between"
-                >
-                  <div className="flex items-center">
-                    {link.icon}
-                    <span className="hidden lg:block">{link.name}</span>
-                  </div>
-                  {link.endIcon &&
-                    isNowSunday &&
-                    !isReviewComplete &&
-                    link.endIcon}
-                </Button>
-              </Link>
+                <Icons.capture />
+                <span className="hidden lg:block">Capture</span>
+              </Button>
             </div>
           </div>
-        ))}
-      </div>
-      <div className="px-3 py-2">
-        <div className="space-y-1">
-          {!user ? (
-            <div className="flex items-center space-x-2 px-2">
-              <Skeleton className="h-9 w-9 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-3 w-[140px]" />
+          {isModalOpen && <CaptureModal onClose={hideModal} />}
+          {links.map((link) => (
+            <div className="px-3 py-2" key={link.name}>
+              <div className="space-y-1">
+                <Link
+                  href={link.href}
+                  className={'w-full justify-center lg:justify-start'}
+                >
+                  <Button
+                    variant={isActive(link.href) ? 'secondary' : 'ghost'}
+                    className="w-full justify-center lg:justify-between"
+                  >
+                    <div className="flex items-center">
+                      {link.icon}
+                      <span className="hidden lg:block">{link.name}</span>
+                    </div>
+                    {link.endIcon &&
+                      isNowSunday &&
+                      !isReviewComplete &&
+                      link.endIcon}
+                  </Button>
+                </Link>
               </div>
             </div>
-          ) : (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-center lg:justify-start"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary font-semibold">
-                      {user?.name
-                        ?.split(' ')
-                        ?.map((name) => name[0])
-                        ?.join('')}
+          ))}
+        </div>
+        <div className="px-3 py-2">
+          <div className="space-y-1">
+            {!user ? (
+              <div className="flex items-center space-x-2 px-2">
+                <Skeleton className="h-9 w-9 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-[140px]" />
+                </div>
+              </div>
+            ) : (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-center lg:justify-start"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary font-semibold">
+                        {user?.name
+                          ?.split(' ')
+                          ?.map((name) => name[0])
+                          ?.join('')}
+                      </div>
+                      <span className="hidden lg:block">{user.name}</span>
                     </div>
-                    <span className="hidden lg:block">{user.name}</span>
-                  </div>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="max-w-[240px] p-1">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  onClick={() => router.push('/dashboard/subscription')}
-                >
-                  Subscription
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start"
-                  onClick={() => handleSignOut()}
-                >
-                  Sign Out
-                </Button>
-              </PopoverContent>
-            </Popover>
-          )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="max-w-[240px] p-1">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => router.push('/dashboard/subscription')}
+                  >
+                    Subscription
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleSignOut()}
+                  >
+                    Sign Out
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Mobile Sidebar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-black shadow-lg md:hidden">
+        <div className="flex justify-around py-2">
+          <Link
+            href={links[0].href}
+            className={'w-full justify-center lg:justify-start'}
+          >
+            <Button
+              variant={isActive(links[0].href) ? 'secondary' : 'ghost'}
+              className="w-full justify-center lg:justify-between"
+            >
+              <div className="flex items-center">{links[0].icon}</div>
+            </Button>
+          </Link>
+          <Link
+            href={links[1].href}
+            className={'w-full justify-center lg:justify-start'}
+          >
+            <Button
+              variant={isActive(links[1].href) ? 'secondary' : 'ghost'}
+              className="w-full justify-center lg:justify-between"
+            >
+              <div className="flex items-center">{links[1].icon}</div>
+            </Button>
+          </Link>
+          <Button
+            variant="ghost"
+            className="w-full justify-center lg:justify-start"
+            onClick={showModal}
+          >
+            <Icons.capture />
+          </Button>
+          <Link
+            href={links[2].href}
+            className={'w-full justify-center lg:justify-start'}
+          >
+            <Button
+              variant={isActive(links[2].href) ? 'secondary' : 'ghost'}
+              className="w-full justify-center lg:justify-between"
+            >
+              <div className="flex items-center">{links[2].icon}</div>
+            </Button>
+          </Link>
+          <Link
+            href={links[3].href}
+            className={'w-full justify-center lg:justify-start'}
+          >
+            <Button
+              variant={isActive(links[3].href) ? 'secondary' : 'ghost'}
+              className="w-full justify-center lg:justify-between"
+            >
+              <div className="flex items-center">{links[3].icon}</div>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </>
   )
 }

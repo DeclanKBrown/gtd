@@ -29,6 +29,8 @@ const Organize = () => {
       </div>
     )
   }
+
+  //@ts-ignore
   return <TableConfigurable data={tasks} />
 }
 
