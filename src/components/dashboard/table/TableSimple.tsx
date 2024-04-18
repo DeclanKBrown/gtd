@@ -23,6 +23,9 @@ import {
 
 import { Task } from '@prisma/client'
 import { trpc } from '@/app/_trpc/Client'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import MobileCardHeader from './mobile/MobileCardHeader'
+import MobileCardContent from './mobile/MobileCardContent'
 
 interface InboxProps {
   data: Task[]
@@ -48,7 +51,7 @@ const TableSimple = <TData, TValue>({ data }: InboxProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
+      <div className="hidden rounded-md border md:flex">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -97,6 +100,21 @@ const TableSimple = <TData, TValue>({ data }: InboxProps) => {
             )}
           </TableBody>
         </Table>
+      </div>
+      {/* Mobile Table */}
+      <div className="flex flex-col gap-3 md:hidden">
+        {data &&
+          data.length &&
+          data.map((item, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <MobileCardHeader projects={projects} task={item} />
+              </CardHeader>
+              <CardContent>
+                <MobileCardContent task={item} />
+              </CardContent>
+            </Card>
+          ))}
       </div>
     </div>
   )

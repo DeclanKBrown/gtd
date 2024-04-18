@@ -167,7 +167,7 @@ export const Sidebar = () => {
       </div>
 
       {/* Mobile Sidebar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-black shadow-lg md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-black px-1 shadow-lg md:hidden">
         <div className="flex justify-around py-2">
           <Link
             href={links[0].href}

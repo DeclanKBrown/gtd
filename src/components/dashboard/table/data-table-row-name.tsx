@@ -33,7 +33,7 @@ const RowName = ({ title, onSave }: EditableTitleProps) => {
       {isEditing ? (
         <Input
           value={editValue}
-          className="m-0 w-[500px] truncate rounded-none border-none bg-transparent p-0 text-sm leading-normal focus:outline-none focus:ring-0"
+          className="m-0 w-[250px] truncate rounded-none border-none bg-transparent p-0 text-sm leading-normal focus:outline-none focus:ring-0 md:w-[500px]"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEditValue(e.target.value)
           }
@@ -42,7 +42,7 @@ const RowName = ({ title, onSave }: EditableTitleProps) => {
           autoFocus
         />
       ) : (
-        <span className="max-w-500px truncate">{editValue}</span>
+        <span className="max-w-250px md:max-w-500px truncate">{editValue}</span>
       )}
     </div>
   )

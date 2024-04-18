@@ -17,6 +17,9 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { trpc } from '@/app/_trpc/Client'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import MobileCardHeader from './mobile/MobileCardHeader'
+import MobileCardContent from './mobile/MobileCardContent'
 
 interface InboxProps<TData, TValue> {
   data: TData[]
@@ -36,9 +39,12 @@ const TableNonConfig = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
     },
   })
 
+  console.log(data)
+
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
+      {/* Desktop Table */}
+      <div className="hidden rounded-md border md:flex">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -87,6 +93,21 @@ const TableNonConfig = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
             )}
           </TableBody>
         </Table>
+      </div>
+      {/* Mobile Table */}
+      <div className="flex flex-col gap-3 md:hidden">
+        {data &&
+          data.length &&
+          data.map((item, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <MobileCardHeader projects={projects} task={item} />
+              </CardHeader>
+              <CardContent>
+                <MobileCardContent task={item} />
+              </CardContent>
+            </Card>
+          ))}
       </div>
     </div>
   )

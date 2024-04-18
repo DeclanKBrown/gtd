@@ -29,6 +29,9 @@ import { DataTableToolbar } from './data-table-toolbar'
 import { Columns } from './Columns'
 import { Task } from '@prisma/client'
 import { trpc } from '@/app/_trpc/Client'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import MobileCardHeader from './mobile/MobileCardHeader'
+import MobileCardContent from './mobile/MobileCardContent'
 
 interface TableConfigurableProps {
   data: Task[]
@@ -74,56 +77,74 @@ export function TableConfigurable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
+      {/* Desktop Table */}
+      <div className="hidden md:flex">
+        <DataTableToolbar table={table} />
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id} colSpan={header.colSpan}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+      {/* Mobile Table */}
+      <div className="flex flex-col gap-3 md:hidden">
+        {data &&
+          data.length &&
+          data.map((item, index) => (
+            <Card key={index}>
+              <CardHeader>
+                <MobileCardHeader projects={projects} task={item} />
+              </CardHeader>
+              <CardContent>
+                <MobileCardContent task={item} />
+              </CardContent>
+            </Card>
+          ))}
       </div>
     </div>
   )

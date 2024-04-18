@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const ProjectsPage = async () => {
   return (
     <>
-      <ScrollArea className="h-screen">
+      <ScrollArea className="h-screen pb-10 md:pb-0">
         <div className="flex flex-col">
           <div className="flex-1 space-y-4 p-8">
             <div className="flex flex-col justify-between space-y-2">
