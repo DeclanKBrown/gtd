@@ -76,9 +76,9 @@ export function TableConfigurable<TData, TValue>({
   })
 
   return (
-    <div className="space-y-4">
-      {/* Desktop Table */}
-      <div className="hidden md:flex">
+    <>
+      <div className="hidden flex-col space-y-4 md:flex">
+        {/* Desktop Table */}
         <DataTableToolbar table={table} />
         <div className="rounded-md border">
           <Table>
@@ -146,6 +146,6 @@ export function TableConfigurable<TData, TValue>({
             </Card>
           ))}
       </div>
-    </div>
+    </>
   )
 }
