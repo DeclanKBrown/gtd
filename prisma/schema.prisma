@@ -46,7 +46,7 @@ model User {
   sessions               Session[]
   stripeCustomerId       String?     @unique @map("stripe_customer_id")
   stripeSubscriptionId   String?     @unique @map("stripe_subscription_id")
-  stripePriceId          String?     @unique @map("stripe_price_id")
+  stripePriceId          String?     @map("stripe_price_id")
   stripeCurrentPeriodEnd DateTime?   @map(name: "stripe_current_period_end")
   Task                   Task[]
   Project                Project[]

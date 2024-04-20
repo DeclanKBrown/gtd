@@ -4,29 +4,33 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Pricing from '@/components/pricing/Pricing'
+import InboxDemo from '@/components/landing/SimpleDemo/Demo'
+import Features from '@/components/landing/Features/Features'
 
 const Home = () => {
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 flex flex-col items-center justify-center text-center sm:mt-40">
-        <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
+        <div className="mx-auto mb-6 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
           <p className="text-sm font-semibold text-gray-700">
-            GTD Is Now Available
+            SimpleGTD Is Now Available
           </p>
         </div>
-        <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
-          Unlock 🔓 Your{' '}
-          <span className="whitespace-nowrap underline">Full Potential</span>{' '}
-          with Our Get-Things-Done App
-        </h1>
-        <p className="mt-5 max-w-prose text-zinc-500 sm:text-lg">
-          GTD Allows you to organise your life with a simple{' '}
-          <span className="font-bold">
-            Capture, Process, Organise, Review, Engage
-          </span>
-          . It&#39;s a simple, yet powerful tool that helps you to stay on top
-          of your tasks and projects.
-        </p>
+        <div className="flex flex-col gap-4">
+          <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
+            <span className="relative whitespace-nowrap">
+              <span className="absolute -bottom-1 -left-2 -right-2 -top-1 -rotate-1 bg-primary md:-bottom-0 md:-left-3 md:-right-3 md:-top-0"></span>
+              <span className="relative text-secondary">Stress Less</span>
+            </span>
+          </h1>
+          <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
+            <span className="whitespace-nowrap">Achieve More</span>
+          </h1>
+        </div>
+        <span className="mt-5 max-w-prose px-12 text-zinc-400 sm:text-2xl">
+          By Tasking an opinionated approach to productivity, turn your
+          overwhelming todo list into an organized productivity machine
+        </span>
 
         <Link
           className={buttonVariants({
@@ -37,11 +41,11 @@ const Home = () => {
           href={'/dashboard'}
           target="_blank"
         >
-          Get Started <ArrowRight className="ml-2 h-5 w-5" />
+          Get Organized <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
       </MaxWidthWrapper>
 
-      {/* value proposition section */}
+      {/* Demo Section */}
       <div>
         <div className="relative isolate">
           <div
@@ -61,13 +65,9 @@ const Home = () => {
             <div className="mx-auto max-w-6xl px-6 lg:px-8">
               <div className="mt-16 flow-root sm:mt-24">
                 <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
-                  <Image
-                    src="/dashboard-image-engage.png"
-                    alt="Dashboard Preview"
-                    width={1364}
-                    height={866}
-                    className="rounded-md bg-white/5 p-2 shadow-2xl ring-1 ring-gray-900/10 sm:p-4 md:p-5"
-                  />
+                  <div className="rounded-md bg-black p-2 shadow-2xl ring-1 ring-gray-900/10 sm:p-4 md:p-5">
+                    <InboxDemo />
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,95 +87,89 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Features section */}
-      <div className="mx-auto mb-32 mt-32 max-w-6xl sm:mt-56">
-        <div className="mb-12 px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="mt-2 text-4xl font-bold text-zinc-200 sm:text-5xl">
-              Get Organized with GTD
-            </h2>
-            <p className="mt-4 text-lg italic text-zinc-500">
-              &quot;Your mind is for having ideas, not holding them. - David
-              Allen&quot;
-            </p>
-          </div>
-        </div>
-        {/* steps  */}
-        <ol className="my-8 space-y-4 pt-8 lg:flex lg:space-x-12 lg:space-y-0">
-          <li className="md:flex-1">
-            <div className="flex flex-col space-y-2 border-l-4 border-zinc-500/20 py-2 pl-4 lg:border-l-0 lg:border-t-2 lg:pb-0 lg:pt-4">
-              <span className="text-sm font-medium text-blue-600">Step 1</span>
-              <span className="font-semibold> text-xl">
-                Sign up for an account
-              </span>
-              <span className="mt-2 text-zinc-500">
-                Either start out with a free plan or choose our{' '}
-                <Link
-                  href="/pricing"
-                  className="text-blue-700 underline underline-offset-2"
+      {/* Pain Points Section */}
+      <section className="relative px-8 py-24">
+        <div className="text-neutral-content relative mx-auto max-w-lg rounded-lg bg-red-500/20 p-8 text-center text-lg md:p-16">
+          <div className="space-y-4 leading-relaxed md:space-y-6">
+            <div className="text-neutral-content/80 space-y-2">
+              <p>
+                <span className="font-medium text-red-400">Stress </span>
+                constant worry about missed tasks
+              </p>
+              <p>
+                <span className="font-medium text-red-400">
+                  Overwhelming To-Do Lists{' '}
+                </span>
+                endless Tasks
+              </p>
+              <p>
+                <span className="font-medium text-red-400">
+                  Sleepless Nights{' '}
+                </span>
+                thinking about to-dos
+              </p>
+              <p>
+                <span className="font-medium text-red-400">
+                  Scattered Tasks{' '}
+                </span>
+                no organisation
+              </p>
+              <p>
+                <span className="font-medium text-red-400">
+                  Fuzzy Progress{' '}
+                </span>
+                unsure if making progress
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-3 text-xl font-semibold md:flex-row">
+              <p>= </p>Constant Cycle of
+              <span className="font-medium text-red-400">Procrastination</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2rem"
+                height="2rem"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
                 >
-                  pro plan
-                </Link>
-              </span>
-            </div>
-          </li>
-          <li className="lg:flex-1">
-            <div className="flex flex-col space-y-2 border-l-4 border-zinc-500/20 py-2 pl-4 lg:border-l-0 lg:border-t-2 lg:pb-0 lg:pt-4">
-              <span className="text-sm font-medium text-blue-600">Step 2</span>
-              <span className="font-semibold> text-xl">
-                Start capturing your tasks, projects & references
-              </span>
-              <span className="mt-2 text-zinc-500">
-                Use the inbox to capture everything that has your attention
-              </span>
-            </div>
-          </li>
-          <li className="lg:flex-1">
-            <div className="flex flex-col space-y-2 border-l-4 border-zinc-500/20 py-2 pl-4 lg:border-l-0 lg:border-t-2 lg:pb-0 lg:pt-4">
-              <span className="text-sm font-medium text-blue-600">Step 3</span>
-              <span className="font-semibold> text-xl">
-                Enjoy the peace of mind that comes with a clear head
-              </span>
-              <span className="mt-2 text-zinc-500">
-                Process your inbox and organise your tasks and projects
-              </span>
-            </div>
-          </li>
-          <li className="lg:flex-1">
-            <div className="flex flex-col space-y-2 border-l-4 border-zinc-500/20 py-2 pl-4 lg:border-l-0 lg:border-t-2 lg:pb-0 lg:pt-4">
-              <span className="text-sm font-medium text-blue-600">Step 4</span>
-              <span className="font-semibold> text-xl">
-                3x your productivity
-              </span>
-              <span className="mt-2 text-zinc-500">
-                Determine the next action and engage with your tasks
-              </span>
-            </div>
-          </li>
-          <li className="lg:flex-1">
-            <div className="flex flex-col space-y-2 border-l-4 border-zinc-500/20 py-2 pl-4 lg:border-l-0 lg:border-t-2 lg:pb-0 lg:pt-4">
-              <span className="text-sm font-medium text-blue-600">Step 5</span>
-              <span className="font-semibold> text-xl">Think Big</span>
-              <span className="mt-2 text-zinc-500">
-                Review you projects & goals weekly
-              </span>
-            </div>
-          </li>
-        </ol>
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="mt-16 flow-root sm:mt-24">
-            <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
-              <Image
-                src="/dashboard-image-review.png"
-                alt="Dashboard Preview"
-                width={1364}
-                height={866}
-                className="rounded-md bg-white/5 p-2 shadow-2xl ring-1 ring-gray-900/10 sm:p-4 md:p-5"
-              />
+                  <path d="M14.381 8.027a5.765 5.765 0 0 1 1.905-.321c.654 0 1.283.109 1.87.309m-11.04 2.594a4.351 4.351 0 0 0-.83-.08C3.919 10.53 2 12.426 2 14.765c0 1.31.602 2.48 1.547 3.258m3.57-7.414a5.577 5.577 0 0 1-.355-1.962C6.762 5.528 9.32 3 12.476 3c2.94 0 5.361 2.194 5.68 5.015m-11.04 2.594a4.29 4.29 0 0 1 1.55.634m9.49-3.228C20.392 8.78 22 10.881 22 13.353c0 1.94-.99 3.653-2.5 4.67M17 19l-2 2m0-5.5l-2 2m0 2.5l-2 2" />
+                  <path
+                    stroke-linejoin="round"
+                    d="m6 22.385l4.286-3.692H6L10.286 15"
+                  />
+                </g>
+              </svg>
             </div>
           </div>
         </div>
-        {/* Pricing */}
+        <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-1 text-center text-sm opacity-80">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 5a.75.75 0 01.75.75v6.638l1.96-2.158a.75.75 0 111.08 1.04l-3.25 3.5a.75.75 0 01-1.08 0l-3.25-3.5a.75.75 0 111.08-1.04l1.96 2.158V5.75A.75.75 0 0110 5z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <p className="s">There&apos;s an easier way</p>
+        </div>
+      </section>
+
+      {/* Features section */}
+      <div className="mx-auto mb-32 mt-16 max-w-6xl sm:mt-20">
+        <Features />
+      </div>
+
+      {/* Pricing */}
+      <div className="mx-auto mb-32 mt-16 max-w-6xl sm:mt-20">
         <Pricing />
       </div>
     </>
