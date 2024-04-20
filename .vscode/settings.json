@@ -8,5 +8,8 @@
   "eslint.format.enable": true,
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "cSpell.words": [
+    "Acheive"
+  ]
 }

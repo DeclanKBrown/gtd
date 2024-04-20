@@ -31,7 +31,11 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/register"
-                className={buttonVariants({ size: 'sm', variant: 'default' })}
+                className={buttonVariants({
+                  size: 'sm',
+                  variant: 'default',
+                  className: 'my-8 bg-[#3b82f6] text-white',
+                })}
               >
                 Get Organized <ArrowRight className="ml-1.5 h-5 w-5" />
               </Link>

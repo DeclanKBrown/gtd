@@ -28,15 +28,15 @@ const Home = () => {
           </h1>
         </div>
         <span className="mt-5 max-w-prose px-12 text-zinc-400 sm:text-2xl">
-          By Tasking an opinionated approach to productivity, turn your
-          overwhelming todo list into an organized productivity machine
+          By taking an opinionated approach to productivity, turn your
+          overwhelming todo lists into an organized productivity machine
         </span>
 
         <Link
           className={buttonVariants({
             variant: 'secondary',
             size: 'lg',
-            className: 'my-8 dark:bg-white dark:text-gray-700',
+            className: 'my-8 bg-[#3b82f6] text-white',
           })}
           href={'/dashboard'}
           target="_blank"
@@ -146,11 +146,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-1 text-center text-sm opacity-80">
+        <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-1 fill-blue-500 text-center text-sm opacity-80">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
-            fill="currentColor"
             className="h-5 w-5"
           >
             <path
@@ -159,7 +158,7 @@ const Home = () => {
               clip-rule="evenodd"
             ></path>
           </svg>
-          <p className="s">There&apos;s an easier way</p>
+          <p className="text-blue-500">There&apos;s an easier way</p>
         </div>
       </section>
 
@@ -171,6 +170,60 @@ const Home = () => {
       {/* Pricing */}
       <div className="mx-auto mb-32 mt-16 max-w-6xl sm:mt-20">
         <Pricing />
+      </div>
+
+      {/* Footer */}
+      <div className="w-full border-t border-secondary">
+        <div className="mx-auto max-w-7xl px-8 py-24">
+          <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap lg:items-start">
+            <div className="mx-auto w-80 max-w-full flex-shrink-0 text-center md:mx-0 md:text-left">
+              <a
+                aria-current="page"
+                className="flex items-center justify-center gap-2 md:justify-start"
+                href="/#"
+              >
+                <strong className="text-base font-extrabold tracking-tight md:text-lg">
+                  SimpleGTD
+                </strong>
+              </a>
+              <p className="text-base-content/80 mt-3 text-sm leading-relaxed">
+                Stress Less, Achieve More
+                <br />
+                Copyright © 2024 - All rights reserved
+              </p>
+            </div>
+            <div className="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pl-24 md:text-left">
+              <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+                <div className="footer-title text-base-content mb-3 text-sm font-semibold tracking-widest md:text-left">
+                  LINKS
+                </div>
+                <div className="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+                  <a className="link link-hover" href="/">
+                    Home
+                  </a>
+                  <a className="link link-hover" href="/pricing">
+                    Pricing
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pl-24 md:text-left">
+              <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+                <div className="footer-title text-base-content mb-3 text-sm font-semibold tracking-widest md:text-left">
+                  LEGAL
+                </div>
+                <div className="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+                  <a className="link link-hover whitespace-nowrap" href="/tos">
+                    Terms of services
+                  </a>
+                  <a className="link link-hover" href="/privacy-policy">
+                    Privacy Policy
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

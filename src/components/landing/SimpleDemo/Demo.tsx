@@ -22,6 +22,8 @@ import {
 import { Columns } from './Columns'
 import { trpc } from '@/app/_trpc/Client'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import DemoMobileCardContent from './mobile/MobileCardContent'
+import DemoMobileCardHeader from './mobile/MobileCardHeader'
 
 export type Task = {
   id: number
@@ -32,14 +34,27 @@ export type Task = {
 
 const InboxDemo = () => {
   const data = [
-    { id: 1, name: 'Do homework', status: 'NEXT_ACTION', projectId: 1 },
+    {
+      id: 1,
+      name: 'Do homework',
+      status: 'NEXT_ACTION',
+      projectId: 1,
+      priority: 'MEDIUM',
+    },
     {
       id: 2,
       name: 'Figure out $1,000,000,000 idea',
       status: 'INBOX',
       projectId: 2,
+      priority: 'MEDIUM',
     },
-    { id: 3, name: 'Push Day', status: 'DONE', projectId: 3 },
+    {
+      id: 3,
+      name: 'Push Day',
+      status: 'DONE',
+      projectId: 3,
+      priority: 'MEDIUM',
+    },
   ]
 
   const projects = [
@@ -127,20 +142,20 @@ const InboxDemo = () => {
             </Table>
           </div>
           {/* Mobile Table */}
-          {/* <div className="flex flex-col gap-3 md:hidden">
-        {data &&
-          data.length &&
-          data.map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <MobileCardHeader projects={projects} task={item} />
-              </CardHeader>
-              <CardContent>
-                <MobileCardContent task={item} />
-              </CardContent>
-            </Card>
-          ))}
-      </div> */}
+          <div className="flex flex-col gap-3 md:hidden">
+            {data &&
+              data.length &&
+              data.map((item, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <DemoMobileCardHeader projects={projects} task={item} />
+                  </CardHeader>
+                  <CardContent>
+                    <DemoMobileCardContent task={item} />
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
         </div>
       </div>
     </>
