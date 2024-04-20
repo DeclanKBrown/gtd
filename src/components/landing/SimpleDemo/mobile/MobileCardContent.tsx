@@ -15,7 +15,7 @@ const DemoMobileCardContent = ({ task }: MobileCardContentProps) => {
   const handleGoalCompletedChange = (newStatus: Date) => {}
 
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex flex-row items-center justify-between gap-2">
       {/* @ts-ignore */}
       <RowStatus status={status} onStatusChange={handleStatusChange} />
       <RowDate

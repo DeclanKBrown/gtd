@@ -43,16 +43,16 @@ const Pricing = () => {
 
   return (
     <>
-      <div className="mb-8 w-full pt-12 text-center">
+      <div className="mb-8 w-full px-3 pt-12 text-center">
         <div className="mx-auto mb-10 sm:max-w-lg">
           <h1 className="text-6xl font-bold sm:text-5xl">
-            Save your self the all nighters
+            Save yourself the all nighters
           </h1>
           <p className="mt-4 text-xl text-zinc-300">
             Break the procrastination cycle—organize your goals today and
             reclaim your nights!
           </p>
-          <p className="mt-5 whitespace-nowrap text-center italic text-zinc-700">
+          <p className="mt-5 text-center italic text-zinc-700">
             &apos;Your mind is for having ideas, not holding them&apos; - David
             Allen (Creator of GTD)
           </p>

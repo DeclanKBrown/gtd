@@ -63,6 +63,10 @@ const Features = () => {
         <TabsContent value="capture">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
+              <p className="mb-4 text-center text-lg text-zinc-300">
+                Capture All Tasks, Projects & References That have your
+                attention
+              </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
                   src="/capture.webp"
@@ -78,6 +82,10 @@ const Features = () => {
         <TabsContent value="process">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
+              <p className="mb-4 text-center text-lg text-zinc-300">
+                Determine the next action of your inbox & set statuses on your
+                to process your inbox to zero
+              </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
                   src="/process.webp"
@@ -93,6 +101,10 @@ const Features = () => {
         <TabsContent value="organize">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
+              <p className="mb-4 text-center text-lg text-zinc-300">
+                Organize your tasks, projects & references into days to complete
+                & priority&apos;s
+              </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
                   src="/organize.webp"
@@ -108,6 +120,9 @@ const Features = () => {
         <TabsContent value="engage">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
+              <p className="mb-4 text-center text-lg text-zinc-300">
+                Move the needle - Engage in your daily highest priority&apos;s
+              </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
                   src="/engage.webp"
@@ -123,6 +138,9 @@ const Features = () => {
         <TabsContent value="review">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
+              <p className="mb-4 text-center text-lg text-zinc-300">
+                Review your progress weekly to keep you focused on your goals
+              </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
                   src="/review.webp"

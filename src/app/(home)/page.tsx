@@ -20,7 +20,9 @@ const Home = () => {
           <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
             <span className="relative whitespace-nowrap">
               <span className="absolute -bottom-1 -left-2 -right-2 -top-1 -rotate-1 bg-primary md:-bottom-0 md:-left-3 md:-right-3 md:-top-0"></span>
-              <span className="relative text-secondary">Stress Less</span>
+              <span className="relative text-secondary">
+                Procrastinate Less
+              </span>
             </span>
           </h1>
           <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -183,7 +185,7 @@ const Home = () => {
                 </strong>
               </a>
               <p className="text-base-content/80 mt-3 text-sm leading-relaxed">
-                Stress Less, Achieve More
+                Procrastinate Less, Achieve More
                 <br />
                 Copyright © 2024 - All rights reserved
               </p>
