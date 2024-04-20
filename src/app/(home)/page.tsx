@@ -170,6 +170,29 @@ const Home = () => {
         <Pricing />
       </div>
 
+      <div className="mx-auto mb-12 mt-6 max-w-6xl sm:mt-20">
+        <div className="mb-12 px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mt-10 text-3xl font-bold text-zinc-200 sm:text-5xl">
+              What price would you pay to acheive your goals?
+            </h2>
+            <Link
+              className={cn(
+                buttonVariants({
+                  variant: 'secondary',
+                  size: 'lg',
+                  className: 'my-8 text-white',
+                }),
+                'bg-blue-500 hover:bg-blue-600',
+              )}
+              href={'/dashboard'}
+            >
+              Beat Procrastination Today <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
       <div className="w-full border-t border-secondary">
         <div className="mx-auto max-w-7xl px-8 py-24">
