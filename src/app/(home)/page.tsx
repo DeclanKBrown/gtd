@@ -1,7 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { buttonVariants } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import Pricing from '@/components/pricing/Pricing'
 import InboxDemo from '@/components/landing/SimpleDemo/Demo'
@@ -163,12 +162,12 @@ const Home = () => {
       </section>
 
       {/* Features section */}
-      <div className="mx-auto mb-32 mt-16 max-w-6xl sm:mt-20">
+      <div className="mx-auto mb-8 mt-16 max-w-6xl sm:mt-20">
         <Features />
       </div>
 
       {/* Pricing */}
-      <div className="mx-auto mb-32 mt-16 max-w-6xl sm:mt-20">
+      <div className="mx-auto mb-12 mt-6 max-w-6xl sm:mt-20">
         <Pricing />
       </div>
 
