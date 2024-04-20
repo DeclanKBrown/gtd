@@ -14,7 +14,8 @@ const Features = () => {
             Start making progress toward your goals
           </h2>
           <p className="mt-4 text-xl text-zinc-300">
-            A tried and tested method to turn you into a productivity machine
+            A tried and tested method to turn a procrastinator into a
+            productivity machine
           </p>
         </div>
       </div>

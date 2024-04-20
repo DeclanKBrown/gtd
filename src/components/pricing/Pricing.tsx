@@ -15,6 +15,7 @@ import { Button, buttonVariants } from '../ui/button'
 import { ArrowRight, Check } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { trpc } from '@/app/_trpc/Client'
+import { cn } from '@/lib/utils'
 
 const Pricing = () => {
   const session = useSession()
@@ -47,9 +48,13 @@ const Pricing = () => {
           <h1 className="text-6xl font-bold sm:text-5xl">
             Save your self the all nighters
           </h1>
-          <p className="mt-5 text-gray-600 sm:text-lg">
-            Get your self out of the vicious cycle of procrastination then all
-            nighter by getting your goals organized today!
+          <p className="mt-4 text-xl text-zinc-300">
+            Break the procrastination cycle—organize your goals today and
+            reclaim your nights!
+          </p>
+          <p className="mt-5 whitespace-nowrap text-center italic text-zinc-700">
+            &apos;Your mind is for having ideas, not holding them&apos; - David
+            Allen (Creator of GTD)
           </p>
         </div>
       </div>
@@ -117,7 +122,7 @@ const Pricing = () => {
           <CardHeader>
             <CardTitle className="mb-2 flex  items-center justify-center text-2xl">
               <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-blue-500 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
-                <p className="text-sm font-semibold text-gray-700">Yearly</p>
+                <p className="text-sm font-semibold text-gray-700">Annually</p>
               </div>
             </CardTitle>
             <CardTitle className="flex items-center justify-center gap-6 text-4xl">
@@ -125,7 +130,7 @@ const Pricing = () => {
                 <span className="absolute -left-2 -right-2 -top-1 bottom-3 -rotate-3 border-b-4 border-b-primary md:-left-3 md:-right-3 md:-top-0 md:bottom-3"></span>
                 <span className="relative">$120</span>
               </span>
-              <span>$99</span>
+              <span>$100</span>
             </CardTitle>
             <CardDescription className="flex items-center justify-center text-lg">
               annually
@@ -151,11 +156,14 @@ const Pricing = () => {
           <CardFooter className="w-full">
             {session?.data?.user ? (
               <Button
-                className={buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 w-full bg-[#3b82f6] dark:text-white',
-                })}
+                className={cn(
+                  buttonVariants({
+                    variant: 'secondary',
+                    size: 'lg',
+                    className: 'my-8 w-full bg-[#3b82f6] dark:text-white',
+                  }),
+                  'bg-blue-500 hover:bg-blue-600',
+                )}
                 onClick={() => createStripeSession()}
               >
                 Get Organized
@@ -163,11 +171,14 @@ const Pricing = () => {
               </Button>
             ) : (
               <Link
-                className={buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 w-full bg-[#3b82f6] text-white',
-                })}
+                className={cn(
+                  buttonVariants({
+                    variant: 'secondary',
+                    size: 'lg',
+                    className: 'my-8 w-full bg-[#3b82f6] text-white',
+                  }),
+                  'bg-blue-500 hover:bg-blue-600',
+                )}
                 href={'/register'}
               >
                 Get Organized

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Pricing from '@/components/pricing/Pricing'
 import InboxDemo from '@/components/landing/SimpleDemo/Demo'
 import Features from '@/components/landing/Features/Features'
+import { cn } from '@/lib/utils'
 
 const Home = () => {
   return (
@@ -32,13 +33,15 @@ const Home = () => {
         </span>
 
         <Link
-          className={buttonVariants({
-            variant: 'secondary',
-            size: 'lg',
-            className: 'my-8 bg-[#3b82f6] text-white',
-          })}
+          className={cn(
+            buttonVariants({
+              variant: 'secondary',
+              size: 'lg',
+              className: 'my-8 text-white',
+            }),
+            'bg-blue-500 hover:bg-blue-600',
+          )}
           href={'/dashboard'}
-          target="_blank"
         >
           Get Organized <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
@@ -92,36 +95,30 @@ const Home = () => {
           <div className="space-y-4 leading-relaxed md:space-y-6">
             <div className="text-neutral-content/80 space-y-2">
               <p>
-                <span className="font-medium text-red-400">Stress </span>
-                constant worry about missed tasks
+                <span className="font-medium text-red-400">Stressed - </span>
+                Task Overload Anxiety
+              </p>
+              <p>
+                <span className="font-medium text-red-400">Overwhelmed - </span>
+                Endless amount of things to do
+              </p>
+              <p>
+                <span className="font-medium text-red-400">Sleepless - </span>
+                Nighttime Task Worry
+              </p>
+              <p>
+                <span className="font-medium text-red-400">Scattered - </span>
+                Chaotic use of lists and tools
               </p>
               <p>
                 <span className="font-medium text-red-400">
-                  Overwhelming To-Do Lists{' '}
+                  Fuzzy Progress -{' '}
                 </span>
-                endless Tasks
-              </p>
-              <p>
-                <span className="font-medium text-red-400">
-                  Sleepless Nights{' '}
-                </span>
-                thinking about to-dos
-              </p>
-              <p>
-                <span className="font-medium text-red-400">
-                  Scattered Tasks{' '}
-                </span>
-                no organisation
-              </p>
-              <p>
-                <span className="font-medium text-red-400">
-                  Fuzzy Progress{' '}
-                </span>
-                unsure if making progress
+                Unsure if moving the needle
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3 text-xl font-semibold md:flex-row">
-              <p>= </p>Constant Cycle of
+              <p>= Constant Cycle of</p>
               <span className="font-medium text-red-400">Procrastination</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

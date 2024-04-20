@@ -2,6 +2,7 @@ import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import { buttonVariants } from './ui/button'
 import { ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const Navbar = () => {
   return (
@@ -31,11 +32,14 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/register"
-                className={buttonVariants({
-                  size: 'sm',
-                  variant: 'default',
-                  className: 'my-8 bg-[#3b82f6] text-white',
-                })}
+                className={cn(
+                  buttonVariants({
+                    size: 'sm',
+                    variant: 'default',
+                    className: 'my-8 bg-[#3b82f6] text-white',
+                  }),
+                  'bg-blue-500 hover:bg-blue-600',
+                )}
               >
                 Get Organized <ArrowRight className="ml-1.5 h-5 w-5" />
               </Link>
