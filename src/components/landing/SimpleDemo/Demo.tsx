@@ -89,7 +89,7 @@ const InboxDemo = () => {
           </p>
         </div>
       </div>
-      <div className="flex-1 flex-col space-y-8 px-3 pb-8 md:flex md:px-8">
+      <div className="flex-1 flex-col space-y-8 px-2 pb-8 md:flex md:px-8">
         <div className="space-y-4">
           <div className="hidden rounded-md border md:flex">
             <Table>
