@@ -6,6 +6,7 @@ import Pricing from '@/components/pricing/Pricing'
 import InboxDemo from '@/components/landing/SimpleDemo/Demo'
 import Features from '@/components/landing/Features/Features'
 import { cn } from '@/lib/utils'
+import FAQs from '@/components/landing/FAQs/FAQs'
 
 const Home = () => {
   return (
@@ -166,6 +167,10 @@ const Home = () => {
       {/* Pricing */}
       <div className="mx-auto mb-12 mt-6 max-w-6xl sm:mt-20">
         <Pricing />
+      </div>
+
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-8 py-24 md:grid-cols-2">
+        <FAQs />
       </div>
 
       <div className="mx-auto mb-12 mt-6 max-w-6xl sm:mt-20">
