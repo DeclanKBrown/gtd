@@ -20,9 +20,7 @@ const Home = () => {
           <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
             <span className="relative whitespace-nowrap">
               <span className="absolute -bottom-1 -left-2 -right-2 -top-1 -rotate-1 bg-primary md:-bottom-0 md:-left-3 md:-right-3 md:-top-0"></span>
-              <span className="relative text-secondary">
-                Procrastinate Less
-              </span>
+              <span className="relative text-secondary">Stress Less</span>
             </span>
           </h1>
           <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -124,8 +122,8 @@ const Home = () => {
               <span className="font-medium text-red-400">Procrastination</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="2rem"
-                height="2rem"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
               >
                 <g
@@ -208,7 +206,7 @@ const Home = () => {
                 </strong>
               </a>
               <p className="text-base-content/80 mt-3 text-sm leading-relaxed">
-                Procrastinate Less, Achieve More
+                Stress Less, Achieve More
                 <br />
                 Copyright © 2024 - All rights reserved
               </p>
