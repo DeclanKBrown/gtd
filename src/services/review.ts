@@ -99,7 +99,7 @@ export const updateReview = async ({
       userId,
     },
     orderBy: {
-      createdAt: 'asc',
+      createdAt: 'desc',
     },
     select: {
       id: true,

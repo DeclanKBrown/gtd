@@ -83,8 +83,8 @@ const Features = () => {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
               <p className="mb-4 text-center text-lg text-zinc-400">
-                Determine the next action of your inbox & set statuses on your
-                to process your inbox to zero
+                Determine the next action of your inbox & set statuses to
+                process your inbox to zero
               </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image
@@ -102,8 +102,8 @@ const Features = () => {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mt-16 flow-root sm:mt-24">
               <p className="mb-4 text-center text-lg text-zinc-400">
-                Organize your tasks, projects & references into days to complete
-                & priority&apos;s
+                Organize your tasks, projects & references into goal completed
+                dates & priority&apos;s
               </p>
               <div className="lg:rounded-2-xl -mt-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:p-4">
                 <Image

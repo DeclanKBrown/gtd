@@ -39,8 +39,6 @@ const TableNonConfig = <TData, TValue>({ data }: InboxProps<TData, TValue>) => {
     },
   })
 
-  console.log(data)
-
   return (
     <div className="space-y-4">
       {/* Desktop Table */}
