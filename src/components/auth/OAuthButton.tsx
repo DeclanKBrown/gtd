@@ -15,7 +15,8 @@ export const OAuthButton = ({ className, ...props }: OAuthButtonProps) => {
   const [isOAuthLoading, setIsOAuthLoading] = React.useState<boolean>(false)
   const router = useRouter()
 
-  const handleOAuth = async () => {
+  const handleOAuth = async (event: any) => {
+    event?.preventDefault()
     setIsOAuthLoading(true)
     try {
       await signIn('google')
