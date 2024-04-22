@@ -111,6 +111,7 @@ const Pricing = () => {
                   className: 'my-8 w-full dark:bg-white dark:text-gray-700',
                 })}
                 href={'/register'}
+                prefetch={false}
               >
                 Get Organized
                 <ArrowRight className="ml-1.5 h-5 w-5" />
@@ -180,6 +181,7 @@ const Pricing = () => {
                   'bg-blue-500 hover:bg-blue-600',
                 )}
                 href={'/register'}
+                prefetch={false}
               >
                 Get Organized
                 <ArrowRight className="ml-1.5 h-5 w-5" />

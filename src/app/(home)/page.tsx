@@ -42,7 +42,8 @@ const Home = () => {
             }),
             'bg-blue-500 hover:bg-blue-600',
           )}
-          href={'/dashboard'}
+          href={'/register'}
+          prefetch={false}
         >
           Get Organized <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
@@ -188,7 +189,8 @@ const Home = () => {
                 }),
                 'bg-blue-500 hover:bg-blue-600',
               )}
-              href={'/dashboard'}
+              href={'/register'}
+              prefetch={false}
             >
               Beat Procrastination Today <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
