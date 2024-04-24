@@ -8,9 +8,6 @@ import { useEffect } from 'react'
 const Page = () => {
   const router = useRouter()
 
-  const searchParams = useSearchParams()
-  const origin = searchParams.get('origin')
-
   const { data, isLoading, isError, error } = trpc.authCallback.useQuery(
     undefined,
     {
@@ -23,7 +20,7 @@ const Page = () => {
     if (!isLoading && data) {
       if (data.success) {
         // User is synced to db
-        router.push(origin ? `/${origin}` : '/dashboard')
+        router.push('/dashboard')
       }
     }
 
@@ -33,7 +30,7 @@ const Page = () => {
         router.push('/sign-in')
       }
     }
-  }, [data, isLoading, isError, error, router, origin])
+  }, [data, isLoading, isError, error, router])
 
   return (
     <div className="mt-24 flex w-full justify-center">
