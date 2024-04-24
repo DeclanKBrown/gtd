@@ -2,6 +2,7 @@ import { Sidebar } from '@/components/dashboard/SideBar'
 import { redirect } from 'next/navigation'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { db } from '@/lib/db'
+import { getUserSubscriptionPlan } from '@/lib/stripe'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -24,6 +25,12 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
   })
 
   if (!dbUser) redirect('/auth-callback?origin=dashboard')
+
+  const subscriptionPlan = await getUserSubscriptionPlan()
+
+  if (!subscriptionPlan.isSubscribed) {
+    redirect('/pricing')
+  }
 
   return (
     <div className="flex min-h-screen">

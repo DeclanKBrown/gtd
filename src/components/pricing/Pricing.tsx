@@ -12,8 +12,13 @@ import Link from 'next/link'
 import { buttonVariants } from '../ui/button'
 import { ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import SubscribeButton from './SubscribeButton'
 
-const Pricing = () => {
+const Pricing = async () => {
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
+
   const features = [
     {
       title: 'Engage your highest priorities',
@@ -79,17 +84,21 @@ const Pricing = () => {
           </CardContent>
           <Separator />
           <CardFooter className="w-full">
-            <Link
-              className={buttonVariants({
-                variant: 'secondary',
-                size: 'lg',
-                className: 'my-8 w-full dark:bg-white dark:text-gray-700',
-              })}
-              href="/sign-in"
-            >
-              Get Organized
-              <ArrowRight className="ml-1.5 h-5 w-5" />
-            </Link>
+            {user ? (
+              <SubscribeButton annually={false} />
+            ) : (
+              <Link
+                className={buttonVariants({
+                  variant: 'secondary',
+                  size: 'lg',
+                  className: 'my-8 w-full dark:bg-white dark:text-gray-700',
+                })}
+                href="/sign-in"
+              >
+                Get Organized
+                <ArrowRight className="ml-1.5 h-5 w-5" />
+              </Link>
+            )}
           </CardFooter>
         </Card>
         <Card className="mx-auto max-w-md border-blue-500">
@@ -128,20 +137,24 @@ const Pricing = () => {
           </CardContent>
           <Separator />
           <CardFooter className="w-full">
-            <Link
-              className={cn(
-                buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 w-full bg-[#3b82f6] text-white',
-                }),
-                'bg-blue-500 hover:bg-blue-600',
-              )}
-              href="/sign-in"
-            >
-              Get Organized
-              <ArrowRight className="ml-1.5 h-5 w-5" />
-            </Link>
+            {user ? (
+              <SubscribeButton annually />
+            ) : (
+              <Link
+                className={cn(
+                  buttonVariants({
+                    variant: 'secondary',
+                    size: 'lg',
+                    className: 'my-8 w-full bg-[#3b82f6] text-white',
+                  }),
+                  'bg-blue-500 hover:bg-blue-600',
+                )}
+                href="/sign-in"
+              >
+                Get Organized
+                <ArrowRight className="ml-1.5 h-5 w-5" />
+              </Link>
+            )}
           </CardFooter>
         </Card>
       </div>

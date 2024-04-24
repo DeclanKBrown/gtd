@@ -343,54 +343,56 @@ export const appRouter = router({
       return await deleteReview({ reviewId: input.id, userId: ctx.userId })
     }),
 
-  createStripeSession: privateProcedure.mutation(async ({ ctx }) => {
-    try {
-      const dashboardUrl = absoluteUrl('/dashboard')
+  createStripeSession: privateProcedure
+    .input(z.object({ plan: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const dashboardUrl = absoluteUrl('/dashboard')
 
-      if (!ctx.userId) throw new TRPCError({ code: 'UNAUTHORIZED' })
+        if (!ctx.userId) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
-      const dbUser = await db.user.findFirst({
-        where: {
-          id: ctx.userId,
-        },
-      })
+        const dbUser = await db.user.findFirst({
+          where: {
+            id: ctx.userId,
+          },
+        })
 
-      if (!dbUser) throw new TRPCError({ code: 'UNAUTHORIZED' })
+        if (!dbUser) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
-      const subscriptionPlan = await getUserSubscriptionPlan()
+        const subscriptionPlan = await getUserSubscriptionPlan()
 
-      if (subscriptionPlan.isSubscribed && dbUser.stripeCustomerId) {
-        const stripeSession = await stripe.billingPortal.sessions.create({
-          customer: dbUser.stripeCustomerId,
-          return_url: dashboardUrl,
+        if (subscriptionPlan.isSubscribed && dbUser.stripeCustomerId) {
+          const stripeSession = await stripe.billingPortal.sessions.create({
+            customer: dbUser.stripeCustomerId,
+            return_url: dashboardUrl,
+          })
+
+          return { url: stripeSession.url }
+        }
+
+        const stripeSession = await stripe.checkout.sessions.create({
+          success_url: dashboardUrl,
+          cancel_url: dashboardUrl,
+          payment_method_types: ['card'],
+          mode: 'subscription',
+          billing_address_collection: 'auto',
+          line_items: [
+            {
+              price: PLANS.find((plan) => plan.slug === input.plan)?.price
+                .priceIds.test,
+              quantity: 1,
+            },
+          ],
+          metadata: {
+            userId: ctx.userId,
+          },
         })
 
         return { url: stripeSession.url }
+      } catch (error) {
+        console.error(error)
       }
-
-      const stripeSession = await stripe.checkout.sessions.create({
-        success_url: dashboardUrl,
-        cancel_url: dashboardUrl,
-        payment_method_types: ['card'],
-        mode: 'subscription',
-        billing_address_collection: 'auto',
-        line_items: [
-          {
-            price: PLANS.find((plan) => plan.name === 'Pro')?.price.priceIds
-              .test,
-            quantity: 1,
-          },
-        ],
-        metadata: {
-          userId: ctx.userId,
-        },
-      })
-
-      return { url: stripeSession.url }
-    } catch (error) {
-      console.error(error)
-    }
-  }),
+    }),
 })
 
 export type AppRouter = typeof appRouter
