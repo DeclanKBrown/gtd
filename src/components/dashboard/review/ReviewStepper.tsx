@@ -6,7 +6,7 @@ import { Step, StepItem, Stepper, useStepper } from '@/components/ui/stepper'
 import ReviewStepOne from './StepOne/ReviewStepOne'
 import ReviewStepTwo from './StepTwo/ReviewStepTwo'
 import ReviewStepThree from './StepThree/ReviewStepThree'
-import { trpc } from '@/app/_trpc/temp'
+import { trpc } from '@/app/_trpc/client'
 import { toast } from '@/components/ui/use-toast'
 import { useEffect } from 'react'
 

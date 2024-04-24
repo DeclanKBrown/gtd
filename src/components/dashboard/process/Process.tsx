@@ -2,7 +2,7 @@
 
 import { Loader } from '@/components/Loader'
 import TableSimple from '../table/TableSimple'
-import { trpc } from '@/app/_trpc/temp'
+import { trpc } from '@/app/_trpc/client'
 
 const Process = () => {
   const { data: tasks, isLoading } = trpc.getInboxTasks.useQuery()

@@ -25,7 +25,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { captureSchema } from '@/lib/validations/captureSchema'
-import { trpc } from '@/app/_trpc/temp'
+import { trpc } from '@/app/_trpc/client'
 import { toast } from '@/components/ui/use-toast'
 import { isURL } from '@/lib/utils'
 

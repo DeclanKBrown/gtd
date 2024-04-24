@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import TableSimple from '../../table/TableSimple'
-import { trpc } from '@/app/_trpc/temp'
+import { trpc } from '@/app/_trpc/client'
 import { toast } from '@/components/ui/use-toast'
 import { Task } from '@prisma/client'
 

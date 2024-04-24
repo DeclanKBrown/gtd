@@ -1,4 +1,4 @@
-import { trpc } from '@/app/_trpc/temp'
+import { trpc } from '@/app/_trpc/client'
 import { toast } from '@/components/ui/use-toast'
 import { RowStatus } from '../data-table-row-status'
 import RowDate from '../data-table-row-date'
