@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/table'
 
 import { Task } from '@prisma/client'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import MobileCardHeader from './mobile/MobileCardHeader'
 import MobileCardContent from './mobile/MobileCardContent'

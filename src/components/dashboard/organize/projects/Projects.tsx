@@ -1,6 +1,6 @@
 'use client'
 
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import Project from './Project'
 import { Loader } from '@/components/Loader'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import TableNonConfig from '../table/TableNonConfig'
 import { endOfDay } from 'date-fns'
 import { Loader } from '@/components/Loader'

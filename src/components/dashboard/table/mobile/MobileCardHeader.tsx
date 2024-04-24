@@ -1,4 +1,4 @@
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { toast } from '@/components/ui/use-toast'
 import { RowProject } from '../data-table-row-project'
 import RowName from '../data-table-row-name'

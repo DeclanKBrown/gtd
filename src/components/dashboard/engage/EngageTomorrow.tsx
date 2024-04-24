@@ -2,7 +2,7 @@
 
 import { endOfTomorrow, startOfTomorrow } from 'date-fns'
 import TableNonConfig from '../table/TableNonConfig'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { Loader } from '@/components/Loader'
 
 const EngageTomorrow = () => {

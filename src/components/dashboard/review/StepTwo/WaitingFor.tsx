@@ -1,6 +1,6 @@
 import TableSimple from '../../table/TableSimple'
 import { Loader } from '@/components/Loader'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 
 const ReviewWaitingFor = () => {
   const { data: tasks, isLoading } = trpc.getWaitingForTasks.useQuery()

@@ -1,7 +1,7 @@
 'use client'
 
 import { getUserSubscriptionPlan } from '@/lib/stripe'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import {
   Card,

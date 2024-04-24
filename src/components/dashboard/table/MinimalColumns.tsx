@@ -7,7 +7,7 @@ import { DataTableColumnHeader } from './data-table-column-header'
 import { RowStatus } from './data-table-row-status'
 import { RowProject } from './data-table-row-project'
 import InboxRowName from './data-table-row-name'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { toast } from '@/components/ui/use-toast'
 import { Task } from '@prisma/client'
 

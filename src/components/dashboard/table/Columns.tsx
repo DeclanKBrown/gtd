@@ -9,7 +9,7 @@ import RowName from './data-table-row-name'
 import { DataTableColumnHeader } from './data-table-column-header'
 import RowDate from './data-table-row-date'
 import { Task } from '@prisma/client'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { toast } from '@/components/ui/use-toast'
 import { priorityOptions, statusOptions } from '@/lib/constants'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { Button, buttonVariants } from '@/components/ui/button'
 
 interface SubscribeButtonProps {

@@ -1,7 +1,7 @@
 import { addWeeks, endOfWeek, startOfWeek } from 'date-fns'
 import TableSimple from '../../table/TableSimple'
 import { Loader } from '@/components/Loader'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 
 const ReviewUpcomingCalender = () => {
   const startOfNextWeek = startOfWeek(addWeeks(new Date(), 1)).toISOString()

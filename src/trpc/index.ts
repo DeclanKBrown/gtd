@@ -344,7 +344,7 @@ export const appRouter = router({
     }),
 
   createStripeSession: privateProcedure
-    .input(z.object({ plan: z.string() }))
+    .input(z.object({ plan: z.string() }).optional())
     .mutation(async ({ input, ctx }) => {
       try {
         const dashboardUrl = absoluteUrl('/dashboard')

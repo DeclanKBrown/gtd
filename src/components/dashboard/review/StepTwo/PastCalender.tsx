@@ -1,7 +1,7 @@
 import { endOfWeek, startOfWeek } from 'date-fns'
 import TableSimple from '../../table/TableSimple'
 import { Loader } from '@/components/Loader'
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 
 const ReviewPastCalendar = () => {
   const startOfCurrentWeek = startOfWeek(new Date()).toISOString()

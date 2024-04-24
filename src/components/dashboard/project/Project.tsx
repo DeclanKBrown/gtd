@@ -1,6 +1,6 @@
 'use client'
 
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { Loader } from '@/components/Loader'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'

@@ -1,4 +1,4 @@
-import { trpc } from '@/app/_trpc/client'
+import { trpc } from '@/app/_trpc/temp'
 import { startOfDay, endOfDay } from 'date-fns'
 
 export const useReviewComplete = () => {
