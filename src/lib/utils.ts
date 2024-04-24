@@ -8,7 +8,7 @@ export const cn = (...inputs: ClassValue[]) => {
 export const absoluteUrl = (path: string) => {
   if (typeof window !== 'undefined') return path
 
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}${path}`
+  if (process.env.DOMAIN) return `https://${process.env.DOMAIN}${path}`
 
   return `http://localhost:3000${path}`
 }
