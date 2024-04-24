@@ -1,6 +1,6 @@
 'use client'
 
-import { trpc } from '@/app/_trpc/Client'
+import { trpc } from '@/app/_trpc/client'
 import { TableConfigurable } from '../../table/TableConfigurable'
 import { Loader } from '@/components/Loader'
 

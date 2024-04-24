@@ -3,9 +3,19 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/sign-in',
+        destination: '/api/auth/login',
+        permanent: true,
+      },
+      {
+        source: '/sign-up',
+        destination: '/api/auth/register',
+        permanent: true,
+      },
+      {
         source: '/dashboard',
         destination: '/dashboard/engage',
-        permanent: true, // Set to false if this redirect is temporary
+        permanent: true,
       },
     ]
   },

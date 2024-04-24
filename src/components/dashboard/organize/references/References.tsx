@@ -1,7 +1,7 @@
 'use client'
 
 import { Badge } from '@/components/ui/badge'
-import { trpc } from '@/app/_trpc/Client'
+import { trpc } from '@/app/_trpc/client'
 import { Loader } from '@/components/Loader'
 import Reference from './Reference'
 

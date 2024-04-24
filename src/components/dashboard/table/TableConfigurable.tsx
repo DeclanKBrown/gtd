@@ -28,7 +28,7 @@ import { DataTableToolbar } from './data-table-toolbar'
 
 import { Columns } from './Columns'
 import { Task } from '@prisma/client'
-import { trpc } from '@/app/_trpc/Client'
+import { trpc } from '@/app/_trpc/client'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import MobileCardHeader from './mobile/MobileCardHeader'
 import MobileCardContent from './mobile/MobileCardContent'

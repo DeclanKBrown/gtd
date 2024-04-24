@@ -20,7 +20,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Columns } from './Columns'
-import { trpc } from '@/app/_trpc/Client'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import DemoMobileCardContent from './mobile/MobileCardContent'
 import DemoMobileCardHeader from './mobile/MobileCardHeader'

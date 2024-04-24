@@ -1,4 +1,4 @@
-import { trpc } from '@/app/_trpc/Client'
+import { trpc } from '@/app/_trpc/client'
 import TableSimple from '../../table/TableSimple'
 import { Loader } from '@/components/Loader'
 

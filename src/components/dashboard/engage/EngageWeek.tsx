@@ -1,5 +1,5 @@
 'use client'
-import { trpc } from '@/app/_trpc/Client'
+import { trpc } from '@/app/_trpc/client'
 import TableNonConfig from '../table/TableNonConfig'
 import { endOfWeek, startOfWeek } from 'date-fns'
 import { Loader } from '@/components/Loader'

@@ -1,8 +1,7 @@
 import { PLANS } from '@/config/stripe'
 import { db } from './db'
 import Stripe from 'stripe'
-import { getServerSession } from 'next-auth'
-import { authOptions } from './auth'
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2024-04-10',
@@ -10,9 +9,10 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
 })
 
 export async function getUserSubscriptionPlan() {
-  const session = await getServerSession(authOptions)
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
 
-  if (!session || !session.user || !session.user.id) {
+  if (!user || !user.id) {
     return {
       ...PLANS[0],
       isSubscribed: false,
@@ -20,8 +20,6 @@ export async function getUserSubscriptionPlan() {
       stripeCurrentPeriodEnd: null,
     }
   }
-
-  const user = session.user
 
   const dbUser = await db.user.findFirst({
     where: {

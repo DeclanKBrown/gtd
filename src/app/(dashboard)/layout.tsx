@@ -1,23 +1,29 @@
-import { getServerSession } from 'next-auth'
 import { Sidebar } from '@/components/dashboard/SideBar'
 import { redirect } from 'next/navigation'
-import { getUserSubscriptionPlan } from '@/lib/stripe'
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { db } from '@/lib/db'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
 const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
-  const session = await getServerSession()
-  if (!session || !session.user) {
-    redirect('/login')
+  const { getUser, isAuthenticated } = getKindeServerSession()
+  const user = await getUser()
+
+  if (!(await isAuthenticated())) {
+    redirect('/')
   }
 
-  const subscriptionPlan = await getUserSubscriptionPlan()
+  if (!user || !user.id) redirect('/auth-callback?origin=dashboard')
 
-  if (!subscriptionPlan.isSubscribed) {
-    redirect('/pricing')
-  }
+  const dbUser = await db.user.findFirst({
+    where: {
+      id: user.id,
+    },
+  })
+
+  if (!dbUser) redirect('/auth-callback?origin=dashboard')
 
   return (
     <div className="flex min-h-screen">

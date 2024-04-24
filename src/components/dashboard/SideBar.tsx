@@ -4,12 +4,11 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import Link from 'next/link'
 import { Icons } from '../icons'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { useState } from 'react'
 
 import CaptureModal from './capture/CaptureModal'
 import { isSunday } from 'date-fns'
-import { signOut, useSession } from 'next-auth/react'
 import { Skeleton } from '../ui/skeleton'
 import {
   Popover,
@@ -18,6 +17,8 @@ import {
 } from '@/components/ui/popover'
 import { toast } from '../ui/use-toast'
 import { useReviewComplete } from '@/hooks/useReviewComplete'
+import { useKindeBrowserClient, LogoutLink } from '@kinde-oss/kinde-auth-nextjs'
+import { cn } from '@/lib/utils'
 
 export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -28,6 +29,8 @@ export const Sidebar = () => {
   const pathname = usePathname()
 
   const isActive = (href: string) => pathname === href
+
+  const { user } = useKindeBrowserClient()
 
   const links = [
     {
@@ -54,21 +57,6 @@ export const Sidebar = () => {
   ]
 
   const isNowSunday = isSunday(new Date())
-
-  const user = useSession()?.data?.user
-
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-    } catch (error) {
-      console.error('Sign out error:', error)
-      return toast({
-        title: 'Error',
-        description: 'Error signing out',
-        variant: 'destructive',
-      })
-    }
-  }
 
   const router = useRouter()
 
@@ -135,12 +123,12 @@ export const Sidebar = () => {
                   >
                     <div className="flex items-center space-x-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary font-semibold">
-                        {user?.name
-                          ?.split(' ')
-                          ?.map((name) => name[0])
-                          ?.join('')}
+                        {user?.given_name &&
+                          user?.family_name &&
+                          user.given_name[0].toUpperCase() +
+                            user.family_name[0].toUpperCase()}
                       </div>
-                      <span className="hidden lg:block">{user.name}</span>
+                      <span className="hidden lg:block">{`${user.given_name} ${user.family_name}`}</span>
                     </div>
                   </Button>
                 </PopoverTrigger>
@@ -152,13 +140,14 @@ export const Sidebar = () => {
                   >
                     Subscription
                   </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
-                    onClick={() => handleSignOut()}
+                  <LogoutLink
+                    className={cn(
+                      buttonVariants({ variant: 'ghost' }),
+                      'w-full justify-start',
+                    )}
                   >
                     Sign Out
-                  </Button>
+                  </LogoutLink>
                 </PopoverContent>
               </Popover>
             )}

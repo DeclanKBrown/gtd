@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Card,
   CardContent,
@@ -11,21 +9,11 @@ import {
 import { Separator } from '@/components/ui/separator'
 
 import Link from 'next/link'
-import { Button, buttonVariants } from '../ui/button'
+import { buttonVariants } from '../ui/button'
 import { ArrowRight, Check } from 'lucide-react'
-import { useSession } from 'next-auth/react'
-import { trpc } from '@/app/_trpc/Client'
 import { cn } from '@/lib/utils'
 
 const Pricing = () => {
-  const session = useSession()
-
-  const { mutate: createStripeSession } = trpc.createStripeSession.useMutation({
-    onSuccess: ({ url }) => {
-      window.location.href = url ?? '/dashboard'
-    },
-  })
-
   const features = [
     {
       title: 'Engage your highest priorities',
@@ -91,32 +79,17 @@ const Pricing = () => {
           </CardContent>
           <Separator />
           <CardFooter className="w-full">
-            {session?.data?.user ? (
-              <Button
-                className={buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 w-full dark:bg-white dark:text-gray-700',
-                })}
-                onClick={() => createStripeSession()}
-              >
-                Get Organized
-                <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Button>
-            ) : (
-              <Link
-                className={buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 w-full dark:bg-white dark:text-gray-700',
-                })}
-                href={'/register'}
-                prefetch={false}
-              >
-                Get Organized
-                <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Link>
-            )}
+            <Link
+              className={buttonVariants({
+                variant: 'secondary',
+                size: 'lg',
+                className: 'my-8 w-full dark:bg-white dark:text-gray-700',
+              })}
+              href="/sign-in"
+            >
+              Get Organized
+              <ArrowRight className="ml-1.5 h-5 w-5" />
+            </Link>
           </CardFooter>
         </Card>
         <Card className="mx-auto max-w-md border-blue-500">
@@ -155,38 +128,20 @@ const Pricing = () => {
           </CardContent>
           <Separator />
           <CardFooter className="w-full">
-            {session?.data?.user ? (
-              <Button
-                className={cn(
-                  buttonVariants({
-                    variant: 'secondary',
-                    size: 'lg',
-                    className: 'my-8 w-full bg-[#3b82f6] dark:text-white',
-                  }),
-                  'bg-blue-500 hover:bg-blue-600',
-                )}
-                onClick={() => createStripeSession()}
-              >
-                Get Organized
-                <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Button>
-            ) : (
-              <Link
-                className={cn(
-                  buttonVariants({
-                    variant: 'secondary',
-                    size: 'lg',
-                    className: 'my-8 w-full bg-[#3b82f6] text-white',
-                  }),
-                  'bg-blue-500 hover:bg-blue-600',
-                )}
-                href={'/register'}
-                prefetch={false}
-              >
-                Get Organized
-                <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Link>
-            )}
+            <Link
+              className={cn(
+                buttonVariants({
+                  variant: 'secondary',
+                  size: 'lg',
+                  className: 'my-8 w-full bg-[#3b82f6] text-white',
+                }),
+                'bg-blue-500 hover:bg-blue-600',
+              )}
+              href="/sign-in"
+            >
+              Get Organized
+              <ArrowRight className="ml-1.5 h-5 w-5" />
+            </Link>
           </CardFooter>
         </Card>
       </div>
