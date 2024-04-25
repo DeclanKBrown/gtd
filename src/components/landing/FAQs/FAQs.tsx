@@ -16,14 +16,6 @@ const FAQs = () => {
         </p>
         <div className="text-base-content/80">
           Have another question? Contact me on{' '}
-          {/* <a
-        className="link text-base-content"
-        target="_blank"
-        href="https://twitter.com/marc_louvion"
-      >
-        Twitter
-      </a>
-      or by */}
           <a
             href="mailto:declan+simplegtd@distinctict.com.au"
             target="_blank"

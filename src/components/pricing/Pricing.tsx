@@ -8,11 +8,13 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-import Link from 'next/link'
 import { buttonVariants } from '../ui/button'
 import { ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import {
+  RegisterLink,
+  getKindeServerSession,
+} from '@kinde-oss/kinde-auth-nextjs/server'
 import SubscribeButton from './SubscribeButton'
 
 const Pricing = async () => {
@@ -87,7 +89,7 @@ const Pricing = async () => {
             {user ? (
               <SubscribeButton annually={false} />
             ) : (
-              <Link
+              <RegisterLink
                 className={buttonVariants({
                   variant: 'secondary',
                   size: 'lg',
@@ -97,7 +99,7 @@ const Pricing = async () => {
               >
                 Get Organized
                 <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Link>
+              </RegisterLink>
             )}
           </CardFooter>
         </Card>
@@ -140,7 +142,7 @@ const Pricing = async () => {
             {user ? (
               <SubscribeButton annually />
             ) : (
-              <Link
+              <RegisterLink
                 className={cn(
                   buttonVariants({
                     variant: 'secondary',
@@ -149,11 +151,10 @@ const Pricing = async () => {
                   }),
                   'bg-blue-500 hover:bg-blue-600',
                 )}
-                href="/sign-in"
               >
                 Get Organized
                 <ArrowRight className="ml-1.5 h-5 w-5" />
-              </Link>
+              </RegisterLink>
             )}
           </CardFooter>
         </Card>

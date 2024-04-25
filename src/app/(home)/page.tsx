@@ -7,6 +7,8 @@ import InboxDemo from '@/components/landing/SimpleDemo/Demo'
 import Features from '@/components/landing/Features/Features'
 import { cn } from '@/lib/utils'
 import FAQs from '@/components/landing/FAQs/FAQs'
+import { RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
+import RegisterButton from '@/components/landing/Register/RegisterButton'
 
 const Home = () => {
   return (
@@ -33,20 +35,7 @@ const Home = () => {
           overwhelming todo lists into an organized productivity machine
         </span>
 
-        <Link
-          className={cn(
-            buttonVariants({
-              variant: 'secondary',
-              size: 'lg',
-              className: 'my-8 text-white',
-            }),
-            'bg-blue-500 hover:bg-blue-600',
-          )}
-          href={'/register'}
-          prefetch={false}
-        >
-          Get Organized <ArrowRight className="ml-2 h-5 w-5" />
-        </Link>
+        <RegisterButton />
       </MaxWidthWrapper>
 
       {/* Demo Section */}
@@ -180,20 +169,7 @@ const Home = () => {
             <h2 className="mt-10 text-3xl font-bold text-zinc-200 sm:text-5xl">
               What price would you pay to acheive your goals?
             </h2>
-            <Link
-              className={cn(
-                buttonVariants({
-                  variant: 'secondary',
-                  size: 'lg',
-                  className: 'my-8 text-white',
-                }),
-                'bg-blue-500 hover:bg-blue-600',
-              )}
-              href={'/register'}
-              prefetch={false}
-            >
-              Beat Procrastination Today <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+            <RegisterButton />
           </div>
         </div>
       </div>
