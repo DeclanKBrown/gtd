@@ -379,7 +379,7 @@ export const appRouter = router({
           line_items: [
             {
               price: PLANS.find((plan) => plan.slug === input.plan)?.price
-                .priceIds.test,
+                .priceIds.production,
               quantity: 1,
             },
           ],
