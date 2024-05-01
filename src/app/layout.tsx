@@ -14,8 +14,22 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'GTD',
-  description: 'Get Things Done',
+  title: 'SimpleGTD',
+  description: 'Stress Less, Acheive More',
+  openGraph: {
+    url: 'https://www.simplegtd.com',
+    title: 'SimpleGTD',
+    description: 'Stress Less, Achieve More',
+    type: 'website',
+    images: [
+      {
+        url: 'https://www.simplegtd.com/icon.ico',
+        width: 800,
+        height: 600,
+        alt: 'SimpleGTD Logo',
+      },
+    ],
+  },
 }
 
 interface RootLayoutProps {
