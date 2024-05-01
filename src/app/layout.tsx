@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'SimpleGTD',
-  description: 'Stress Less, Acheive More',
+  description: 'Stress Less, Achieve More',
   openGraph: {
     url: 'https://www.simplegtd.com',
     title: 'SimpleGTD',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://www.simplegtd.com/icon.ico',
+        url: 'https://www.simplegtd.com/icon.svg',
         width: 800,
         height: 600,
         alt: 'SimpleGTD Logo',
