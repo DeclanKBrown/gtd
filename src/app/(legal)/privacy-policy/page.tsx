@@ -42,8 +42,9 @@ const Page = () => {
           use or modification.
           <br />
           <br />
-          We don&apos;t share any personally identifying information publicly or
-          with third-parties, except when required to by law.
+          We don&apos;t share or sell any information publicly or with
+          third-parties, except when required to by law. Our data is stored in
+          secure warehouses locations in the Sydney, Australia
           <br />
           <br />
           We act in the capacity of a data controller and a data processor with
@@ -63,7 +64,7 @@ const Page = () => {
           free to contact us.
           <br />
           <br />
-          This policy is effective as of 20 July 2024.
+          This policy is effective as of 01 May 2024.
         </div>
       </div>
     </div>
