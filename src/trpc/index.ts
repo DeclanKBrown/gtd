@@ -376,6 +376,7 @@ export const appRouter = router({
           payment_method_types: ['card'],
           mode: 'subscription',
           billing_address_collection: 'auto',
+          allow_promotion_codes: true,
           line_items: [
             {
               price: PLANS.find((plan) => plan.slug === input.plan)?.price
